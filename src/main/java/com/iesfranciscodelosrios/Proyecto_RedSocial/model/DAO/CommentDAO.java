@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.ICommentDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Comment;
 
@@ -38,7 +39,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	public boolean create() {
 		boolean added = false;
 		
-		Connection con = Connect.getConnection();
+		Connection con = (Connection) Connect.getConnection();
 		
 		if (con != null) {
 			try {
