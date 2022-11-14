@@ -43,7 +43,7 @@ public class Comment {
 		this.date = date;
 	}
 
-	public int getUser() {
+	public User getUser() {
 		return user;
 	}
 
@@ -51,7 +51,7 @@ public class Comment {
 		this.user = user;
 	}
 
-	public int getPost() {
+	public Post getPost() {
 		return post;
 	}
 
