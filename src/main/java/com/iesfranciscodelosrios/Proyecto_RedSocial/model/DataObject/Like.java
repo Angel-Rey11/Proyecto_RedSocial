@@ -21,7 +21,7 @@ public class Like {
 		this.id = id;
 	}
 	
-	public int getUser() {
+	public User getUser() {
 		return user;
 	}
 	
@@ -29,7 +29,7 @@ public class Like {
 		this.user = user;
 	}
 	
-	public int getPost() {
+	public Post getPost() {
 		return post;
 	}
 	

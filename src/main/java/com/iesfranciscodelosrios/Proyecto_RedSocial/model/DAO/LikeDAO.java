@@ -6,15 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.ILikeDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Like;
 
 public class LikeDAO extends Like implements ILikeDAO{
 	private final static String INSERT = "INSERT INTO Likes (id_user, id_post) VALUES (?, ?)";
 	private final static String DELETE = "DELETE FROM Likes WHERE id = ?";
-	
+
+	private Connection con;
 	public LikeDAO() {
-		
+		con= (Connection) Connect.getConnection();
 	}
 	
 	public LikeDAO(int id) {
@@ -31,9 +33,7 @@ public class LikeDAO extends Like implements ILikeDAO{
 	public boolean create() {
 		boolean added = false;
 		
-		Connection con = Connect.getConnection();
-		
-		if (con != null) {
+		if (this.con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(INSERT);
 				ps.setInt(1, this.user.getId());
@@ -51,10 +51,8 @@ public class LikeDAO extends Like implements ILikeDAO{
 	@Override
 	public boolean delete() {
 		boolean removed = false;
-		
-		Connection con = Connect.getConnection();
-		
-		if (con != null) {
+
+		if (this.con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(DELETE);
 				ps.setInt(1, this.id);
