@@ -1,0 +1,26 @@
+
+.label {
+     -fx-text-fill: black;
+     -fx-font-family: Arial;
+}
+
+.text-field {
+    -fx-text-fill: black;
+}
+
+.text-area {
+	-fx-text-fill: black;
+}
+
+.text-area *.content {
+    -fx-background-color:  #B1B2FF;
+    -fx-border-color: #B1B2FF;
+}
+
+.mod *.content {
+	 -fx-background-color:   #D2DAFF !important;
+}
+
+.button {
+	-fx-cursor: hand;
+}
