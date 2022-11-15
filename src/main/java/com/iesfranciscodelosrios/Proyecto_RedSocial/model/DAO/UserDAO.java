@@ -20,6 +20,7 @@ public class UserDAO extends User implements IUserDAO {
     private final static String GETALLFOLLOWING = "SELECT * FROM User WHERE id IN (SELECT id_following FROM Follow WHERE id_follower = ?)";
     private final static String FOLLOW = "INSERT INTO Follow VALUES (?, ?)";
     private final static String UNFOLLOW = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
+    private final static String FIND = "SELECT id, name, nickname, password, biografia FROM Comments WHERE id = ?";
     private Connection con;
     public UserDAO(){
         con= (Connection) Connect.getConnection();
@@ -30,18 +31,21 @@ public class UserDAO extends User implements IUserDAO {
     public UserDAO(User u){
         this(u.getId(), u.getName(), u.getNickname(), u.getPassword(), u.getBiografia());
     }
+    public UserDAO(int id) {
+        this.find(id);
+    }
 
 
 
     @Override
-    public boolean create(User u) {
+    public boolean insert() {
         boolean insertado = false;
         try {
             PreparedStatement ps = this.con.prepareStatement(INSERT);
-            ps.setString(1, u.getName());
-            ps.setString(2, u.getNickname());
-            ps.setString(3, u.getPassword());
-            ps.setString(4, u.getBiografia());
+            ps.setString(1, this.getName());
+            ps.setString(2, this.getNickname());
+            ps.setString(3, this.getPassword());
+            ps.setString(4, this.getBiografia());
             ps.executeUpdate();
             insertado = true;
         } catch (SQLException e) {
@@ -52,10 +56,10 @@ public class UserDAO extends User implements IUserDAO {
     }
 
     @Override
-    public boolean delete(User u) {
+    public boolean delete() {
         try{
             PreparedStatement ps = this.con.prepareStatement(DELETE);
-            ps.setInt(1, u.getId());
+            ps.setInt(1, this.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -65,14 +69,14 @@ public class UserDAO extends User implements IUserDAO {
     }
 
     @Override
-    public boolean update(User u) {
+    public boolean update() {
         try{
             PreparedStatement ps = this.con.prepareStatement(UPDATE);
-            ps.setString(1, u.getName());
-            ps.setString(2, u.getNickname());
-            ps.setString(3, u.getPassword());
-            ps.setString(4, u.getBiografia());
-            ps.setInt(5, u.getId());
+            ps.setString(1, this.getName());
+            ps.setString(2, this.getNickname());
+            ps.setString(3, this.getPassword());
+            ps.setString(4, this.getBiografia());
+            ps.setInt(5, this.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -130,12 +134,12 @@ public class UserDAO extends User implements IUserDAO {
     }
 
     @Override
-    public boolean follow(User u, User u2) {
+    public boolean follow(User u) {
         boolean insertado = false;
         try {
             PreparedStatement ps = this.con.prepareStatement(FOLLOW);
-            ps.setInt(1, u.getId());
-            ps.setInt(2, u2.getId());
+            ps.setInt(1, this.getId());
+            ps.setInt(2, u.getId());
             ps.executeUpdate();
             insertado = true;
         } catch (SQLException e) {
@@ -146,12 +150,12 @@ public class UserDAO extends User implements IUserDAO {
     }
 
     @Override
-    public boolean unfollow(User u, User u2) {
+    public boolean unfollow(User u) {
         boolean borrado = false;
         try{
             PreparedStatement ps = this.con.prepareStatement(UNFOLLOW);
-            ps.setInt(1, u.getId());
-            ps.setInt(2, u2.getId());
+            ps.setInt(1, this.getId());
+            ps.setInt(2, u.getId());
             ps.executeUpdate();
             borrado = true;
         }catch(SQLException e){
@@ -163,16 +167,32 @@ public class UserDAO extends User implements IUserDAO {
 
     @Override
     public boolean like(User u, IPostDAO p) {
+
         return false;
     }
 
     @Override
     public boolean unlike(User u, IPostDAO p) {
+
         return false;
     }
 
     @Override
-    public IUserDAO find(User u) {
-        return null;
+    public UserDAO find(int id) {
+        UserDAO u = null;
+        if (this.con != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(FIND);
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                }
+                rs.close();
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return u;
     }
 }
