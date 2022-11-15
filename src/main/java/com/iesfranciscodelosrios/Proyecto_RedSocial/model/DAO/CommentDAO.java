@@ -14,6 +14,8 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 public class CommentDAO extends Comment implements ICommentDAO {
 	private Connection con;
+	private UserDAO uDAO;
+	private PostDAO pDAO;
 	
 	private final static String INSERT = "INSERT INTO Comments (text, date, id_user, id_post) VALUES (?, ?, ?, ?)";
 	private final static String DELETE = "DELETE FROM Comments WHERE id = ?";
@@ -22,6 +24,8 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	
 	public CommentDAO() {
 		con = (Connection) Connect.getConnection();
+		uDAO = new UserDAO();
+		pDAO = new PostDAO();
 	}
 	
 	public CommentDAO(int id, String text, Date date) {
@@ -114,9 +118,9 @@ public class CommentDAO extends Comment implements ICommentDAO {
 					c.setId(rs.getInt(1));
 					c.setText(rs.getString(2));
 					c.setDate(rs.getDate(3));
-					User u = UserDAO.find(rs.getInt(4));
+					User u = uDAO.find(rs.getInt(4));
 					c.setUser(u);
-					Post p = PostDAO.find(rs.getInt(5));
+					Post p = pDAO.find(rs.getInt(5));
 					c.setPost(p);
 				}
 				rs.close();
