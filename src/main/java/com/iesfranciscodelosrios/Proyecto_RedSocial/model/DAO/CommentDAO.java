@@ -103,7 +103,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	@Override
 	public CommentDAO find(int id) {
 		CommentDAO c = null;
-		
+
 		if (this.con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(FIND);
