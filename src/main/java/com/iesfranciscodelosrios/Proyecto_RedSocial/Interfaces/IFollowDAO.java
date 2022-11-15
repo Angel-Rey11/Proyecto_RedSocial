@@ -1,13 +1,13 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces;
 
-import java.util.List;
+
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
+
 
 public interface IFollowDAO {
-    boolean create(IFollowDAO f);
-    boolean delete(IFollowDAO f);
-    boolean update(IFollowDAO f);
-    IFollowDAO find(IFollowDAO f);
-    List<IFollowDAO> getAllFollower();
-    List<IFollowDAO> getAllFollowing();
+    boolean create();
+    boolean delete();
+    boolean update();
+    FollowDAO find(int id);
 
 }

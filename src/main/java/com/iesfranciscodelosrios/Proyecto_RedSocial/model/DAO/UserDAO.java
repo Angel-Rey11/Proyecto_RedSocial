@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO extends User implements IUserDAO {
+
     private final static String INSERT = "INSERT INTO User VALUES (null,?, ?, ?, ?)";
     private final static String DELETE = "DELETE FROM User WHERE id = ?";
     private final static String UPDATE = "UPDATE User SET name = ?,  nickname = ?, password = ?, biografia = ? WHERE id = ?";

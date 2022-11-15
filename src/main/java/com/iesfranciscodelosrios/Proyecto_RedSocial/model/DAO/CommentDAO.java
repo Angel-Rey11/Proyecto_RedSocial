@@ -9,6 +9,7 @@ import java.util.Date;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.ICommentDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Comment;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 public class CommentDAO extends Comment implements ICommentDAO {
