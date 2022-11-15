@@ -1,8 +1,10 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
+
 public interface IPostDAO {
-    boolean create(IPostDAO p);
-    boolean delete(IPostDAO p);
-    boolean update(IPostDAO p);
-    IPostDAO find(IPostDAO p);
+    boolean create();
+    boolean delete();
+    boolean update();
+    PostDAO find(int id);
 }

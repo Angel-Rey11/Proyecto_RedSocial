@@ -7,6 +7,7 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 import java.util.List;
 
 public class UserDAO extends User implements IUserDAO {
+	
     @Override
     public boolean create(IUserDAO u) {
         return false;
