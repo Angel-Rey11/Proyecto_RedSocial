@@ -1,19 +1,20 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 import java.util.List;
 
 public interface IUserDAO {
-    boolean create(User u);
-    boolean delete(User u);
-    boolean update(User u);
+    boolean insert();
+    boolean delete();
+    boolean update();
     List<User> getAllFollower();
     List<User> getAllFollowing();
-    boolean follow(User u, User u2);
-    boolean unfollow(User u, User u2);
+    boolean follow(User u);
+    boolean unfollow(User u);
     boolean like(User u, IPostDAO p);
     boolean unlike(User u, IPostDAO p);
-    IUserDAO find(User u);
+    UserDAO find(int id);
 
 }
