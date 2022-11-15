@@ -24,3 +24,7 @@
 .button {
 	-fx-cursor: hand;
 }
+
+.scroll {
+	-fx-background: black;
+}
