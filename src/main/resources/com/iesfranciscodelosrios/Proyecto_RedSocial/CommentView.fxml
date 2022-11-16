@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.MenuPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.CommentViewController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -94,7 +94,7 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
                 </expandableContent>
             </DialogPane>
-            <ScrollPane prefHeight="500.0" prefWidth="565.0" style="-fx-background-color: black;" styleClass="scroll">
+            <ScrollPane layoutY="227.0" prefHeight="273.0" prefWidth="565.0" style="-fx-background-color: black;" styleClass="scroll">
                <content>
                   <GridPane fx:id="postGrid" prefHeight="39.0" prefWidth="43.0">
                     <columnConstraints>
@@ -106,12 +106,42 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <ImageView fitHeight="46.0" fitWidth="42.0" layoutX="502.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/plus.png" />
-               </image>
-            </ImageView>
-            <Button layoutX="500.0" layoutY="428.0" mnemonicParsing="false" opacity="0.0" prefHeight="46.0" prefWidth="46.0" />
+            <AnchorPane layoutX="45.0" layoutY="22.0" prefHeight="156.0" prefWidth="475.0" style="-fx-background-color: B1B2FF; -fx-background-radius: 20px; -fx-border-radius: 20px;">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="25.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/gamer.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="79.0" layoutY="23.0" style="-fx-font-size: 14px;" text="Nombre del Usuario" />
+                  <Label layoutX="79.0" layoutY="42.0" style="-fx-font-size: 14px;" text="Post" />
+                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="79.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../images/like%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="79.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/like.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="165.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/chat-bubble.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="248.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/share2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="433.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/more%20(2).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
