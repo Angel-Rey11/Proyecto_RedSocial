@@ -1,45 +1,33 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 public class PerfilController implements Initializable{
-	@FXML
-	private ImageView img1;
-	@FXML
-	private ImageView img2;
-	@FXML
-	private Button mg;
-	@FXML
-	private Button dmg;
 	@FXML
 	private Button follow;
 	@FXML
 	private Button unfollow;
 	@FXML
 	private TextArea bio;
-	
 	@FXML
-	private void mg() {
-		img1.setVisible(false);
-		img2.setVisible(true);
-		mg.setDisable(true);
-		dmg.setDisable(false);
-	}
-	
-	@FXML
-	private void dmg() {
-		img1.setVisible(true);
-		img2.setVisible(false);
-		dmg.setDisable(true);
-		mg.setDisable(false);
-	}
+	private GridPane postGrid;
+	private List<Post> posts;
 	
 	@FXML
 	private void follow() {
@@ -67,7 +55,44 @@ public class PerfilController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		dmg.setDisable(true);
+		posts = new ArrayList<>(posts());
 		
+		int columns = 0;
+		int row = 1;
+		
+		try {
+			for (int i = 0; i < posts.size(); i++) {
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("post.fxml"));
+				AnchorPane an = fxmlLoader.load();
+				PostController post = fxmlLoader.getController();
+				post.setData(posts.get(i));
+				
+				if(columns == 1) {
+					columns = 0;
+					++row;
+				}
+				
+				postGrid.add(an, columns++, row);
+				GridPane.setMargin(an, new Insets(10));
+			}
+		} catch (IOException e) {
+				e.printStackTrace();
+		}
+		
+	}
+	
+	private List<Post> posts() {
+		List<Post> ls = new ArrayList<>();
+		
+		for(int i = 0; i<5; i++) {
+			Post post = new Post();
+			User u = new User(2,"Pepe","Pepito","1234","hola");
+			post.setText("Hola");
+			post.setUser(u);
+			ls.add(post);
+		}
+		
+		return ls;
 	}
 }
