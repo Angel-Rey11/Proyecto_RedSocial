@@ -54,12 +54,12 @@
             <Separator layoutY="191.0" prefHeight="7.0" prefWidth="565.0" style="-fx-background-color: B1B2FF;" />
             <AnchorPane layoutY="98.0" prefHeight="100.0" prefWidth="565.0" style="-fx-background-color: transparent;">
                <children>
-                  <Label layoutX="122.0" layoutY="58.0" style="-fx-font-size: 14px;" text="Seguidores" />
-                  <Label layoutX="272.0" layoutY="58.0" style="-fx-font-size: 14px;" text="Seguidos" />
-                  <Label layoutX="402.0" layoutY="58.0" style="-fx-font-size: 14px;" text="Posts" />
-                  <Label layoutX="201.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" text="150" />
-                  <Label layoutX="339.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" text="20" />
-                  <Label layoutX="444.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" text="3" />
+                  <Label layoutX="122.0" layoutY="58.0" style="-fx-font-size: 14px;" styleClass="mod" text="Seguidores" />
+                  <Label layoutX="272.0" layoutY="58.0" style="-fx-font-size: 14px;" styleClass="mod" text="Seguidos" />
+                  <Label layoutX="402.0" layoutY="58.0" style="-fx-font-size: 14px;" styleClass="mod" text="Posts" />
+                  <Label layoutX="201.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="150" />
+                  <Label layoutX="339.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="20" />
+                  <Label layoutX="444.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="3" />
                   <TextArea fx:id="bio" layoutX="122.0" layoutY="-6.0" prefHeight="52.0" prefWidth="395.0" styleClass="mod" />
                   <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="35.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -94,22 +94,6 @@
                   <Image url="@../images/gamer.png" />
                </image>
             </ImageView>
-            <AnchorPane layoutX="31.0" layoutY="219.0" prefHeight="100.0" prefWidth="508.0" style="-fx-background-color: D2DAFF; -fx-background-radius: 20px;">
-               <children>
-                  <ImageView fx:id="img1" fitHeight="28.0" fitWidth="24.0" layoutX="33.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/like.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="img2" fitHeight="28.0" fitWidth="24.0" layoutX="33.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="@../images/like%20(1).png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="dmg" layoutX="31.0" layoutY="56.0" mnemonicParsing="false" onAction="#dmg" opacity="0.0" prefHeight="25.0" prefWidth="28.0" />
-                  <Button fx:id="mg" layoutX="31.0" layoutY="56.0" mnemonicParsing="false" onAction="#mg" opacity="0.0" prefHeight="25.0" prefWidth="28.0" />
-               </children>
-            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
