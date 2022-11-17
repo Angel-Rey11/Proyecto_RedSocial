@@ -3,6 +3,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 public class PostController implements Initializable {
+	private PostDAO post;
 	@FXML
 	private Label name;
 	@FXML
@@ -41,9 +43,10 @@ public class PostController implements Initializable {
 		mg.setDisable(false);
 	}
 	
-	public void setData(Post post) {
-		name.setText(post.getUser().getNickname()); 
+	public void setData(PostDAO post) {
+		name.setText(post.getUser().getNickname());
 		post2.setText(post.getText());
+		this.post = post;
 	}
 	
 	@Override

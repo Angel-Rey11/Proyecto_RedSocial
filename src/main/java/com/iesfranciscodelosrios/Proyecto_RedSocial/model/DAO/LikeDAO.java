@@ -16,7 +16,7 @@ public class LikeDAO extends Like implements ILikeDAO{
 
 	private Connection con;
 	public LikeDAO() {
-		con= (Connection) Connect.getConnection();
+		con= Connect.getConnection();
 	}
 	
 	public LikeDAO(int id) {

@@ -2,15 +2,13 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Utils.Utils;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
-import javafx.event.ActionEvent;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +29,7 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField passwordField, passwordFieldsignup,confirnmPasswordField;
 
-    private LoginController() {
+    public LoginController() {
         u = new Utils();
         uDAO = new UserDAO();
     }
@@ -47,10 +45,10 @@ public class LoginController implements Initializable {
     private void eventLogin() throws IOException {
 
         if (!nicknameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-            String user = nicknameField.getText();
+            String nickname = nicknameField.getText();
             String pass = DigestUtils.sha256Hex(passwordField.getText());
-            if (uDAO.login(user, pass)) {
-                u.mostrarInfo("Login", "Login correcto", "Bienvenido " + user);
+            if (uDAO.login(nickname, pass)) {
+                u.mostrarInfo("Login", "Login correcto", "Bienvenido " + nickname);
                 App.setRoot("MenuPrincipal");
             } else {
                 u.mostrarAlerta("Login", "Login incorrecto", "Usuario o contraseña incorrectos");
@@ -79,8 +77,9 @@ public class LoginController implements Initializable {
             String nickname = nicknameFieldsignup.getText();
             String name = nameField.getText();
             if(confirnmPasswordField.getText().equals(passwordFieldsignup.getText())){
-                userDAO = new UserDAO(-1,nickname, pass, name,"",null,null,null);
+                userDAO = new UserDAO(0,nickname,name,pass,"",null,null,null);
                 userDAO.insert();
+                DataService.userLogeado = userDAO;
                 u.mostrarInfo("Registro", "Registro correcto", "Bienvenido " + nickname);
                 loginPane.setVisible(true);
                 signupPane.setVisible(false);
