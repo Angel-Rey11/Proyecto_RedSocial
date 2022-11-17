@@ -35,6 +35,8 @@ public class CommentViewController implements Initializable {
 	
 	@FXML
 	private GridPane commentGrid;
+	@FXML
+	private AnchorPane a1;
 	
 	private List<CommentDAO> comment;
 	
@@ -60,9 +62,20 @@ public class CommentViewController implements Initializable {
 	private void switchToLogin() throws IOException {
 		App.setRoot("Login");
 	}
+	
+	@FXML
+	private void showAddComment() {
+		a1.setVisible(true);
+	}
+	
+	@FXML
+	private void AddComment() {
+		a1.setVisible(false);
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		/*
 		comment = new ArrayList<>(comments());
 		
 		int columns = 0;
@@ -87,10 +100,11 @@ public class CommentViewController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		name.setText(String.valueOf(DataService.p.getUser().getNickname()));
+		*/
+		name.setText(DataService.p.getUser().getNickname());
 		post.setText(DataService.p.getText());
 	}
-	
+	/*
 	private List<CommentDAO> comments() {
 		List<CommentDAO> list = cDAO.getAllCommentsByIdPost(DataService.p.getId());
 		
@@ -103,4 +117,5 @@ public class CommentViewController implements Initializable {
 		
 		return list;
 	}
+	*/
 }
