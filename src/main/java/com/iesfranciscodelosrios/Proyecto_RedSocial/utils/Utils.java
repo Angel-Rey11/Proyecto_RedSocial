@@ -1,4 +1,4 @@
-package com.iesfranciscodelosrios.Proyecto_RedSocial.utils;
+package com.iesfranciscodelosrios.Proyecto_RedSocial.Utils;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

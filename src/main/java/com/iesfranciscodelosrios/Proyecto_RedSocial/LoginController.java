@@ -1,7 +1,7 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Utils.Utils;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
-import com.iesfranciscodelosrios.Proyecto_RedSocial.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
