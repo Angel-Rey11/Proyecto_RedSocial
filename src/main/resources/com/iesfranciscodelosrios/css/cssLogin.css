@@ -24,3 +24,14 @@
 .button {
 	-fx-cursor: hand;
 }
+
+.mod {
+     -fx-text-fill: white !important;
+     -fx-font-family: Arial;
+}
+
+.mod2 {
+     -fx-text-fill: #8B8A8A !important;
+     -fx-font-family: Arial;
+}
+
