@@ -84,4 +84,10 @@ public class User {
     public String getPassword() {
         return password;
     }
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", nickname=" + nickname + ", password=" + password
+				+ ", biografia=" + biografia + ", posts=" + posts + ", followers=" + followers + ", following="
+				+ following + "]";
+	}
 }
