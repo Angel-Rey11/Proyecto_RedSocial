@@ -8,8 +8,8 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
-import com.iesfranciscodelosrios.Proyecto_RedSocial.Utils.Dialog;
-import com.iesfranciscodelosrios.Proyecto_RedSocial.Utils.Loggers;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
