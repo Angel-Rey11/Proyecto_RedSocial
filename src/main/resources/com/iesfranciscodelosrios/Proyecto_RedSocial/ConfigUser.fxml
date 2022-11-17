@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssLogin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssLogin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.ConfigUserController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -51,7 +51,7 @@
       </AnchorPane>
       <AnchorPane layoutX="136.0" prefHeight="500.0" prefWidth="565.0" style="-fx-background-color: black;">
          <children>
-            <AnchorPane layoutX="78.0" layoutY="66.0" prefHeight="329.0" prefWidth="423.0" style="-fx-background-color: D2DAFF; -fx-border-color: B1B2FF; -fx-border-width: 2px; -fx-background-radius: 20px; -fx-border-radius: 20px;">
+            <AnchorPane fx:id="editPerfil" layoutX="78.0" layoutY="66.0" prefHeight="329.0" prefWidth="423.0" style="-fx-background-color: D2DAFF; -fx-border-color: B1B2FF; -fx-border-width: 2px; -fx-background-radius: 20px; -fx-border-radius: 20px;">
                <children>
                   <Label layoutX="136.0" layoutY="14.0" style="-fx-font-size: 20px;" text="EDITAR PERFIL" />
                   <Separator layoutX="3.0" layoutY="44.0" prefHeight="4.0" prefWidth="415.0" style="-fx-background-color: black;" />
@@ -61,10 +61,10 @@
                   <Separator layoutX="3.0" layoutY="100.0" prefHeight="4.0" prefWidth="415.0" style="-fx-background-color: black;" />
                   <Separator layoutX="3.0" layoutY="174.0" prefHeight="4.0" prefWidth="415.0" style="-fx-background-color: black;" />
                   <Separator layoutX="3.0" layoutY="221.0" prefHeight="4.0" prefWidth="415.0" style="-fx-background-color: black;" />
-                  <TextArea layoutX="175.0" layoutY="104.0" prefHeight="65.0" prefWidth="219.0" promptText="BIOGRAFIA DEL USUARIO" styleClass="mod" />
-                  <TextField layoutX="175.0" layoutY="69.0" prefHeight="25.0" prefWidth="219.0" promptText="NOMBRE DEL USUARIO" style="-fx-background-color: D2DAFF;" />
-                  <TextField layoutX="175.0" layoutY="185.0" prefHeight="25.0" prefWidth="219.0" promptText="NICKNAME DEL USUARIO" style="-fx-background-color: D2DAFF;" />
-                  <Button layoutX="266.0" layoutY="241.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: AAC4FF; -fx-background-radius: 20px;" text="ACTUALIZAR">
+                  <TextArea fx:id="biography" layoutX="175.0" layoutY="104.0" prefHeight="65.0" prefWidth="219.0" promptText="BIOGRAFIA DEL USUARIO" styleClass="mod" />
+                  <TextField fx:id="nameUser" layoutX="175.0" layoutY="69.0" prefHeight="25.0" prefWidth="219.0" promptText="NOMBRE DEL USUARIO" style="-fx-background-color: D2DAFF;" />
+                  <TextField fx:id="nickname" layoutX="175.0" layoutY="185.0" prefHeight="25.0" prefWidth="219.0" promptText="NICKNAME DEL USUARIO" style="-fx-background-color: D2DAFF;" />
+                  <Button fx:id="update" layoutX="266.0" layoutY="241.0" mnemonicParsing="false" onAction="#modifyUser" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: AAC4FF; -fx-background-radius: 20px;" text="ACTUALIZAR">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -74,28 +74,28 @@
                      </graphic>
                   </Button>
                   <Label layoutX="28.0" layoutY="291.0" style="-fx-font-size: 14px;" text="¿Quieres cambiar la contraseña? Pulsa aquí" />
-                  <Button layoutX="28.0" layoutY="287.0" mnemonicParsing="false" opacity="0.0" prefHeight="25.0" prefWidth="277.0" />
+                  <Button fx:id="modifyPassword" layoutX="28.0" layoutY="287.0" mnemonicParsing="false" onAction="#changePassword" opacity="0.0" prefHeight="25.0" prefWidth="277.0" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="86.0" layoutY="135.0" prefHeight="159.0" prefWidth="423.0" style="-fx-background-color: D2DAFF; -fx-border-color: B1B2FF; -fx-border-width: 2px; -fx-background-radius: 20px; -fx-border-radius: 20px;" visible="false">
+            <AnchorPane fx:id="changePwd" layoutX="86.0" layoutY="135.0" prefHeight="159.0" prefWidth="423.0" style="-fx-background-color: D2DAFF; -fx-border-color: B1B2FF; -fx-border-width: 2px; -fx-background-radius: 20px; -fx-border-radius: 20px;" visible="false">
                <children>
                   <Label layoutX="93.0" layoutY="14.0" style="-fx-font-size: 20px;" text="CAMBIAR CONTRASEÑA" />
                   <Separator layoutX="3.0" layoutY="44.0" prefHeight="4.0" prefWidth="415.0" style="-fx-background-color: black;" />
                   <Label layoutX="24.0" layoutY="90.0" style="-fx-font-size: 18px;" text="CONTRASEÑA" />
-                  <PasswordField layoutX="170.0" layoutY="88.0" prefHeight="25.0" prefWidth="198.0" promptText="CONTRASEÑA DEL USUARIO" style="-fx-background-color: D2DAFF;" />
+                  <PasswordField fx:id="passwordUser" layoutX="170.0" layoutY="88.0" prefHeight="25.0" prefWidth="198.0" promptText="CONTRASEÑA DEL USUARIO" style="-fx-background-color: D2DAFF;" />
                   <Label layoutX="24.0" layoutY="57.0" text="Para cambiar la contraseña, por favor, introduzca la actual" />
-                  <Button layoutX="328.0" layoutY="119.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="79.0" style="-fx-background-color: AAC4FF; -fx-background-radius: 20px;" text="ACEPTAR" />
+                  <Button fx:id="accept" layoutX="328.0" layoutY="119.0" mnemonicParsing="false" onAction="#insertPasswordByChange" prefHeight="28.0" prefWidth="79.0" style="-fx-background-color: AAC4FF; -fx-background-radius: 20px;" text="ACEPTAR" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="96.0" layoutY="145.0" prefHeight="169.0" prefWidth="423.0" style="-fx-background-color: D2DAFF; -fx-border-color: B1B2FF; -fx-border-width: 2px; -fx-background-radius: 20px; -fx-border-radius: 20px;" visible="false">
+            <AnchorPane fx:id="passwordNewModify" layoutX="96.0" layoutY="145.0" prefHeight="169.0" prefWidth="423.0" style="-fx-background-color: D2DAFF; -fx-border-color: B1B2FF; -fx-border-width: 2px; -fx-background-radius: 20px; -fx-border-radius: 20px;" visible="false">
                <children>
                   <Label layoutX="93.0" layoutY="14.0" style="-fx-font-size: 20px;" text="CAMBIAR CONTRASEÑA" />
                   <Separator layoutX="3.0" layoutY="44.0" prefHeight="4.0" prefWidth="415.0" style="-fx-background-color: black;" />
                   <Label layoutX="14.0" layoutY="62.0" style="-fx-font-size: 18px;" text="CONTRASEÑA NUEVA" />
-                  <PasswordField layoutX="220.0" layoutY="60.0" prefHeight="25.0" prefWidth="198.0" promptText="NUEVA" style="-fx-background-color: D2DAFF;" />
+                  <PasswordField fx:id="newPassword" layoutX="220.0" layoutY="60.0" prefHeight="25.0" prefWidth="198.0" promptText="NUEVA" style="-fx-background-color: D2DAFF;" />
                   <Label layoutX="14.0" layoutY="94.0" style="-fx-font-size: 18px;" text="REPITA CONTRASEÑA" />
-                  <PasswordField layoutX="220.0" layoutY="92.0" prefHeight="25.0" prefWidth="198.0" promptText="CONTRASEÑA NUEVA" style="-fx-background-color: D2DAFF;" />
-                  <Button layoutX="220.0" layoutY="125.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="183.0" style="-fx-background-color: AAC4FF; -fx-background-radius: 20px;" text="CAMBIAR CONTRASEÑA">
+                  <PasswordField fx:id="repeatNewPassword" layoutX="220.0" layoutY="92.0" prefHeight="25.0" prefWidth="198.0" promptText="CONTRASEÑA NUEVA" style="-fx-background-color: D2DAFF;" />
+                  <Button fx:id="changeNewPassword" layoutX="220.0" layoutY="125.0" mnemonicParsing="false" onAction="#modifyPasswordUser" prefHeight="28.0" prefWidth="183.0" style="-fx-background-color: AAC4FF; -fx-background-radius: 20px;" text="CAMBIAR CONTRASEÑA">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                            <image>
