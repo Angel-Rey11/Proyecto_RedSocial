@@ -1,11 +1,16 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject;
 
+import java.util.List;
+
 public class User {
     private int id;
     private String name;
     private String nickname;
     private String password;
     private String biografia;
+    private List<Post> posts;
+    private List<User> followers;
+    private List<User> following;
 
     public User(int id, String name, String nickname, String password, String biografia) {
         this.id = id;
@@ -36,8 +41,32 @@ public class User {
         this.biografia = biografia;
     }
 
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+
+    public void setFollowing(List<User> following) {
+        this.following = following;
+    }
+
     public String getBiografia() {
         return biografia;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public List<User> getFollowing() {
+        return following;
     }
 
     public int getId() {
