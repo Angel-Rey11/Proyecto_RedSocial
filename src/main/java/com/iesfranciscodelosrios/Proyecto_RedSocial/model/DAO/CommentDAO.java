@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.ICommentDAO;
@@ -21,6 +23,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	private final static String DELETE = "DELETE FROM Comments WHERE id = ?";
 	private final static String UPDATE = "UPDATE Comments SET text = ?, date = ?, id_user = ?, id_post = ? WHERE id = ?";
 	private final static String FIND = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id = ?";
+	private final static String GETALLBYPOST = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id_post = ?";
 	
 	public CommentDAO() {
 		con = (Connection) Connect.getConnection();
@@ -129,5 +132,33 @@ public class CommentDAO extends Comment implements ICommentDAO {
 			}
 		}
 		return c;
+	}
+	
+	public List<CommentDAO> getAllCommentsByIdPost(int id) {
+		List<CommentDAO> list = null;
+		
+		if (this.con != null) {
+			try {
+				PreparedStatement ps = con.prepareStatement(GETALLBYPOST);
+				ps.setInt(1, id);
+				ResultSet rs = ps.executeQuery();
+				CommentDAO cDAO = null;
+				if (rs.next()) {
+					list = new ArrayList<CommentDAO>();
+					cDAO = new CommentDAO();
+					cDAO.setId(rs.getInt(1));
+					cDAO.setText(rs.getString(2));
+					cDAO.setDate(rs.getDate(3));
+					User u = uDAO.find(rs.getInt(4));
+					cDAO.setUser(u);
+					Post p = pDAO.find(rs.getInt(5));
+					cDAO.setPost(p);
+					list.add(cDAO);
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }
