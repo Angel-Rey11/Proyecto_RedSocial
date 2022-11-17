@@ -3,6 +3,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.IPostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.IUserDAO;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 import java.sql.Connection;
@@ -21,16 +22,17 @@ public class UserDAO extends User implements IUserDAO {
     private final static String GETALLFOLLOWING = "SELECT * FROM User WHERE id IN (SELECT id_following FROM Follow WHERE id_follower = ?)";
     private final static String FOLLOW = "INSERT INTO Follow VALUES (?, ?)";
     private final static String UNFOLLOW = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
-    private final static String FIND = "SELECT id, name, nickname, password, biografia FROM Comments WHERE id = ?";
+    private final static String FIND = "SELECT id, name, nickname, password, biografia FROM User WHERE id = ?";
+    private final static String LOGIN = "SELECT id, name, nickname, password, biografia FROM User WHERE nickname = ? AND password = ?";
     private Connection con;
     public UserDAO(){
         con= (Connection) Connect.getConnection();
     }
-    public UserDAO(int id, String name, String nickname, String password, String biografia) {
+    public UserDAO(int id, String name, String nickname, String password, String biografia, List<Post> posts, List<User> followers, List<User> following) {
         super(id, name, nickname, password, biografia);
     }
     public UserDAO(User u){
-        this(u.getId(), u.getName(), u.getNickname(), u.getPassword(), u.getBiografia());
+        this(u.getId(), u.getName(), u.getNickname(), u.getPassword(), u.getBiografia(), u.getPosts(), u.getFollowers(), u.getFollowing());
     }
     public UserDAO(int id) {
         this.find(id);
@@ -84,6 +86,25 @@ public class UserDAO extends User implements IUserDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    public boolean login(String nickname, String password) {
+        boolean logeado = false;
+        if (this.con != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(LOGIN);
+                ps.setString(1, nickname);
+                ps.setString(2, password);
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()) {
+                    logeado=true;
+                }else {
+                    logeado=false;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return logeado;
     }
 
     @Override
@@ -187,7 +208,7 @@ public class UserDAO extends User implements IUserDAO {
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), null, null, null);
                 }
                 rs.close();
             } catch(SQLException e) {
