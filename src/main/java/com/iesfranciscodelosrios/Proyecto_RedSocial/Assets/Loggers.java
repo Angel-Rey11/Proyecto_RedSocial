@@ -1,4 +1,4 @@
-package com.iesfranciscodelosrios.Proyecto_RedSocial.Utils;
+package com.iesfranciscodelosrios.Proyecto_RedSocial.Assets;
 
 import java.io.IOException;
 import java.io.InputStream;
