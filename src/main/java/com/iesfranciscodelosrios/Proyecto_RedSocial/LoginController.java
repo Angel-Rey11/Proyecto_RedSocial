@@ -49,6 +49,7 @@ public class LoginController implements Initializable {
             String pass = DigestUtils.sha256Hex(passwordField.getText());
             if (uDAO.login(nickname, pass)) {
                 u.mostrarInfo("Login", "Login correcto", "Bienvenido " + nickname);
+                DataService.userLogeado = uDAO;
                 App.setRoot("MenuPrincipal");
             } else {
                 u.mostrarAlerta("Login", "Login incorrecto", "Usuario o contraseña incorrectos");
@@ -79,7 +80,6 @@ public class LoginController implements Initializable {
             if(confirnmPasswordField.getText().equals(passwordFieldsignup.getText())){
                 userDAO = new UserDAO(0,nickname,name,pass,"",null,null,null);
                 userDAO.insert();
-                DataService.userLogeado = userDAO;
                 u.mostrarInfo("Registro", "Registro correcto", "Bienvenido " + nickname);
                 loginPane.setVisible(true);
                 signupPane.setVisible(false);
