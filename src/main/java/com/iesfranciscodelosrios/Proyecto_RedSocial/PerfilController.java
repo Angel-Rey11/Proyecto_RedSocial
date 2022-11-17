@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
@@ -27,7 +28,7 @@ public class PerfilController implements Initializable{
 	private TextArea bio;
 	@FXML
 	private GridPane postGrid;
-	private List<Post> posts;
+	private List<PostDAO> posts;
 	
 	@FXML
 	private void follow() {
@@ -82,11 +83,11 @@ public class PerfilController implements Initializable{
 		
 	}
 	
-	private List<Post> posts() {
-		List<Post> ls = new ArrayList<>();
+	private List<PostDAO> posts() {
+		List<PostDAO> ls = new ArrayList<>();
 		
 		for(int i = 0; i<5; i++) {
-			Post post = new Post();
+			PostDAO post = new PostDAO();
 			User u = new User(2,"Pepe","Pepito","1234","hola");
 			post.setText("Hola");
 			post.setUser(u);

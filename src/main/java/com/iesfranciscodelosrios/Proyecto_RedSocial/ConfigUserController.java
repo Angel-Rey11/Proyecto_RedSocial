@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.iesfranciscodelosrios.Proyecto_RedSocial.Utils.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
@@ -53,9 +53,9 @@ public class ConfigUserController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		nameUser.setText(DataService.u.getName());
-		biography.setText(DataService.u.getBiografia());
-		nickname.setText(DataService.u.getNickname());
+		nameUser.setText(DataService.userLogeado.getName());
+		biography.setText(DataService.userLogeado.getBiografia());
+		nickname.setText(DataService.userLogeado.getNickname());
 	}
 	
 	@FXML
@@ -65,9 +65,9 @@ public class ConfigUserController implements Initializable {
 		String bio = biography.getText();
 		String nick = nickname.getText();
 		
-		if (DataService.u != null) {
+		if (DataService.userLogeado != null) {
 			if (!nameUser.getText().isEmpty() && !biography.getText().isEmpty() && !nickname.getText().isEmpty()) {
-				User u = new User(DataService.u.getId(), name, nick, DataService.u.getPassword(), bio);
+				User u = new User(DataService.userLogeado.getId(), name, nick, DataService.userLogeado.getPassword(), bio);
 				UserDAO udao = new UserDAO(u.getId());
 				udao.update();
 				Dialog.showConfirm("Message", "CAMBIOS REALIZADOS CON ÉXITO", "EL USUARIO HA SIDO MODIFICADO CORRECTAMENTE");

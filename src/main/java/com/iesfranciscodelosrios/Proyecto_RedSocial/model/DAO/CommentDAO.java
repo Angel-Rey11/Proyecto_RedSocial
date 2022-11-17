@@ -26,7 +26,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	private final static String GETALLBYPOST = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id_post = ?";
 	
 	public CommentDAO() {
-		con = (Connection) Connect.getConnection();
+		con = Connect.getConnection();
 		uDAO = new UserDAO();
 		pDAO = new PostDAO();
 	}

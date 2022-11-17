@@ -24,7 +24,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	//FIN DE LAS CONSULTAS
 	
 	public FollowDAO() { 
-		con = (Connection) Connect.getConnection();
+		con = Connect.getConnection();
 	}
 	public FollowDAO(int id, User follower, User following) { super(id, follower, following); }
 	public FollowDAO(Follow f) {

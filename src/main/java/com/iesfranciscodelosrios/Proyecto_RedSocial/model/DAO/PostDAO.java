@@ -24,7 +24,7 @@ public class PostDAO extends Post implements IPostDAO {
 	//FIN DE LAS CONSULTAS
 	
 	public PostDAO() {
-		con = (Connection) Connect.getConnection();
+		con = Connect.getConnection();
 	}
 	public PostDAO(int id, Date creationDate, Date modificationDate, String text, User user) { super(id, creationDate, modificationDate, text, user); }
 	public PostDAO(Post p) {

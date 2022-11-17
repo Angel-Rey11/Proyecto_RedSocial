@@ -15,18 +15,18 @@ import java.util.List;
 
 public class UserDAO extends User implements IUserDAO {
 
-    private final static String INSERT = "INSERT INTO User VALUES (null,?, ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO User VALUES (null, ?, ?, ?)";
     private final static String DELETE = "DELETE FROM User WHERE id = ?";
     private final static String UPDATE = "UPDATE User SET name = ?,  nickname = ?, password = ?, biografia = ? WHERE id = ?";
     private final static String GETALLFOLLOWER = "SELECT * FROM User WHERE id IN (SELECT id_follower FROM Follow WHERE id_following = ?)";
     private final static String GETALLFOLLOWING = "SELECT * FROM User WHERE id IN (SELECT id_following FROM Follow WHERE id_follower = ?)";
     private final static String FOLLOW = "INSERT INTO Follow VALUES (?, ?)";
     private final static String UNFOLLOW = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
-    private final static String FIND = "SELECT id, name, nickname, password, biografia FROM User WHERE id = ?";
-    private final static String LOGIN = "SELECT id, name, nickname, password, biografia FROM User WHERE nickname = ? AND password = ?";
+    private final static String FIND = "SELECT id, name, nickname, password, biografia FROM user WHERE id = ?";
+    private final static String LOGIN = "SELECT * FROM user WHERE nickname = ? AND password = ?";
     private Connection con;
     public UserDAO(){
-        con= (Connection) Connect.getConnection();
+        con = Connect.getConnection();
     }
     public UserDAO(int id, String name, String nickname, String password, String biografia, List<Post> posts, List<User> followers, List<User> following) {
         super(id, name, nickname, password, biografia);
@@ -44,11 +44,10 @@ public class UserDAO extends User implements IUserDAO {
     public boolean insert() {
         boolean insertado = false;
         try {
-            PreparedStatement ps = this.con.prepareStatement(INSERT);
+            PreparedStatement ps = con.prepareStatement(INSERT);
             ps.setString(1, this.getName());
             ps.setString(2, this.getNickname());
             ps.setString(3, this.getPassword());
-            ps.setString(4, this.getBiografia());
             ps.executeUpdate();
             insertado = true;
         } catch (SQLException e) {
@@ -103,6 +102,8 @@ public class UserDAO extends User implements IUserDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }else{
+            System.out.println("No hay conexion");
         }
         return logeado;
     }

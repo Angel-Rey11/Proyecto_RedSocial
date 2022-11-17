@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
@@ -19,7 +20,7 @@ import javafx.scene.layout.GridPane;
 public class MenuPrincipalController implements Initializable {
 	@FXML
 	private GridPane postGrid;
-	private List<Post> posts;
+	private List<PostDAO> posts;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -35,7 +36,6 @@ public class MenuPrincipalController implements Initializable {
 				AnchorPane an = fxmlLoader.load();
 				PostController post = fxmlLoader.getController();
 				post.setData(posts.get(i));
-				
 				if(columns == 1) {
 					columns = 0;
 					++row;
@@ -49,11 +49,11 @@ public class MenuPrincipalController implements Initializable {
 		}
 	}
 	
-	private List<Post> posts() {
-		List<Post> ls = new ArrayList<>();
+	private List<PostDAO> posts() {
+		List<PostDAO> ls = new ArrayList<>();
 		
 		for(int i = 0; i<10; i++) {
-			Post post = new Post();
+			PostDAO post = new PostDAO();
 			User u = new User(2,"Pepe","Pepito","1234","hola");
 			post.setText("Hola");
 			post.setUser(u);
