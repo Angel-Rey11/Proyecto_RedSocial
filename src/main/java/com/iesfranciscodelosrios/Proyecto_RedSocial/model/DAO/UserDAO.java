@@ -1,5 +1,6 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.IPostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.IUserDAO;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class UserDAO extends User implements IUserDAO {
 
-    private final static String INSERT = "INSERT INTO User VALUES (null, ?, ?, ?)";
+    private final static String INSERT = "INSERT INTO `user` (`id`, `nickname`, `name`, `password`) VALUES (NULL,?,?,?)";
     private final static String DELETE = "DELETE FROM User WHERE id = ?";
     private final static String UPDATE = "UPDATE User SET name = ?,  nickname = ?, password = ?, biografia = ? WHERE id = ?";
     private final static String GETALLFOLLOWER = "SELECT * FROM User WHERE id IN (SELECT id_follower FROM Follow WHERE id_following = ?)";
@@ -43,17 +44,20 @@ public class UserDAO extends User implements IUserDAO {
     @Override
     public boolean insert() {
         boolean insertado = false;
-        try {
-            PreparedStatement ps = con.prepareStatement(INSERT);
-            ps.setString(1, this.getName());
-            ps.setString(2, this.getNickname());
-            ps.setString(3, this.getPassword());
-            ps.executeUpdate();
-            insertado = true;
-        } catch (SQLException e) {
-            insertado = false;
-            e.printStackTrace();
+        if(this.con!=null){
+            try {
+                PreparedStatement ps = this.con.prepareStatement(INSERT);
+                ps.setString(1, this.getName());
+                ps.setString(2, this.getNickname());
+                ps.setString(3, this.getPassword());
+                ps.executeUpdate();
+                insertado = true;
+            } catch (SQLException e) {
+                insertado = false;
+                e.printStackTrace();
+            }
         }
+        System.out.println(DataService.userLogeado.getName());
         return insertado;
     }
 
@@ -102,8 +106,6 @@ public class UserDAO extends User implements IUserDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else{
-            System.out.println("No hay conexion");
         }
         return logeado;
     }
