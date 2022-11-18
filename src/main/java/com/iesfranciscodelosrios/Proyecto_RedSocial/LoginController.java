@@ -60,9 +60,12 @@ public class LoginController implements Initializable {
     }
 
     @FXML
+    private void eventSignUp2() throws IOException{
+        loginPane.setVisible(false);
+        signupPane.setVisible(true);
+    }
+    @FXML
     private void eventSignup() {
-            loginPane.setVisible(false);
-            signupPane.setVisible(true);
             if (!nicknameFieldsignup.getText().isEmpty() && !passwordFieldsignup.getText().isEmpty() && !nameField.getText().isEmpty()) {
                 signupPane.setVisible(false);
                 passwordPane.setVisible(true);
@@ -79,8 +82,11 @@ public class LoginController implements Initializable {
             String name = nameField.getText();
             if(confirnmPasswordField.getText().equals(passwordFieldsignup.getText())){
                 userDAO = new UserDAO(0,nickname,name,pass,"",null,null,null);
+                DataService.userLogeado = userDAO;
+                DataService.userLogeado.insert();
                 userDAO.insert();
                 u.mostrarInfo("Registro", "Registro correcto", "Bienvenido " + nickname);
+                System.out.println(DataService.userLogeado.getName());
                 loginPane.setVisible(true);
                 signupPane.setVisible(false);
                 passwordPane.setVisible(false);
