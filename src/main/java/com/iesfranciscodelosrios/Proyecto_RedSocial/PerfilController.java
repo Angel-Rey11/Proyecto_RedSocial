@@ -14,20 +14,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class PerfilController implements Initializable{
 	@FXML
-	private Button follow;
-	@FXML
-	private Button unfollow;
-	@FXML
 	private TextArea bio;
 	@FXML
 	private GridPane postGrid;
+	@FXML
+	private Label nickname;
 	private List<PostDAO> posts;
 	
 	@FXML
@@ -46,23 +44,6 @@ public class PerfilController implements Initializable{
 	}
 	
 	@FXML
-	private void follow() {
-		unfollow.setVisible(false);
-		follow.setVisible(true);
-		unfollow.setDisable(true);
-		follow.setDisable(false);
-	}
-	
-	@FXML
-	private void unfollow() {
-		unfollow.setVisible(true);
-		follow.setVisible(false);
-		follow.setDisable(true);
-		unfollow.setDisable(false);
-		
-	}
-	
-	@FXML
 	private void addBio() {
 		String text = bio.getText();
 		bio.setText(text);
@@ -73,6 +54,7 @@ public class PerfilController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		nickname.setText(DataService.userLogeado.getNickname());
 		bio.setText(DataService.userLogeado.getBiografia());
 		bio.setEditable(false);
 		
@@ -80,7 +62,6 @@ public class PerfilController implements Initializable{
 		
 		int columns = 0;
 		int row = 1;
-		
 		try {
 			for (int i = 0; i < posts.size(); i++) {
 				FXMLLoader fxmlLoader = new FXMLLoader();
@@ -100,20 +81,10 @@ public class PerfilController implements Initializable{
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
-		
 	}
 	
 	private List<PostDAO> posts() {
-		List<PostDAO> ls = new ArrayList<>();
-		
-		for(int i = 0; i<5; i++) {
-			PostDAO post = new PostDAO();
-			User u = new User(2,"Pepe","Pepito","1234","hola");
-			post.setText("Hola");
-			post.setUser(u);
-			ls.add(post);
-		}
-		
+		List<PostDAO> ls = PostDAO.getPostsByUser(DataService.userLogeado.getId());
 		return ls;
 	}
 }

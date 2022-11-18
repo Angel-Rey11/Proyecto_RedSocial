@@ -56,8 +56,13 @@ public class PostController implements Initializable {
 	@FXML
 	private void switchToComments() throws IOException {
 		DataService.p = this.post;
-		System.out.println(DataService.p);
 		App.setRoot("CommentView");
+	}
+	
+	@FXML
+	private void switchToProfile() throws IOException {
+		DataService.pAux = this.post;
+		App.setRoot("PerfilAux");
 	}
 	
 	@Override
