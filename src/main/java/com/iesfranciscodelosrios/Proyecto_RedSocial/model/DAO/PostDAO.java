@@ -23,7 +23,7 @@ public class PostDAO extends Post implements IPostDAO {
 	private final static String DELETE = "DELETE FROM Post WHERE id = ?";
 	private final static String FIND = "SELECT id, creation_date, modification_date, text, id_user FROM Post WHERE id = ?";
 	private final static String FINDALLBYFOLLOWER = "SELECT p.* FROM Post as p, user as u, follow as f WHERE p.id_user=f.id_user_following and f.id_user_follower=u.id and u.id=? and p.id_user=?";
-	private final static String FINDALLBYUSER="SELECT * from Post where id_user=?";
+	private final static String FINDALLBYUSER="SELECT id,text,id_user from Post where id_user=?";
 	//FIN DE LAS CONSULTAS
 	
 	public PostDAO() {}
@@ -168,22 +168,21 @@ public class PostDAO extends Post implements IPostDAO {
 		}
 		return posts;
 	}
-	public static List<PostDAO> getPostsByUser(){
+	public static List<PostDAO> getPostsByUser(int id){
+		UserDAO ud = new UserDAO();
 		Connection con = Connect.getConnection();
 		List<PostDAO> posts = new ArrayList<PostDAO>();
 
 		if(con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(FINDALLBYUSER);
-				ps.setInt(1, DataService.userLogeado.getId());
+				ps.setInt(1, id);
 				ResultSet rs = ps.executeQuery();
 				while(rs.next()) {
 					PostDAO p = new PostDAO();
 					p.setId(rs.getInt("id"));
-					p.setCreationDate(rs.getDate("creation_date"));
-					p.setModificationDate(rs.getDate("modification_date"));
 					p.setText(rs.getString("text"));
-					int id_user = rs.getInt("id_user");
+					p.setUser(ud.find(rs.getInt("id_user")));
 					posts.add(p);
 				}
 				rs.close();

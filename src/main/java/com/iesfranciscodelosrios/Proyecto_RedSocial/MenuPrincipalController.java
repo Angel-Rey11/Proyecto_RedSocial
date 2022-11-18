@@ -62,14 +62,14 @@ public class MenuPrincipalController implements Initializable {
 		ls = new ArrayList<>();
 		
 			PostDAO post = new PostDAO();
-			User u = new User(1,"Pepe","Canela","1234","hola");
+			User u = new User(1,"Pepe","Canela","1234","me gusta el chocolate");
 			post.setText("Hola");
 			post.setUser(u);
 			post.setId(1);
 			ls.add(post);
 			
 			PostDAO post2 = new PostDAO();
-			User u2 = new User(2,"Antonio","Pepito","1234","hola");
+			User u2 = new User(2,"Antonio","Pepito","1234","me gustan las peras");
 			post2.setText("QUE");
 			post2.setUser(u2);
 			post2.setId(2);

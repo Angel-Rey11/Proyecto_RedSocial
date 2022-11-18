@@ -45,5 +45,6 @@
       <Button layoutX="461.0" layoutY="24.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button fx:id="mg" layoutX="85.0" layoutY="109.0" mnemonicParsing="false" onAction="#mg" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button fx:id="dmg" layoutX="85.0" layoutY="109.0" mnemonicParsing="false" onAction="#dmg" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
+      <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToProfile" opacity="0.0" prefHeight="51.0" prefWidth="52.0" />
    </children>
 </AnchorPane>

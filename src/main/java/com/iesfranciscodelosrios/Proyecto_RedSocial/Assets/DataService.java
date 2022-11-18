@@ -8,4 +8,5 @@ public class DataService {
 
 	public static UserDAO userLogeado = new UserDAO();
 	public static PostDAO p = new PostDAO();
+	public static PostDAO pAux = new PostDAO();
 }
