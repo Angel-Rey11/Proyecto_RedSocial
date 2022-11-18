@@ -43,6 +43,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private void eventLogin() throws IOException {
+        loginPane.setVisible(true);
+        signupPane.setVisible(false);
+        passwordPane.setVisible(false);
 
         if (!nicknameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
             String nickname = nicknameField.getText();
@@ -81,15 +84,14 @@ public class LoginController implements Initializable {
             String nickname = nicknameFieldsignup.getText();
             String name = nameField.getText();
             if(confirnmPasswordField.getText().equals(passwordFieldsignup.getText())){
-                userDAO = new UserDAO(0,nickname,name,pass,"",null,null,null);
+                userDAO = new UserDAO(-1,nickname,name,pass,"",null,null,null);
                 DataService.userLogeado = userDAO;
-                DataService.userLogeado.insert();
-                userDAO.insert();
-                u.mostrarInfo("Registro", "Registro correcto", "Bienvenido " + nickname);
-                System.out.println(DataService.userLogeado.getName());
-                loginPane.setVisible(true);
-                signupPane.setVisible(false);
-                passwordPane.setVisible(false);
+                if(DataService.userLogeado.insert()){
+                    u.mostrarInfo("Registro", "Registro correcto", "Bienvenido " + nickname);
+                    this.eventSignUp2();
+                }else{
+                    u.mostrarAlerta("Error", "Error", "Error al registrar");
+                }
             }else{
                 u.mostrarAlerta("Error", "Contraseñas no coinciden", "Las contraseñas no coinciden");
                 nicknameFieldsignup.setText("");
@@ -99,7 +101,6 @@ public class LoginController implements Initializable {
                 signupPane.setVisible(true);
                 passwordPane.setVisible(false);
             }
-            App.setRoot("MenuPrincipal");
         } else {
             u.mostrarAlerta("Error", "Error", "Rellena todos los campos");
         }

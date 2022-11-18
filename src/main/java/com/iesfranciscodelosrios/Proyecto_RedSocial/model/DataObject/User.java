@@ -1,5 +1,8 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
+
+import java.sql.Connection;
 import java.util.List;
 
 public class User {

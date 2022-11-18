@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO extends User implements IUserDAO {
+public class UserDAO extends User{
 
     private final static String INSERT = "INSERT INTO `user` (`id`, `nickname`, `name`, `password`) VALUES (NULL,?,?,?)";
     private final static String DELETE = "DELETE FROM User WHERE id = ?";
@@ -25,10 +25,7 @@ public class UserDAO extends User implements IUserDAO {
     private final static String UNFOLLOW = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
     private final static String FIND = "SELECT id, name, nickname, password, biografia FROM user WHERE id = ?";
     private final static String LOGIN = "SELECT * FROM user WHERE nickname = ? AND password = ?";
-    private Connection con;
-    public UserDAO(){
-        con = Connect.getConnection();
-    }
+    public UserDAO(){}
     public UserDAO(int id, String name, String nickname, String password, String biografia, List<Post> posts, List<User> followers, List<User> following) {
         super(id, name, nickname, password, biografia);
     }
@@ -41,30 +38,35 @@ public class UserDAO extends User implements IUserDAO {
 
 
 
-    @Override
+
     public boolean insert() {
+        Connection con = Connect.getConnection();
         boolean insertado = false;
-        if(this.con!=null){
+        if(con!=null){
             try {
-                PreparedStatement ps = this.con.prepareStatement(INSERT);
+                PreparedStatement ps = con.prepareStatement(INSERT);
                 ps.setString(1, this.getName());
                 ps.setString(2, this.getNickname());
                 ps.setString(3, this.getPassword());
                 ps.executeUpdate();
                 insertado = true;
+                System.out.println("Usuario insertado correctamente");
             } catch (SQLException e) {
                 insertado = false;
                 e.printStackTrace();
             }
+        }else{
+            System.out.println("No se ha podido conectar a la base de datos");
+            insertado = false;
         }
-        System.out.println(DataService.userLogeado.getName());
         return insertado;
     }
 
-    @Override
+
     public boolean delete() {
+        Connection con = Connect.getConnection();
         try{
-            PreparedStatement ps = this.con.prepareStatement(DELETE);
+            PreparedStatement ps = con.prepareStatement(DELETE);
             ps.setInt(1, this.getId());
             ps.executeUpdate();
             return true;
@@ -74,10 +76,11 @@ public class UserDAO extends User implements IUserDAO {
         }
     }
 
-    @Override
+
     public boolean update() {
+        Connection con = Connect.getConnection();
         try{
-            PreparedStatement ps = this.con.prepareStatement(UPDATE);
+            PreparedStatement ps = con.prepareStatement(UPDATE);
             ps.setString(1, this.getName());
             ps.setString(2, this.getNickname());
             ps.setString(3, this.getPassword());
@@ -91,8 +94,9 @@ public class UserDAO extends User implements IUserDAO {
         }
     }
     public boolean login(String nickname, String password) {
+        Connection con = Connect.getConnection();
         boolean logeado = false;
-        if (this.con != null) {
+        if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(LOGIN);
                 ps.setString(1, nickname);
@@ -106,16 +110,20 @@ public class UserDAO extends User implements IUserDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }else{
+            System.out.println("No se ha podido conectar a la base de datos");
+            logeado = false;
         }
         return logeado;
     }
 
-    @Override
+
     public List<User> getAllFollower() {
+        Connection con = Connect.getConnection();
         List<User> followers = new ArrayList<>();
-        if(this.con != null){
+        if(con != null){
             try{
-                PreparedStatement ps = this.con.prepareStatement(GETALLFOLLOWER);
+                PreparedStatement ps = con.prepareStatement(GETALLFOLLOWER);
                 ps.setInt(1, this.getId());
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()){
@@ -134,12 +142,13 @@ public class UserDAO extends User implements IUserDAO {
         return followers;
     }
 
-    @Override
+
     public List<User> getAllFollowing() {
+        Connection con = Connect.getConnection();
         List<User> following = new ArrayList<>();
-        if(this.con != null){
+        if(con != null){
             try{
-                PreparedStatement ps = this.con.prepareStatement(GETALLFOLLOWING);
+                PreparedStatement ps = con.prepareStatement(GETALLFOLLOWING);
                 ps.setInt(1, this.getId());
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()){
@@ -158,11 +167,12 @@ public class UserDAO extends User implements IUserDAO {
         return following;
     }
 
-    @Override
+
     public boolean follow(User u) {
+        Connection con = Connect.getConnection();
         boolean insertado = false;
         try {
-            PreparedStatement ps = this.con.prepareStatement(FOLLOW);
+            PreparedStatement ps = con.prepareStatement(FOLLOW);
             ps.setInt(1, this.getId());
             ps.setInt(2, u.getId());
             ps.executeUpdate();
@@ -174,11 +184,12 @@ public class UserDAO extends User implements IUserDAO {
         return insertado;
     }
 
-    @Override
+
     public boolean unfollow(User u) {
+        Connection con = Connect.getConnection();
         boolean borrado = false;
         try{
-            PreparedStatement ps = this.con.prepareStatement(UNFOLLOW);
+            PreparedStatement ps = con.prepareStatement(UNFOLLOW);
             ps.setInt(1, this.getId());
             ps.setInt(2, u.getId());
             ps.executeUpdate();
@@ -190,22 +201,23 @@ public class UserDAO extends User implements IUserDAO {
         return borrado;
     }
 
-    @Override
+
     public boolean like(User u, IPostDAO p) {
 
         return false;
     }
 
-    @Override
+
     public boolean unlike(User u, IPostDAO p) {
 
         return false;
     }
 
-    @Override
+
     public UserDAO find(int id) {
+        Connection con = Connect.getConnection();
         UserDAO u = null;
-        if (this.con != null) {
+        if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(FIND);
                 ps.setInt(1, id);
