@@ -1,9 +1,9 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject;
 
 public class Like {
-	protected int id;
-	protected User user;
-	protected Post post;
+	private int id;
+	private User user;
+	private Post post;
 	
 	public Like() {
 		
@@ -33,7 +33,7 @@ public class Like {
 		return post;
 	}
 	
-	public void setPost(Post p) {
+	public void setPost(Post post) {
 		this.post = post;
 	}
 
