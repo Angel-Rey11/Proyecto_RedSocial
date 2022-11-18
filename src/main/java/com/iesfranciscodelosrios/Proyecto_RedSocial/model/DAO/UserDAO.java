@@ -26,6 +26,8 @@ public class UserDAO extends User{
     private final static String FIND = "SELECT id, name, nickname, password, biografia FROM user WHERE id = ?";
     private final static String FINDBYNICKNAME = "SELECT id, name, nickname, password, biografia FROM user WHERE nickname = ?";
     private final static String LOGIN = "SELECT * FROM user WHERE nickname = ? AND password = ?";
+    private final static String MODIFYBIO = "UPDATE `user` SET `biografia` = ? WHERE `user`.`id` = ?";
+    
     public UserDAO(){}
     public UserDAO(int id, String name, String nickname, String password, String biografia, List<Post> posts, List<User> followers, List<User> following) {
         super(id, name, nickname, password, biografia);
@@ -251,5 +253,25 @@ public class UserDAO extends User{
             }
         }
         return u;
+    }
+    
+    public boolean changeBio() {
+    	boolean modified = false;
+    	
+    	Connection con = Connect.getConnection();
+    	
+    	if (con != null) {
+    		try {
+    			PreparedStatement ps = con.prepareStatement(MODIFYBIO);
+    			ps.setString(1, this.getBiografia());
+    			ps.setInt(2, this.getId());
+    			ps.executeUpdate();
+    			modified = true;
+    			ps.close();
+    		} catch (SQLException e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	return modified;
     }
 }

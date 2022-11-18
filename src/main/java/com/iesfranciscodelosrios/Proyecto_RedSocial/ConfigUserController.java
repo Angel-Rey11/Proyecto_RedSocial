@@ -79,9 +79,8 @@ public class ConfigUserController implements Initializable {
 		
 		if (DataService.userLogeado != null) {
 			if (!nameUser.getText().isEmpty() && !biography.getText().isEmpty() && !nickname.getText().isEmpty()) {
-				User u = new User(DataService.userLogeado.getId(), name, nick, DataService.userLogeado.getPassword(), bio);
-				UserDAO udao = new UserDAO(u.getId());
-				udao.update();
+				UserDAO u = new UserDAO(DataService.userLogeado.getId(), nick, name , DataService.userLogeado.getPassword(), bio, null, null, null);
+				u.update();
 				Dialog.showConfirm("Message", "CAMBIOS REALIZADOS CON ÉXITO", "EL USUARIO HA SIDO MODIFICADO CORRECTAMENTE");
 				Loggers.LogsInfo("USUARIO MODIFICADO");
 				
@@ -127,9 +126,8 @@ public class ConfigUserController implements Initializable {
 		
 		if (!pass.isEmpty() && !passN.isEmpty()) {
 			if (pass.contentEquals(passN)) {
-				User u = new User(DataService.userLogeado.getId(), DataService.userLogeado.getName(), DataService.userLogeado.getNickname(), pass, DataService.userLogeado.getBiografia());
-				UserDAO udao = new UserDAO(u.getId());
-				udao.update();
+				UserDAO u = new UserDAO(DataService.userLogeado.getId(), DataService.userLogeado.getName(), DataService.userLogeado.getNickname(), pass, DataService.userLogeado.getBiografia(), null, null, null);
+				u.update();
 				Dialog.showConfirm("OPERACIÓN EXITOSA", "CAMBIOS REALIZADOS CON ÉXITO", "LA CONTRASEÑA HA SIDO MODIFICADA CORRECTAMENTE");
 				App.setRoot("MenuPrincipal");
 				Loggers.LogsInfo("CONTRASEÑA MODIFICADA");
