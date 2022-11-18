@@ -31,14 +31,12 @@ public class CommentDAO extends Comment implements ICommentDAO {
 		pDAO = new PostDAO();
 	}
 	
-	public CommentDAO(int id, String text, Date date) {
+	public CommentDAO(int id, String text, Date date, User u, Post p) {
 		super(id, text, date);
 	}
 	
 	public CommentDAO(Comment c) {
-		this(c.getId(), c.getText(), (Date) c.getDate());
-		this.user = c.getUser();
-		this.post = c.getPost();
+		this(c.getId(), c.getText(), (Date) c.getDate(), c.getUser(), c.getPost());
 	}
 	
 	public CommentDAO(int id) {
