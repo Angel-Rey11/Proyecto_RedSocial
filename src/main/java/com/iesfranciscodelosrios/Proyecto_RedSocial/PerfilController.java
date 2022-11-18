@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
-import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 import javafx.fxml.FXML;
@@ -31,6 +31,21 @@ public class PerfilController implements Initializable{
 	private List<PostDAO> posts;
 	
 	@FXML
+	private void switchToMain() throws IOException {
+		App.setRoot("MenuPrincipal");
+	}
+	
+	@FXML
+	private void switchToConf() throws IOException {
+		App.setRoot("Conf");
+	}
+	
+	@FXML
+	private void switchToLogin() throws IOException {
+		App.setRoot("Login");
+	}
+	
+	@FXML
 	private void follow() {
 		unfollow.setVisible(false);
 		follow.setVisible(true);
@@ -52,10 +67,15 @@ public class PerfilController implements Initializable{
 		String text = bio.getText();
 		bio.setText(text);
 		bio.setEditable(false);
+		DataService.userLogeado.setBiografia(text);
+		DataService.userLogeado.changeBio();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		bio.setText(DataService.userLogeado.getBiografia());
+		bio.setEditable(false);
+		
 		posts = new ArrayList<>(posts());
 		
 		int columns = 0;
