@@ -88,7 +88,9 @@ public class LoginController implements Initializable {
                 DataService.userLogeado = userDAO;
                 if(DataService.userLogeado.insert()){
                     u.mostrarInfo("Registro", "Registro correcto", "Bienvenido " + nickname);
-                    this.eventSignUp2();
+                    loginPane.setVisible(true);
+                    signupPane.setVisible(false);
+                    passwordPane.setVisible(false);
                 }else{
                     u.mostrarAlerta("Error", "Error", "Error al registrar");
                 }
