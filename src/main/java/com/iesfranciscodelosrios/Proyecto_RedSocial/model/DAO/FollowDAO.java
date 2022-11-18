@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.IFollowDAO;
@@ -14,8 +13,6 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 public class FollowDAO extends Follow implements IFollowDAO {
 	
-	private Connection con;
-	
 	//CONSULTAS DE MariaDB
 	private final static String INSERT = "INSERT INTO Follow (id_user_follower, id_user_following) VALUES (?, ?)";
 	private final static String UPDATE = "UPDATE Follow SET id_user_follower = ?, id_user_following = ? WHERE id = ?";
@@ -23,9 +20,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	private final static String FIND = "SELECT id, id_user_follower, id_user_following FROM Follow WHERE id = ?";
 	//FIN DE LAS CONSULTAS
 	
-	public FollowDAO() { 
-		con = Connect.getConnection();
-	}
+	public FollowDAO() {}
 	public FollowDAO(int id, User follower, User following) { super(id, follower, following); }
 	public FollowDAO(Follow f) {
 		super(f.getId(), f.getFollower(), f.getFollowing());
@@ -37,6 +32,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	@Override
 	public boolean create() {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		boolean addFollow = false;
 
 		if(con != null) {
@@ -61,6 +57,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	@Override
 	public boolean delete() {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		boolean remove = false;
 		
 		if(con != null) {
@@ -84,6 +81,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		boolean refresh = false;
 		
 		if(con != null) {
@@ -106,6 +104,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	@Override
 	public FollowDAO find(int id) {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		FollowDAO fdao = null;
 		
 		if(con != null) {

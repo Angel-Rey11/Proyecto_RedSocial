@@ -14,8 +14,6 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 public class PostDAO extends Post implements IPostDAO {
 	
-	private Connection con;
-	
 	//CONSULTAS DE MariaDB
 	private final static String INSERT = "INSERT INTO Post (creation_date, modification_date, text, id_user) VALUES (?, ?, ?, ?)";
 	private final static String UPDATE = "UPDATE Post SET creation_date = ?, modification_date = ?, text = ?, id_user = ? WHERE id = ?";
@@ -23,9 +21,7 @@ public class PostDAO extends Post implements IPostDAO {
 	private final static String FIND = "SELECT id, creation_date, modification_date, text, id_user FROM Post WHERE id = ?";
 	//FIN DE LAS CONSULTAS
 	
-	public PostDAO() {
-		con = Connect.getConnection();
-	}
+	public PostDAO() {}
 	public PostDAO(int id, Date creationDate, Date modificationDate, String text, User user) { super(id, creationDate, modificationDate, text, user); }
 	public PostDAO(Post p) {
 		super(p.getId(), p.getCreationDate(), p.getModificationDate(), p.getText(), p.getUser());
@@ -37,6 +33,7 @@ public class PostDAO extends Post implements IPostDAO {
 	@Override
 	public boolean create() {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		boolean addPost = false;
 		
 		if(con != null) {
@@ -64,6 +61,7 @@ public class PostDAO extends Post implements IPostDAO {
 	@Override
 	public boolean delete() {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		boolean remove = false;
 		
 		if(con != null) {
@@ -87,6 +85,7 @@ public class PostDAO extends Post implements IPostDAO {
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		boolean refresh = false;
 		
 		if(con != null) {
@@ -112,6 +111,7 @@ public class PostDAO extends Post implements IPostDAO {
 	@Override
 	public PostDAO find(int id) {
 		// TODO Auto-generated method stub
+		Connection con = Connect.getConnection();
 		PostDAO p = null;
 		
 		if(con != null) {
