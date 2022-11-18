@@ -21,8 +21,6 @@ public class UserDAO extends User{
     private final static String UPDATE = "UPDATE User SET name = ?,  nickname = ?, password = ?, biografia = ? WHERE id = ?";
     private final static String GETALLFOLLOWER = "SELECT * FROM User WHERE id IN (SELECT id_follower FROM Follow WHERE id_following = ?)";
     private final static String GETALLFOLLOWING = "SELECT * FROM User WHERE id IN (SELECT id_following FROM Follow WHERE id_follower = ?)";
-    private final static String FOLLOW = "INSERT INTO Follow VALUES (?, ?)";
-    private final static String UNFOLLOW = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
     private final static String FIND = "SELECT id, name, nickname, password, biografia FROM user WHERE id = ?";
     private final static String FINDBYNICKNAME = "SELECT id, name, nickname, password, biografia FROM user WHERE nickname = ?";
     private final static String LOGIN = "SELECT * FROM user WHERE nickname = ? AND password = ?";
@@ -171,38 +169,7 @@ public class UserDAO extends User{
     }
 
 
-    public boolean follow(User u) {
-        Connection con = Connect.getConnection();
-        boolean insertado = false;
-        try {
-            PreparedStatement ps = con.prepareStatement(FOLLOW);
-            ps.setInt(1, this.getId());
-            ps.setInt(2, u.getId());
-            ps.executeUpdate();
-            insertado = true;
-        } catch (SQLException e) {
-            insertado = false;
-            e.printStackTrace();
-        }
-        return insertado;
-    }
 
-
-    public boolean unfollow(User u) {
-        Connection con = Connect.getConnection();
-        boolean borrado = false;
-        try{
-            PreparedStatement ps = con.prepareStatement(UNFOLLOW);
-            ps.setInt(1, this.getId());
-            ps.setInt(2, u.getId());
-            ps.executeUpdate();
-            borrado = true;
-        }catch(SQLException e){
-            borrado = false;
-            e.printStackTrace();
-        }
-        return borrado;
-    }
 
 
     public boolean like(User u, IPostDAO p) {

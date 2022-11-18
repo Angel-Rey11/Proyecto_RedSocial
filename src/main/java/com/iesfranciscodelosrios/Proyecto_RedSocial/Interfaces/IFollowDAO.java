@@ -6,7 +6,7 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
 
 public interface IFollowDAO {
     boolean create();
-    boolean delete();
+    boolean delete(int id);
     boolean update();
     FollowDAO find(int id);
 
