@@ -3,11 +3,11 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject;
 import java.util.Date;
 
 public class Comment {
-	protected int id;
-	protected String text;
-	protected Date date;
-	protected User user;
-	protected Post post;
+	private int id;
+	private String text;
+	private Date date;
+	private User user;
+	private Post post;
 	
 	public Comment() {
 		

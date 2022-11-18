@@ -15,7 +15,6 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 public class CommentDAO extends Comment implements ICommentDAO {
-	private Connection con;
 	private UserDAO uDAO;
 	private PostDAO pDAO;
 	
@@ -26,7 +25,6 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	private final static String GETALLBYPOST = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id_post = ?";
 	
 	public CommentDAO() {
-		con = Connect.getConnection();
 		uDAO = new UserDAO();
 		pDAO = new PostDAO();
 	}
@@ -47,13 +45,15 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	public boolean create() {
 		boolean added = false;
 		
-		if (this.con != null) {
+		Connection con = Connect.getConnection();
+		
+		if (con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(INSERT);
-				ps.setString(1, this.text);
-				ps.setDate(2, (java.sql.Date) this.date);
-				ps.setInt(3, this.user.getId());
-				ps.setInt(4, this.post.getId());
+				ps.setString(1, this.getText());
+				ps.setDate(2, (java.sql.Date) this.getDate());
+				ps.setInt(3, this.getUser().getId());
+				ps.setInt(4, this.getPost().getId());
 				ps.executeUpdate();
 				added = true;
 				ps.close();
@@ -68,10 +68,12 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	public boolean delete() {
 		boolean removed = false;
 		
-		if (this.con != null) {
+		Connection con = Connect.getConnection();
+		
+		if (con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(DELETE);
-				ps.setInt(1, this.id);
+				ps.setInt(1, this.getId());
 				ps.executeUpdate();
 				removed = true;
 				ps.close();
@@ -86,15 +88,16 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	public boolean update() {
 		boolean modified = false;
 
+		Connection con = Connect.getConnection();
 		
-		if (this.con != null) {
+		if (con != null) {
 			try{
 				PreparedStatement ps = con.prepareStatement(UPDATE);
-				ps.setString(1, this.text);
-				ps.setDate(2, (java.sql.Date) this.date);
-				ps.setInt(3, this.user.getId());
-				ps.setInt(4, this.post.getId());
-				ps.setInt(5, this.id);
+				ps.setString(1, this.getText());
+				ps.setDate(2, (java.sql.Date) this.getDate());
+				ps.setInt(3, this.getUser().getId());
+				ps.setInt(4, this.getPost().getId());
+				ps.setInt(5, this.getId());
 				ps.executeUpdate();
 				modified = true;
 				ps.close();
@@ -108,8 +111,10 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	@Override
 	public CommentDAO find(int id) {
 		CommentDAO c = null;
+		
+		Connection con = Connect.getConnection();
 
-		if (this.con != null) {
+		if (con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(FIND);
 				ps.setInt(1, id);
@@ -135,7 +140,9 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	public List<CommentDAO> getAllCommentsByIdPost(int id) {
 		List<CommentDAO> list = null;
 		
-		if (this.con != null) {
+		Connection con = Connect.getConnection();
+		
+		if (con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(GETALLBYPOST);
 				ps.setInt(1, id);
