@@ -22,7 +22,7 @@
                </image>
             </ImageView>
             <Label layoutX="47.0" layoutY="153.0" style="-fx-font-size: 14px;" text="HOME" />
-            <Button layoutX="2.0" layoutY="106.0" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="129.0" style="-fx-background-color: B1B2FF;" />
+            <Button layoutX="2.0" layoutY="106.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.0" prefHeight="65.0" prefWidth="129.0" style="-fx-background-color: B1B2FF;" />
             <ImageView fitHeight="28.0" fitWidth="36.0" layoutX="53.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/bell-ring.png" />
@@ -36,7 +36,7 @@
             </ImageView>
             <Label layoutX="42.0" layoutY="306.0" style="-fx-font-size: 14px;" text="PERFIL" />
             <Button layoutX="7.0" layoutY="181.0" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="119.0" style="-fx-background-color: B1B2FF;" text="Button" />
-            <Button layoutX="7.0" layoutY="259.0" mnemonicParsing="false" opacity="0.0" prefHeight="65.0" prefWidth="119.0" style="-fx-background-color: B1B2FF;" text="Button" />
+            <Button layoutX="7.0" layoutY="259.0" mnemonicParsing="false" onAction="#switchToProfile" opacity="0.0" prefHeight="65.0" prefWidth="119.0" style="-fx-background-color: B1B2FF;" text="Button" />
             <ImageView fitHeight="28.0" fitWidth="36.0" layoutX="52.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/menu.png" />

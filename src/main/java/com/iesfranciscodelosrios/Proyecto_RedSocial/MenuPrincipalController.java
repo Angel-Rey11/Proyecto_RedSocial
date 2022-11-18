@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -22,6 +24,11 @@ public class MenuPrincipalController implements Initializable {
 	@FXML
 	private GridPane postGrid;
 	private List<PostDAO> posts;
+	private List<PostDAO> ls;
+	@FXML
+	private DialogPane vis;
+	@FXML
+	private TextArea post;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -51,7 +58,7 @@ public class MenuPrincipalController implements Initializable {
 	}
 	
 	private List<PostDAO> posts() {
-		List<PostDAO> ls = new ArrayList<>();
+		ls = new ArrayList<>();
 		
 			PostDAO post = new PostDAO();
 			User u = new User(1,"Pepe","Canela","1234","hola");
@@ -78,6 +85,17 @@ public class MenuPrincipalController implements Initializable {
 	
 	@FXML
 	private void addPost() {
+		vis.setVisible(true);
+	}
+	
+	@FXML
+	private void addPostConfirm() {
+		PostDAO post3 = new PostDAO();
+		post3.setText(post.getText());
+		post3.setUser(DataService.userLogeado);
+		post3.setId(6);
+		ls.add(post3);
+		vis.setVisible(false);
 		
 	}
 	
