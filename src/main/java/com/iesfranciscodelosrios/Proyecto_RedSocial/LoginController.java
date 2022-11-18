@@ -52,7 +52,7 @@ public class LoginController implements Initializable {
             String pass = DigestUtils.sha256Hex(passwordField.getText());
             if (uDAO.login(nickname, pass)) {
                 u.mostrarInfo("Login", "Login correcto", "Bienvenido " + nickname);
-                DataService.userLogeado = uDAO;
+                DataService.userLogeado = uDAO.find(nickname);
                 App.setRoot("MenuPrincipal");
             } else {
                 u.mostrarAlerta("Login", "Login incorrecto", "Usuario o contraseña incorrectos");

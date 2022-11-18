@@ -1,5 +1,12 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
-public class ConfController {
+import java.io.IOException;
 
+import javafx.fxml.FXML;
+
+public class ConfController {
+	@FXML
+	private void switchToEditProfile() throws IOException {
+		App.setRoot("ConfigUser");
+	}
 }
