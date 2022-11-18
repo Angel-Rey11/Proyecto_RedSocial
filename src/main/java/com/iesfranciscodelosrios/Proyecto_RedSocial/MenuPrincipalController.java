@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
@@ -52,13 +53,20 @@ public class MenuPrincipalController implements Initializable {
 	private List<PostDAO> posts() {
 		List<PostDAO> ls = new ArrayList<>();
 		
-		for(int i = 0; i<10; i++) {
 			PostDAO post = new PostDAO();
-			User u = new User(2,"Pepe","Pepito","1234","hola");
+			User u = new User(1,"Pepe","Canela","1234","hola");
 			post.setText("Hola");
 			post.setUser(u);
+			post.setId(1);
 			ls.add(post);
-		}
+			
+			PostDAO post2 = new PostDAO();
+			User u2 = new User(2,"Antonio","Pepito","1234","hola");
+			post2.setText("QUE");
+			post2.setUser(u2);
+			post2.setId(2);
+			ls.add(post2);
+		
 		
 		return ls;
 	}

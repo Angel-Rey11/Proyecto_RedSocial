@@ -1,8 +1,10 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 
@@ -18,6 +20,8 @@ public class PostController implements Initializable {
 	private Label name;
 	@FXML
 	private Label post2;
+	@FXML
+	private Label id;
 	@FXML
 	private ImageView img1;
 	@FXML
@@ -47,6 +51,13 @@ public class PostController implements Initializable {
 		name.setText(post.getUser().getNickname());
 		post2.setText(post.getText());
 		this.post = post;
+	}
+	
+	@FXML
+	private void switchToComments() throws IOException {
+		DataService.p = this.post;
+		System.out.println(DataService.p);
+		App.setRoot("CommentView");
 	}
 	
 	@Override

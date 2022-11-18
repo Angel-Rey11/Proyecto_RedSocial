@@ -13,6 +13,8 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -48,7 +50,17 @@ public class ConfigUserController implements Initializable {
 	private PasswordField repeatNewPassword;
 	@FXML
 	private Button changeNewPassword;
-
+	
+	@FXML
+	private Button home;
+	@FXML
+	private Button profile;
+	@FXML
+	private MenuButton plus;
+	@FXML
+	private MenuItem settings;
+	@FXML
+	private MenuItem sign_off;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -91,7 +103,7 @@ public class ConfigUserController implements Initializable {
 	}
 	
 	@FXML
-	private void insertPasswordByChange() {
+	private void insertPasswordByChange() throws IOException {
 		String pass = passwordUser.getText();
 		
 		if (!pass.isEmpty()) {
@@ -102,19 +114,22 @@ public class ConfigUserController implements Initializable {
 		}
 	}
 	
-	private void AnchorPanePasswordNewModify() {
+	private void AnchorPanePasswordNewModify() throws IOException {
 		changePwd.setVisible(false);
 		passwordNewModify.setVisible(true);
 	}
 	
 	@FXML
 	private void modifyPasswordUser() throws IOException {
+
 		String pass = newPassword.getText();
 		String passN = repeatNewPassword.getText();
 		
 		if (!pass.isEmpty() && !passN.isEmpty()) {
 			if (pass.contentEquals(passN)) {
-				//udao.update();
+				User u = new User(DataService.userLogeado.getId(), DataService.userLogeado.getName(), DataService.userLogeado.getNickname(), pass, DataService.userLogeado.getBiografia());
+				UserDAO udao = new UserDAO(u.getId());
+				udao.update();
 				Dialog.showConfirm("OPERACIÓN EXITOSA", "CAMBIOS REALIZADOS CON ÉXITO", "LA CONTRASEÑA HA SIDO MODIFICADA CORRECTAMENTE");
 				App.setRoot("MenuPrincipal");
 				Loggers.LogsInfo("CONTRASEÑA MODIFICADA");
@@ -123,5 +138,25 @@ public class ConfigUserController implements Initializable {
 			Dialog.showError("ERROR", "FALLO AL INTRODUCIR LA CONTRASEÑA", "TODOS LOS CAMPOS DEBEN SER COMPLETADOS");
 			Loggers.LogsSevere("TODOS LOS CAMPOS DEBEN SER COMPLETADOS");
 		}
+	}
+	
+	@FXML
+	private void switchToHome() throws IOException {
+		App.setRoot("MenuPrincipal");
+	}
+	
+	@FXML
+	 private void switchToProfile() throws IOException {
+		App.setRoot("Perfil");
+	}
+	
+	@FXML
+	private void switchToConf() throws IOException {
+		App.setRoot("Conf");
+	}
+	
+	@FXML
+	private void switchToLogin() throws IOException {
+		App.setRoot("Login");
 	}
 }
