@@ -15,10 +15,10 @@ public class User {
     private List<User> followers;
     private List<User> following;
 
-    public User(int id, String name, String nickname, String password, String biografia) {
+    public User(int id, String nickname, String name, String password, String biografia) {
         this.id = id;
-        this.name = name;
         this.nickname = nickname;
+        this.name = name;
         this.password = password;
         this.biografia = biografia;
     }

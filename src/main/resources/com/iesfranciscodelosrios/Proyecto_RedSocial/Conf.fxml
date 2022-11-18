@@ -52,13 +52,18 @@
             <AnchorPane layoutY="62.0" prefHeight="73.0" prefWidth="565.0">
                <children>
                   <Label layoutX="58.0" layoutY="14.0" style="-fx-font-size: 16px;" styleClass="mod" text="Tu cuenta" />
-                  <Label layoutX="58.0" layoutY="34.0" style="-fx-font-size: 12px;" styleClass="mod2" text="Consulta la información de tu cuenta u obtén una información más detallada de sus ajustes" />
+                  <Label layoutX="58.0" layoutY="34.0" style="-fx-font-size: 12px;" styleClass="mod2" text="Consulta la información de tu cuenta u obtén información más detallada de sus ajustes" />
                   <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/user%20(3).png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="2.0" layoutY="7.0" mnemonicParsing="false" opacity="0.0" prefHeight="57.0" prefWidth="559.0" />
+                  <Button layoutX="2.0" layoutY="7.0" mnemonicParsing="false" onAction="#switchToEditProfile" opacity="0.0" prefHeight="57.0" prefWidth="559.0" />
+                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="544.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/angle-right.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="-1.0" layoutY="135.0" prefHeight="73.0" prefWidth="565.0">
@@ -71,6 +76,11 @@
                      </image>
                   </ImageView>
                   <Button layoutX="3.0" layoutY="3.0" mnemonicParsing="false" opacity="0.0" prefHeight="57.0" prefWidth="559.0" />
+                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="545.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/angle-right.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane layoutY="213.0" prefHeight="73.0" prefWidth="565.0">
@@ -83,6 +93,11 @@
                      </image>
                   </ImageView>
                   <Button layoutX="3.0" layoutY="3.0" mnemonicParsing="false" opacity="0.0" prefHeight="57.0" prefWidth="559.0" />
+                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="544.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/angle-right.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="-1.0" layoutY="295.0" prefHeight="73.0" prefWidth="565.0">
@@ -95,6 +110,11 @@
                      </image>
                   </ImageView>
                   <Button layoutX="3.0" layoutY="3.0" mnemonicParsing="false" opacity="0.0" prefHeight="57.0" prefWidth="559.0" />
+                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="545.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/angle-right.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="-1.0" layoutY="377.0" prefHeight="73.0" prefWidth="565.0">
@@ -107,6 +127,11 @@
                      </image>
                   </ImageView>
                   <Button layoutX="3.0" layoutY="3.0" mnemonicParsing="false" opacity="0.0" prefHeight="57.0" prefWidth="559.0" />
+                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="544.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/angle-right.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children></AnchorPane>

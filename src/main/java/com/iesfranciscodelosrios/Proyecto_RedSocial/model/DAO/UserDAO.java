@@ -16,7 +16,7 @@ import java.util.List;
 
 public class UserDAO extends User{
 
-    private final static String INSERT = "INSERT INTO `user` (`id`, `nickname`, `name`, `password`) VALUES (NULL,?,?,?)";
+    private final static String INSERT = "INSERT INTO `user` (`id`, `nickname`, `name`, `password`, `biografia`) VALUES (NULL,?,?,?,'')";
     private final static String DELETE = "DELETE FROM User WHERE id = ?";
     private final static String UPDATE = "UPDATE User SET name = ?,  nickname = ?, password = ?, biografia = ? WHERE id = ?";
     private final static String GETALLFOLLOWER = "SELECT * FROM User WHERE id IN (SELECT id_follower FROM Follow WHERE id_following = ?)";
@@ -24,13 +24,14 @@ public class UserDAO extends User{
     private final static String FOLLOW = "INSERT INTO Follow VALUES (?, ?)";
     private final static String UNFOLLOW = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
     private final static String FIND = "SELECT id, name, nickname, password, biografia FROM user WHERE id = ?";
+    private final static String FINDBYNICKNAME = "SELECT id, name, nickname, password, biografia FROM user WHERE nickname = ?";
     private final static String LOGIN = "SELECT * FROM user WHERE nickname = ? AND password = ?";
     public UserDAO(){}
     public UserDAO(int id, String name, String nickname, String password, String biografia, List<Post> posts, List<User> followers, List<User> following) {
         super(id, name, nickname, password, biografia);
     }
     public UserDAO(User u){
-        this(u.getId(), u.getName(), u.getNickname(), u.getPassword(), u.getBiografia(), u.getPosts(), u.getFollowers(), u.getFollowing());
+        this(u.getId(), u.getNickname(), u.getName(), u.getPassword(), u.getBiografia(), u.getPosts(), u.getFollowers(), u.getFollowing());
     }
     public UserDAO(int id) {
         this.find(id);
@@ -45,8 +46,8 @@ public class UserDAO extends User{
         if(con!=null){
             try {
                 PreparedStatement ps = con.prepareStatement(INSERT);
-                ps.setString(1, this.getName());
-                ps.setString(2, this.getNickname());
+                ps.setString(1, this.getNickname());
+                ps.setString(2, this.getName());
                 ps.setString(3, this.getPassword());
                 ps.executeUpdate();
                 insertado = true;
@@ -221,6 +222,25 @@ public class UserDAO extends User{
             try {
                 PreparedStatement ps = con.prepareStatement(FIND);
                 ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), null, null, null);
+                }
+                rs.close();
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return u;
+    }
+    
+    public UserDAO find(String nickname) {
+        Connection con = Connect.getConnection();
+        UserDAO u = null;
+        if (con != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(FINDBYNICKNAME);
+                ps.setString(1, nickname);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), null, null, null);
