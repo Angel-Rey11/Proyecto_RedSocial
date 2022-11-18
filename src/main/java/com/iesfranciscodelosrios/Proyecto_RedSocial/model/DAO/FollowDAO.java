@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.IFollowDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Follow;
@@ -16,7 +17,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	//CONSULTAS DE MariaDB
 	private final static String INSERT = "INSERT INTO Follow (id_user_follower, id_user_following) VALUES (?, ?)";
 	private final static String UPDATE = "UPDATE Follow SET id_user_follower = ?, id_user_following = ? WHERE id = ?";
-	private final static String DELETE = "DELETE FROM Follow WHERE id = ?";
+	private final static String DELETE = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
 	private final static String FIND = "SELECT id, id_user_follower, id_user_following FROM Follow WHERE id = ?";
 	//FIN DE LAS CONSULTAS
 	
@@ -55,27 +56,20 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	}
 
 	@Override
-	public boolean delete() {
-		// TODO Auto-generated method stub
+	public boolean delete(int id) {
 		Connection con = Connect.getConnection();
-		boolean remove = false;
-		
-		if(con != null) {
-			PreparedStatement ps;
-			try {
-				ps = con.prepareStatement(DELETE);
-				ps.setInt(1, this.id);
-				if(ps.executeUpdate() == 1) {
-					this.id = -1;
-				}	
-				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+		boolean borrado = false;
+		try{
+			PreparedStatement ps = con.prepareStatement(DELETE);
+			ps.setInt(1, DataService.userLogeado.getId());
+			ps.setInt(2, id);
+			ps.executeUpdate();
+			borrado = true;
+		}catch(SQLException e){
+			borrado = false;
+			e.printStackTrace();
 		}
-		
-		return remove;
+		return borrado;
 	}
 
 	@Override

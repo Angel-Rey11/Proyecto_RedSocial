@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.IPostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
@@ -19,6 +22,8 @@ public class PostDAO extends Post implements IPostDAO {
 	private final static String UPDATE = "UPDATE Post SET creation_date = ?, modification_date = ?, text = ?, id_user = ? WHERE id = ?";
 	private final static String DELETE = "DELETE FROM Post WHERE id = ?";
 	private final static String FIND = "SELECT id, creation_date, modification_date, text, id_user FROM Post WHERE id = ?";
+	private final static String FINDALLBYFOLLOWER = "SELECT p.* FROM Post as p, user as u, follow as f WHERE p.id_user=f.id_user_following and f.id_user_follower=u.id and u.id=? and p.id_user=?";
+	private final static String FINDALLBYUSER="SELECT * from Post where id_user=?";
 	//FIN DE LAS CONSULTAS
 	
 	public PostDAO() {}
@@ -137,6 +142,56 @@ public class PostDAO extends Post implements IPostDAO {
 		}
 		
 		return p;
+	}
+	public static List<PostDAO> findAllByFollower() {
+		Connection con = Connect.getConnection();
+		List<PostDAO> posts = new ArrayList<PostDAO>();
+
+		if(con != null) {
+			try {
+				PreparedStatement ps = con.prepareStatement(FINDALLBYFOLLOWER);
+				ps.setInt(1, DataService.userLogeado.getId());
+				ResultSet rs = ps.executeQuery();
+				while(rs.next()) {
+					PostDAO p = new PostDAO();
+					p.setId(rs.getInt("id"));
+					p.setCreationDate(rs.getDate("creation_date"));
+					p.setModificationDate(rs.getDate("modification_date"));
+					p.setText(rs.getString("text"));
+					int id_user = rs.getInt("id_user");
+					posts.add(p);
+				}
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return posts;
+	}
+	public static List<PostDAO> getPostsByUser(){
+		Connection con = Connect.getConnection();
+		List<PostDAO> posts = new ArrayList<PostDAO>();
+
+		if(con != null) {
+			try {
+				PreparedStatement ps = con.prepareStatement(FINDALLBYUSER);
+				ps.setInt(1, DataService.userLogeado.getId());
+				ResultSet rs = ps.executeQuery();
+				while(rs.next()) {
+					PostDAO p = new PostDAO();
+					p.setId(rs.getInt("id"));
+					p.setCreationDate(rs.getDate("creation_date"));
+					p.setModificationDate(rs.getDate("modification_date"));
+					p.setText(rs.getString("text"));
+					int id_user = rs.getInt("id_user");
+					posts.add(p);
+				}
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return posts;
 	}
 
 }
