@@ -17,7 +17,7 @@
     -fx-border-color: #B1B2FF;
 }
 
-.mod *.content {
+.mod1 *.content {
 	 -fx-background-color:   #D2DAFF !important;
 }
 
@@ -27,6 +27,11 @@
 
 .mod {
      -fx-text-fill: white !important;
+     -fx-font-family: Arial;
+}
+
+.modArea {
+     -fx-text-fill: black !important;
      -fx-font-family: Arial;
 }
 

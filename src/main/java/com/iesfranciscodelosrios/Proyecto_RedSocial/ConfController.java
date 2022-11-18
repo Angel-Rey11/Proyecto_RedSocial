@@ -9,4 +9,14 @@ public class ConfController {
 	private void switchToEditProfile() throws IOException {
 		App.setRoot("ConfigUser");
 	}
+	
+	@FXML
+	private void switchToHome() throws IOException {
+		App.setRoot("MenuPrincipal");
+	}
+	
+	@FXML
+	private void switchToProfile() throws IOException {
+		App.setRoot("Perfil");
+	}
 }

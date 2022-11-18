@@ -27,6 +27,16 @@
 	 -fx-text-fill: white !important;
 } 
 
+.mod2 *.content {
+	 -fx-background-color:  #D2DAFF !important;
+	 -fx-text-fill: black !important;
+} 
+
+.mod2 {
+	-fx-background-radius: 20px;
+	-fx-border-radius: 20px;
+}
+
 .button {
 	-fx-cursor: hand;
 }
