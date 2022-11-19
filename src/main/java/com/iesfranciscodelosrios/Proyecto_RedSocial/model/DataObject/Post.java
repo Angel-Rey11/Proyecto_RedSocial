@@ -1,11 +1,11 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Post {
 
 	protected int id;
-	protected Date creationDate;
+	protected Timestamp creationDate;
 	protected String text;
 	protected User user;
 	
@@ -13,7 +13,7 @@ public class Post {
 		super();
 	}
 
-	public Post(int id, Date creationDate, String text, User user) {
+	public Post(int id, Timestamp creationDate, String text, User user) {
 		this.id = id;
 		this.creationDate = creationDate;
 		this.text = text;
@@ -28,11 +28,11 @@ public class Post {
 		this.id = id;
 	}
 
-	public Date getCreationDate() {
+	public Timestamp getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 	
