@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Interfaces.ILikeDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Like;
@@ -17,7 +18,7 @@ public class LikeDAO extends Like implements ILikeDAO{
 	private final static String INSERT = "INSERT INTO Likes (id_user, id_post) VALUES (?, ?)";
 	private final static String DELETE = "DELETE FROM Likes WHERE id = ?";
 	private final static String GETALLLIKES = "SELECT * FROM Likes WHERE id_post = ?";
-
+	private final static String FIND = "SELECT * FROM Likes WHERE id = ?";
 	public LikeDAO() {
 	}
 	
@@ -27,6 +28,9 @@ public class LikeDAO extends Like implements ILikeDAO{
 	
 	public LikeDAO(Like l) {
 		this(l.getId(), l.getUser(), l.getPost());
+	}
+	public LikeDAO(int id) {
+		this.find(id);
 	}
 
 	@Override
@@ -38,8 +42,8 @@ public class LikeDAO extends Like implements ILikeDAO{
 		if (con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(INSERT);
-				ps.setInt(1, this.getUser().getId());
-				ps.setInt(2, this.getPost().getId());
+				ps.setInt(1, DataService.userLogeado.getId());
+				ps.setInt(2, DataService.p.getId());
 				ps.executeUpdate();
 				added = true;
 				ps.close();
@@ -96,5 +100,29 @@ public class LikeDAO extends Like implements ILikeDAO{
 			}
 		}
 		return likes;
+	}
+	public LikeDAO find(int id) {
+		LikeDAO l = new LikeDAO();
+		UserDAO u = new UserDAO();
+		PostDAO p = new PostDAO();
+		Connection con = Connect.getConnection();
+		if(con != null) {
+			try {
+				PreparedStatement ps = con.prepareStatement(FIND);
+				ps.setInt(1,id);
+				ResultSet rs = ps.executeQuery();
+				if (rs.next()) {
+					u = u.find(rs.getInt("id_user"));
+					p = p.find(rs.getInt("id_post"));
+					l.setId(rs.getInt("id"));
+					l.setUser(u);
+					l.setPost(p);
+				}
+				ps.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return l;
 	}
 }
