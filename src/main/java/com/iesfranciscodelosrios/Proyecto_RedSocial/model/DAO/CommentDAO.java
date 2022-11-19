@@ -22,7 +22,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	private final static String DELETE = "DELETE FROM Comments WHERE id = ?";
 	private final static String UPDATE = "UPDATE Comments SET text = ?, date = ?, id_user = ?, id_post = ? WHERE id = ?";
 	private final static String FIND = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id = ?";
-	private final static String GETALLBYPOST = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id_post = ?";
+	private final static String GETALLBYPOST = "SELECT id, text, id_user FROM Comments WHERE id_post = ?";
 	
 	public CommentDAO() {
 		uDAO = new UserDAO();
@@ -138,26 +138,22 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	}
 	
 	public List<CommentDAO> getAllCommentsByIdPost(int id) {
-		List<CommentDAO> list = null;
-		
+		UserDAO ud = new UserDAO();
+		PostDAO pd = new PostDAO();
 		Connection con = Connect.getConnection();
+		List<CommentDAO> list = new ArrayList<CommentDAO>();
 		
 		if (con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(GETALLBYPOST);
 				ps.setInt(1, id);
 				ResultSet rs = ps.executeQuery();
-				CommentDAO cDAO = null;
-				if (rs.next()) {
-					list = new ArrayList<CommentDAO>();
+				while (rs.next()) {
+					CommentDAO cDAO = null;
 					cDAO = new CommentDAO();
 					cDAO.setId(rs.getInt(1));
 					cDAO.setText(rs.getString(2));
-					cDAO.setDate(rs.getDate(3));
-					User u = uDAO.find(rs.getInt(4));
-					cDAO.setUser(u);
-					Post p = pDAO.find(rs.getInt(5));
-					cDAO.setPost(p);
+					cDAO.setUser(ud.find(rs.getInt("id_user")));
 					list.add(cDAO);
 				}
 			} catch(SQLException e) {

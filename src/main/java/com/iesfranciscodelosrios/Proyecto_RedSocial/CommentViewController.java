@@ -2,10 +2,10 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -80,13 +80,11 @@ public class CommentViewController implements Initializable {
 	@FXML
 	private void AddComment() {
 		String message = text.getText();
-		ZoneId defaultZoneId = ZoneId.systemDefault();
-		LocalDate datenow =  LocalDate.now();
-		Date date = Date.from(datenow.atStartOfDay(defaultZoneId).toInstant());
+		Date date = Date.valueOf(LocalDate.now());
 		User user = DataService.userLogeado;
 		Post post = DataService.p;
 		if (text.getText() != "") {
-			CommentDAO c = new CommentDAO(0, message, date, user, post);
+			CommentDAO c = new CommentDAO(-1, message, date, user, post);
 			c.create();
 			a1.setVisible(false);
 		}
@@ -125,13 +123,6 @@ public class CommentViewController implements Initializable {
 	
 	private List<CommentDAO> comments() {
 		List<CommentDAO> list = cDAO.getAllCommentsByIdPost(DataService.p.getId());
-		
-		for (int i = 0; i < list.size() ; i++) {
-			CommentDAO comment = new CommentDAO();
-			comment.setText(list.get(i).getText());
-			comment.setUser(list.get(i).getUser());
-			list.add(comment);
-		}
 		
 		return list;
 	}
