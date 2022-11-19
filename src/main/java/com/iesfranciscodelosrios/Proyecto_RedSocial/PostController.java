@@ -2,6 +2,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
@@ -35,33 +36,25 @@ public class PostController implements Initializable {
 
 	@FXML
 	private void mg() {
-		mg.setDisable(true);
-		dmg.setDisable(false);
-		img1.setVisible(false);
-		img2.setVisible(true);
-		/*like = new LikeDAO(-1,DataService.userLogeado,post.find(this.post.getId()));
+		like = new LikeDAO(-1,DataService.userLogeado,post.find(this.post.getId()));
 		System.out.println(this.post.getId());
-		if(like.create()){
+		if(like.create(this.post.getId())){
 			mg.setDisable(true);
 			dmg.setDisable(false);
 			img1.setVisible(false);
 			img2.setVisible(true);
-		}*/
+		}
 	}
 
 	@FXML
 	private void dmg() {
-		mg.setDisable(false);
-		dmg.setDisable(true);
-		img1.setVisible(true);
-		img2.setVisible(false);
-		/*like = new LikeDAO(-1,DataService.userLogeado,this.post);
-		if(like.delete()){
+		like = new LikeDAO(-1,DataService.userLogeado,this.post);
+		if(like.delete(this.post.getId())){
 			mg.setDisable(false);
 			dmg.setDisable(true);
 			img1.setVisible(true);
 			img2.setVisible(false);
-		}*/
+		}
 	}
 
 	public void setData(PostDAO post) {
@@ -84,16 +77,26 @@ public class PostController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		/*if (this.like.getAllLikesbyPost(this.post.getId()).contains(DataService.userLogeado)) {
-			img1.setVisible(false);
-			img2.setVisible(true);
+	}
+	public void initializePrivado(){
+		like = new LikeDAO();
+		boolean encontrado= false;
+		List<LikeDAO> likes = this.like.getAllLikesbyPost(this.post.getId());
+		for (LikeDAO likeDAO : likes) {
+			if(likeDAO.getUser().getId()==DataService.userLogeado.getId()){
+				encontrado=true;
+			}
+		}
+		if(encontrado){
 			mg.setDisable(true);
 			dmg.setDisable(false);
+			img1.setVisible(false);
+			img2.setVisible(true);
 		}else{
 			img1.setVisible(true);
 			img2.setVisible(false);
 			mg.setDisable(false);
 			dmg.setDisable(true);
-		}*/
+		}
 	}
 }
