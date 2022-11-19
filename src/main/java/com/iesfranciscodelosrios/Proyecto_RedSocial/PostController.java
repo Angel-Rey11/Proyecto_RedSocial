@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.LikeDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 
 public class PostController implements Initializable {
 	private PostDAO post;
+	private LikeDAO like;
 	@FXML
 	private Label name;
 	@FXML
@@ -30,41 +32,59 @@ public class PostController implements Initializable {
 	private Button mg; //Me gusta
 	@FXML
 	private Button dmg; //No me gusta
-	
+
 	@FXML
 	private void mg() {
-		mg.setDisable(true);
-		dmg.setDisable(false);
+		like = new LikeDAO(-1,DataService.userLogeado,this.post);
+		if(like.create()){
+			mg.setDisable(true);
+			dmg.setDisable(false);
+			img1.setVisible(false);
+			img2.setVisible(true);
+		}
 	}
-	
+
 	@FXML
 	private void dmg() {
-		img1.setVisible(true);
-		img2.setVisible(false);
-		dmg.setDisable(true);
-		mg.setDisable(false);
+		like = new LikeDAO(-1,DataService.userLogeado,this.post);
+		if(like.delete()){
+			mg.setDisable(false);
+			dmg.setDisable(true);
+			img1.setVisible(true);
+			img2.setVisible(false);
+		}
 	}
-	
+
 	public void setData(PostDAO post) {
 		name.setText(post.getUser().getNickname());
 		post2.setText(post.getText());
 		this.post = post;
 	}
-	
+
 	@FXML
 	private void switchToComments() throws IOException {
 		DataService.p = this.post;
 		App.setRoot("CommentView");
 	}
-	
+
 	@FXML
 	private void switchToProfile() throws IOException {
 		DataService.pAux = this.post;
 		App.setRoot("PerfilAux");
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		dmg.setDisable(true);
+		if (this.like.getAllLikesbyPost(this.post.getId()).contains(DataService.userLogeado)) {
+			img1.setVisible(false);
+			img2.setVisible(true);
+			mg.setDisable(true);
+			dmg.setDisable(false);
+		}else{
+			img1.setVisible(true);
+			img2.setVisible(false);
+			mg.setDisable(false);
+			dmg.setDisable(true);
+		}
 	}
 }

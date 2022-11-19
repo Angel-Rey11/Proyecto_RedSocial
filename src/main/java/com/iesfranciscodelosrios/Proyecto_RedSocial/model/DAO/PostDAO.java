@@ -22,7 +22,7 @@ public class PostDAO extends Post implements IPostDAO {
 	private final static String UPDATE = "UPDATE Post SET creation_date = ?, modification_date = ?, text = ?, id_user = ? WHERE id = ?";
 	private final static String DELETE = "DELETE FROM Post WHERE id = ?";
 	private final static String FIND = "SELECT id, creation_date, text, id_user FROM Post WHERE id = ?";
-	private final static String FINDALLBYFOLLOWER = "SELECT p.* FROM Post as p, user as u, follow as f WHERE p.id_user=f.id_user_following and f.id_user_follower=u.id and u.id=?";
+	private final static String FINDALLBYFOLLOWER = "SELECT p.* FROM Post as p, user as u, follow as f WHERE (p.id_user=f.id_user_following and f.id_user_follower=u.id and u.id=?) OR (p.id_user=u.id and u.id=?) GROUP BY p.id Order by p.creation_date desc;";
 	private final static String FINDALLBYUSER="SELECT id,text,id_user from Post where id_user=?";
 	//FIN DE LAS CONSULTAS
 	
@@ -149,6 +149,7 @@ public class PostDAO extends Post implements IPostDAO {
 			try {
 				PreparedStatement ps = con.prepareStatement(FINDALLBYFOLLOWER);
 				ps.setInt(1, DataService.userLogeado.getId());
+				ps.setInt(2, DataService.userLogeado.getId());
 				ResultSet rs = ps.executeQuery();
 				while(rs.next()) {
 					PostDAO p = new PostDAO();

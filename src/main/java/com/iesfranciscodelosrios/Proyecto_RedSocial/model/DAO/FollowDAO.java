@@ -56,13 +56,13 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean delete() {
 		Connection con = Connect.getConnection();
 		boolean borrado = false;
 		try{
 			PreparedStatement ps = con.prepareStatement(DELETE);
-			ps.setInt(1, DataService.userLogeado.getId());
-			ps.setInt(2, id);
+			ps.setInt(1, this.follower.getId());
+			ps.setInt(2, this.following.getId());
 			ps.executeUpdate();
 			borrado = true;
 		}catch(SQLException e){
