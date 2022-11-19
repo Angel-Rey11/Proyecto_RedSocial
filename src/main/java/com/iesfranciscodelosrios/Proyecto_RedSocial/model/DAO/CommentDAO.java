@@ -1,11 +1,13 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Connection.Connect;
@@ -29,12 +31,12 @@ public class CommentDAO extends Comment implements ICommentDAO {
 		pDAO = new PostDAO();
 	}
 	
-	public CommentDAO(int id, String text, Date date, User u, Post p) {
-		super(id, text, date);
+	public CommentDAO(int id, String text, Timestamp date, User u, Post p) {
+		super(id, text, date,u,p);
 	}
 	
 	public CommentDAO(Comment c) {
-		this(c.getId(), c.getText(), (Date) c.getDate(), c.getUser(), c.getPost());
+		this(c.getId(), c.getText(), c.getDate(), c.getUser(), c.getPost());
 	}
 	
 	public CommentDAO(int id) {
@@ -51,7 +53,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 			try {
 				PreparedStatement ps = con.prepareStatement(INSERT);
 				ps.setString(1, this.getText());
-				ps.setDate(2, (java.sql.Date) this.getDate());
+				ps.setTimestamp(2, this.getDate());
 				ps.setInt(3, this.getUser().getId());
 				ps.setInt(4, this.getPost().getId());
 				ps.executeUpdate();
@@ -94,7 +96,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 			try{
 				PreparedStatement ps = con.prepareStatement(UPDATE);
 				ps.setString(1, this.getText());
-				ps.setDate(2, (java.sql.Date) this.getDate());
+				ps.setTimestamp(2,this.getDate());
 				ps.setInt(3, this.getUser().getId());
 				ps.setInt(4, this.getPost().getId());
 				ps.setInt(5, this.getId());
@@ -123,7 +125,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 					c = new CommentDAO();
 					c.setId(rs.getInt(1));
 					c.setText(rs.getString(2));
-					c.setDate(rs.getDate(3));
+					c.setDate(rs.getTimestamp(3));
 					User u = uDAO.find(rs.getInt(4));
 					c.setUser(u);
 					Post p = pDAO.find(rs.getInt(5));
@@ -139,7 +141,6 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	
 	public List<CommentDAO> getAllCommentsByIdPost(int id) {
 		UserDAO ud = new UserDAO();
-		PostDAO pd = new PostDAO();
 		Connection con = Connect.getConnection();
 		List<CommentDAO> list = new ArrayList<CommentDAO>();
 		
