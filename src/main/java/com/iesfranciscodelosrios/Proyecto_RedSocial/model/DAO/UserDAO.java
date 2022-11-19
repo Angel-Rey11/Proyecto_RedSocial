@@ -25,6 +25,7 @@ public class UserDAO extends User{
     private final static String FINDBYNICKNAME = "SELECT id, name, nickname, password, biografia FROM user WHERE nickname = ?";
     private final static String LOGIN = "SELECT * FROM user WHERE nickname = ? AND password = ?";
     private final static String MODIFYBIO = "UPDATE `user` SET `biografia` = ? WHERE `user`.`id` = ?";
+    private final static String RANDOMUSER = "SELECT * FROM `user` WHERE id NOT IN (?) ORDER BY RAND()*(25-10)+10 LIMIT 6";
     
     public UserDAO(){}
     public UserDAO(int id, String name, String nickname, String password, String biografia) {
@@ -228,6 +229,26 @@ public class UserDAO extends User{
     	return modified;
     }
     public List<UserDAO> getRandomUsers(){
-        return null;
+    	Connection con = Connect.getConnection();
+        List<UserDAO> random = new ArrayList<>();
+        if(con != null){
+            try{
+                PreparedStatement ps = con.prepareStatement(RANDOMUSER);
+                ps.setInt(1, DataService.userLogeado.getId());
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    UserDAO u = new UserDAO();
+                    u.setId(rs.getInt("id"));
+                    u.setName(rs.getString("name"));
+                    u.setNickname(rs.getString("nickname"));
+                    u.setPassword(rs.getString("password"));
+                    u.setBiografia(rs.getString("biografia"));
+                    random.add(u);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return random;
     }
 }

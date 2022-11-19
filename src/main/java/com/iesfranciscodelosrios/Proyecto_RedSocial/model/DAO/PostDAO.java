@@ -24,7 +24,7 @@ public class PostDAO extends Post implements IPostDAO {
 	private final static String DELETE = "DELETE FROM Post WHERE id = ?";
 	private final static String FIND = "SELECT id, creation_date, text, id_user FROM Post WHERE id = ?";
 	private final static String FINDALLBYFOLLOWER = "SELECT p.* FROM Post as p, user as u, follow as f WHERE (p.id_user=f.id_user_following and f.id_user_follower=u.id and u.id=?) OR (p.id_user=u.id and u.id=?) GROUP BY p.id Order by p.creation_date desc;";
-	private final static String FINDALLBYUSER="SELECT id,text,id_user from Post where id_user=?";
+	private final static String FINDALLBYUSER="SELECT id,text,id_user from Post where id_user=? GROUP BY creation_date DESC";
 	//FIN DE LAS CONSULTAS
 	
 	public PostDAO() {}
