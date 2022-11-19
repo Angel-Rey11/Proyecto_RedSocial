@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.CommentViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.CommentViewController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -96,7 +96,7 @@
             </DialogPane>
             <ScrollPane layoutY="227.0" prefHeight="273.0" prefWidth="565.0" style="-fx-background-color: black;" styleClass="scroll">
                <content>
-                  <GridPane fx:id="postGrid" prefHeight="39.0" prefWidth="43.0">
+                  <GridPane fx:id="commentGrid" prefHeight="39.0" prefWidth="43.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>

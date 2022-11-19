@@ -2,16 +2,14 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
-import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
-import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
-
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +23,6 @@ public class MenuPrincipalController implements Initializable {
 	@FXML
 	private GridPane postGrid;
 	private List<PostDAO> posts;
-	private List<PostDAO> ls;
 	@FXML
 	private DialogPane vis;
 	@FXML
@@ -59,22 +56,7 @@ public class MenuPrincipalController implements Initializable {
 	}
 	
 	private List<PostDAO> posts() {
-		ls = new ArrayList<>();
-		
-			PostDAO post = new PostDAO();
-			User u = new User(1,"Pepe","Canela","1234","me gusta el chocolate");
-			post.setText("Hola");
-			post.setUser(u);
-			post.setId(1);
-			ls.add(post);
-			
-			PostDAO post2 = new PostDAO();
-			User u2 = new User(2,"Antonio","Pepito","1234","me gustan las peras");
-			post2.setText("QUE");
-			post2.setUser(u2);
-			post2.setId(2);
-			ls.add(post2);
-		
+		List<PostDAO> ls = PostDAO.findAllByFollower();
 		
 		return ls;
 	}
@@ -91,11 +73,9 @@ public class MenuPrincipalController implements Initializable {
 	
 	@FXML
 	private void addPostConfirm() {
-		PostDAO post3 = new PostDAO();
-		post3.setText(post.getText());
-		post3.setUser(DataService.userLogeado);
-		post3.setId(6);
-		ls.add(post3);
+		Date date = Date.valueOf(LocalDate.now());
+		PostDAO pd = new PostDAO(-1,date,post.getText(),DataService.userLogeado);
+		pd.create();
 		vis.setVisible(false);
 		
 	}

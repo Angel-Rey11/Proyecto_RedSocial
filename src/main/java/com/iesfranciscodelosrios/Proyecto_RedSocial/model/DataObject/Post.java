@@ -6,7 +6,6 @@ public class Post {
 
 	protected int id;
 	protected Date creationDate;
-	protected Date modificationDate;
 	protected String text;
 	protected User user;
 	
@@ -14,10 +13,9 @@ public class Post {
 		super();
 	}
 
-	public Post(int id, Date creationDate, Date modificationDate, String text, User user) {
+	public Post(int id, Date creationDate, String text, User user) {
 		this.id = id;
 		this.creationDate = creationDate;
-		this.modificationDate = modificationDate;
 		this.text = text;
 		this.user = user;
 	}
@@ -37,15 +35,7 @@ public class Post {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-
-	public Date getModificationDate() {
-		return modificationDate;
-	}
-
-	public void setModificationDate(Date modificationDate) {
-		this.modificationDate = modificationDate;
-	}
-
+	
 	public String getText() {
 		return text;
 	}
@@ -64,7 +54,7 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", creationDate=" + creationDate + ", modificationDate=" + modificationDate
+		return "Post [id=" + id + ", creationDate=" + creationDate + ", modificationDate=" 
 				+ ", text=" + text + ", user=" + user + "]";
 	}
 
