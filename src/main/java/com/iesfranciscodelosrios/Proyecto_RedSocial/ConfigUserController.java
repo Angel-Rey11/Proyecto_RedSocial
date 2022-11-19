@@ -79,7 +79,7 @@ public class ConfigUserController implements Initializable {
 		
 		if (DataService.userLogeado != null) {
 			if (!nameUser.getText().isEmpty() && !biography.getText().isEmpty() && !nickname.getText().isEmpty()) {
-				UserDAO u = new UserDAO(DataService.userLogeado.getId(), nick, name , DataService.userLogeado.getPassword(), bio, null, null, null);
+				UserDAO u = new UserDAO(DataService.userLogeado.getId(), nick, name , DataService.userLogeado.getPassword(), bio);
 				u.update();
 				Dialog.showConfirm("Message", "CAMBIOS REALIZADOS CON ÉXITO", "EL USUARIO HA SIDO MODIFICADO CORRECTAMENTE");
 				Loggers.LogsInfo("USUARIO MODIFICADO");
@@ -126,7 +126,7 @@ public class ConfigUserController implements Initializable {
 		
 		if (!pass.isEmpty() && !passN.isEmpty()) {
 			if (pass.contentEquals(passN)) {
-				UserDAO u = new UserDAO(DataService.userLogeado.getId(), DataService.userLogeado.getName(), DataService.userLogeado.getNickname(), pass, DataService.userLogeado.getBiografia(), null, null, null);
+				UserDAO u = new UserDAO(DataService.userLogeado.getId(), DataService.userLogeado.getName(), DataService.userLogeado.getNickname(), pass, DataService.userLogeado.getBiografia());
 				u.update();
 				Dialog.showConfirm("OPERACIÓN EXITOSA", "CAMBIOS REALIZADOS CON ÉXITO", "LA CONTRASEÑA HA SIDO MODIFICADA CORRECTAMENTE");
 				App.setRoot("MenuPrincipal");

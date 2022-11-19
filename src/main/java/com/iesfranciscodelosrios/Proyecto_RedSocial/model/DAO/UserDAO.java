@@ -27,11 +27,11 @@ public class UserDAO extends User{
     private final static String MODIFYBIO = "UPDATE `user` SET `biografia` = ? WHERE `user`.`id` = ?";
     
     public UserDAO(){}
-    public UserDAO(int id, String name, String nickname, String password, String biografia, List<Post> posts, List<User> followers, List<User> following) {
+    public UserDAO(int id, String name, String nickname, String password, String biografia) {
         super(id, name, nickname, password, biografia);
     }
     public UserDAO(User u){
-        this(u.getId(), u.getNickname(), u.getName(), u.getPassword(), u.getBiografia(), u.getPosts(), u.getFollowers(), u.getFollowing());
+        this(u.getId(), u.getNickname(), u.getName(), u.getPassword(), u.getBiografia());
     }
     public UserDAO(int id) {
         this.find(id);
@@ -193,7 +193,7 @@ public class UserDAO extends User{
                 ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), null, null, null);
+                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 }
                 rs.close();
             } catch(SQLException e) {
@@ -212,7 +212,7 @@ public class UserDAO extends User{
                 ps.setString(1, nickname);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), null, null, null);
+                    u = new UserDAO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 }
                 rs.close();
             } catch(SQLException e) {

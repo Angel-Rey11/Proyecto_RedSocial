@@ -11,9 +11,6 @@ public class User {
     private String nickname;
     private String password;
     private String biografia;
-    private List<Post> posts;
-    private List<User> followers;
-    private List<User> following;
 
     public User(int id, String nickname, String name, String password, String biografia) {
         this.id = id;
@@ -44,33 +41,11 @@ public class User {
         this.biografia = biografia;
     }
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
-    }
-
-    public void setFollowing(List<User> following) {
-        this.following = following;
-    }
 
     public String getBiografia() {
         return biografia;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public List<User> getFollowers() {
-        return followers;
-    }
-
-    public List<User> getFollowing() {
-        return following;
-    }
 
     public int getId() {
         return id;
@@ -90,7 +65,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", nickname=" + nickname + ", password=" + password
-				+ ", biografia=" + biografia + ", posts=" + posts + ", followers=" + followers + ", following="
-				+ following + "]";
+				+ ", biografia=" + biografia +"]";
 	}
 }
