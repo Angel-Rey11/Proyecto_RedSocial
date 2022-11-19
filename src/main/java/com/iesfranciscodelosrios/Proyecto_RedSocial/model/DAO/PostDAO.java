@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class PostDAO extends Post implements IPostDAO {
 	//FIN DE LAS CONSULTAS
 	
 	public PostDAO() {}
-	public PostDAO(int id, Date creationDate, String text, User user) { super(id, creationDate,text, user); }
+	public PostDAO(int id, Timestamp creationDate, String text, User user) { super(id, creationDate,text, user); }
 	public PostDAO(Post p) {
 		super(p.getId(), p.getCreationDate(), p.getText(), p.getUser());
 	}
@@ -45,7 +46,7 @@ public class PostDAO extends Post implements IPostDAO {
 			PreparedStatement ps;
 			try {
 				ps = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-				ps.setDate(1, this.creationDate);
+				ps.setTimestamp(1, this.creationDate);
 				ps.setString(2, this.text);
 				ps.setInt(3, this.user.getId());
 				ps.executeUpdate();  //devuelve 1 si todo ok
@@ -96,7 +97,7 @@ public class PostDAO extends Post implements IPostDAO {
 			PreparedStatement ps;
 			try {
 				ps = con.prepareStatement(UPDATE);
-				ps.setDate(1, this.creationDate);
+				ps.setTimestamp(1, this.creationDate);
 				ps.setString(3, this.text);
 				ps.setInt(4, this.user.getId());
 				ps.setInt(5, this.id);
@@ -125,7 +126,7 @@ public class PostDAO extends Post implements IPostDAO {
 				if(rs.next()) {
 					p = new PostDAO();
 					p.setId(rs.getInt("id"));
-					p.setCreationDate(rs.getDate("creation_date"));
+					p.setCreationDate(rs.getTimestamp("creation_date"));
 					p.setText(rs.getString("text"));
 					//User u = UserDAO.find(rs.getInt("id_user"));
 					//p.setUser(u);

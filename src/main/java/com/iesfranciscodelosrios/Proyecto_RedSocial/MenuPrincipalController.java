@@ -3,6 +3,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class MenuPrincipalController implements Initializable {
 	
 	@FXML
 	private void addPostConfirm() {
-		Date date = Date.valueOf(LocalDate.now());
+		Timestamp date = new Timestamp(System.currentTimeMillis());;
 		PostDAO pd = new PostDAO(-1,date,post.getText(),DataService.userLogeado);
 		pd.create();
 		vis.setVisible(false);
