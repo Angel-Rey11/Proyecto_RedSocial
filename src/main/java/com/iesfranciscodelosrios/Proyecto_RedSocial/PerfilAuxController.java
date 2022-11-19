@@ -9,6 +9,9 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,11 +31,24 @@ public class PerfilAuxController implements Initializable{
 	private Button unfollow;
 	@FXML
 	private TextArea bio;
+	@FXML 
+	private Label nFollower;
+	@FXML
+	private Label nFollowing;
+	@FXML 
+	private Label nPost;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		nickname.setText(DataService.pAux.getUser().getNickname());
 		bio.setText(DataService.pAux.getUser().getBiografia());
+		User pDAO = DataService.pAux.getUser();
+		DataService.uAux = (UserDAO) pDAO;
+		nFollower.setText(String.valueOf(DataService.uAux.getAllFollower().size()));
+		nFollowing.setText(String.valueOf(DataService.uAux.getAllFollowing().size()));
+		List<PostDAO> listPost = PostDAO.getPostsByUser(DataService.uAux.getId());
+		nPost.setText(String.valueOf(listPost.size()));
 	}
 	
 	@FXML

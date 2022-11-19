@@ -61,16 +61,14 @@ public class PerfilController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		nickname.setText(DataService.userLogeado.getNickname());
 		bio.setText(DataService.userLogeado.getBiografia());
-		bio.setEditable(false);
-		
-		try {
-			nFollower.setText(String.valueOf(DataService.userLogeado.getAllFollower().size()));
-			nFollowing.setText(String.valueOf(DataService.userLogeado.getAllFollowing().size()));
-			List<PostDAO> listPost = PostDAO.getPostsByUser(DataService.userLogeado.getId());
-			nPost.setText(String.valueOf(listPost.size()));
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (!bio.getText().equals("")) {
+			bio.setEditable(false);
 		}
+		
+		nFollower.setText(String.valueOf(DataService.userLogeado.getAllFollower().size()));
+		nFollowing.setText(String.valueOf(DataService.userLogeado.getAllFollowing().size()));
+		List<PostDAO> listPost = PostDAO.getPostsByUser(DataService.userLogeado.getId());
+		nPost.setText(String.valueOf(listPost.size()));
 		
 		posts = new ArrayList<>(posts());
 		

@@ -78,12 +78,11 @@ public class ConfigUserController implements Initializable {
 		String nick = nickname.getText();
 		
 		if (DataService.userLogeado != null) {
-			if (!nameUser.getText().isEmpty() && !biography.getText().isEmpty() && !nickname.getText().isEmpty()) {
-				UserDAO u = new UserDAO(DataService.userLogeado.getId(), nick, name , DataService.userLogeado.getPassword(), bio);
-				u.update();
+			if (!nameUser.getText().isEmpty() && !nickname.getText().isEmpty()) {
+				DataService.userLogeado = new UserDAO(DataService.userLogeado.getId(), nick, name , DataService.userLogeado.getPassword(), bio);
+				DataService.userLogeado.update();
 				Dialog.showConfirm("Message", "CAMBIOS REALIZADOS CON ÉXITO", "EL USUARIO HA SIDO MODIFICADO CORRECTAMENTE");
 				Loggers.LogsInfo("USUARIO MODIFICADO");
-				
 			}else {
 				Dialog.showError("ERROR", "FALLO AL INTRODUCIR DATOS", "TODOS LOS CAMPOS DEBEN SER COMPLETADOS");
 				Loggers.LogsSevere("TODOS LOS CAMPOS DEBEN SER COMPLETADOS");
