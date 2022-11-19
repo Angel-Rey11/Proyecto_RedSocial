@@ -2,11 +2,13 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
