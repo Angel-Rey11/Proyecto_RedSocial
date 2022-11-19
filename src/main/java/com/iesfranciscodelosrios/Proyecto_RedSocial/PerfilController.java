@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
-import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +25,12 @@ public class PerfilController implements Initializable{
 	private GridPane postGrid;
 	@FXML
 	private Label nickname;
+	@FXML 
+	private Label nFollower;
+	@FXML
+	private Label nFollowing;
+	@FXML 
+	private Label nPost;
 	private List<PostDAO> posts;
 	
 	@FXML
@@ -57,6 +62,15 @@ public class PerfilController implements Initializable{
 		nickname.setText(DataService.userLogeado.getNickname());
 		bio.setText(DataService.userLogeado.getBiografia());
 		bio.setEditable(false);
+		
+		try {
+			nFollower.setText(String.valueOf(DataService.userLogeado.getAllFollower().size()));
+			nFollowing.setText(String.valueOf(DataService.userLogeado.getAllFollowing().size()));
+			List<PostDAO> listPost = PostDAO.getPostsByUser(DataService.userLogeado.getId());
+			nPost.setText(String.valueOf(listPost.size()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		posts = new ArrayList<>(posts());
 		
