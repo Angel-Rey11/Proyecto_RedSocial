@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 
 public class PerfilAuxController implements Initializable{
+	private FollowDAO fDAO;
 	@FXML
 	private Label nickname;
 	@FXML
@@ -33,19 +35,25 @@ public class PerfilAuxController implements Initializable{
 	
 	@FXML
 	private void follow() {
-		unfollow.setVisible(false);
-		follow.setVisible(true);
-		unfollow.setDisable(true);
-		follow.setDisable(false);
+		fDAO = new FollowDAO(-1, DataService.userLogeado, DataService.pAux.getUser());
+		if(fDAO.create()) {
+			unfollow.setVisible(true);
+			follow.setVisible(false);
+			unfollow.setDisable(true);
+			follow.setDisable(false);
+		}
+
 	}
 	
 	@FXML
 	private void unfollow() {
-		unfollow.setVisible(true);
-		follow.setVisible(false);
-		follow.setDisable(true);
-		unfollow.setDisable(false);
-		
+		fDAO = new FollowDAO(-1, DataService.userLogeado, DataService.pAux.getUser());
+		if(fDAO.delete()) {
+			unfollow.setVisible(false);
+			follow.setVisible(true);
+			unfollow.setDisable(false);
+			follow.setDisable(true);
+		}
 	}
 	
 	@FXML

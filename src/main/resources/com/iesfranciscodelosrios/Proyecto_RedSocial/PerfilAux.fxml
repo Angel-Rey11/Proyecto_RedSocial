@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilAuxController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilAuxController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -79,7 +79,7 @@
                         <Image url="@../images/share.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="follow" layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#unfollow" prefHeight="28.0" prefWidth="100.0" style="-fx-background-color: black; -fx-border-color: AAC4FF; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="Siguiendo" textFill="#aac4ff" visible="false">
+                  <Button fx:id="unfollow" layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#unfollow" prefHeight="28.0" prefWidth="100.0" style="-fx-background-color: black; -fx-border-color: AAC4FF; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="Siguiendo" textFill="#aac4ff" visible="false">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -88,7 +88,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="unfollow" layoutX="482.0" layoutY="54.0" mnemonicParsing="false" onAction="#follow" prefHeight="28.0" prefWidth="65.0" style="-fx-background-color: black; -fx-border-color: white; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="Seguir" textFill="WHITE" />
+                  <Button fx:id="follow" layoutX="482.0" layoutY="54.0" mnemonicParsing="false" onAction="#follow" prefHeight="28.0" prefWidth="65.0" style="-fx-background-color: black; -fx-border-color: white; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="Seguir" textFill="WHITE" />
                </children>
             </AnchorPane>
             <ImageView fitHeight="82.0" fitWidth="79.0" layoutX="23.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
