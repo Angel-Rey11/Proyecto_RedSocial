@@ -39,8 +39,8 @@ public class PerfilAuxController implements Initializable{
 		if(fDAO.create()) {
 			unfollow.setVisible(true);
 			follow.setVisible(false);
-			unfollow.setDisable(true);
-			follow.setDisable(false);
+			unfollow.setDisable(false);
+			follow.setDisable(true);
 		}
 
 	}
@@ -51,8 +51,8 @@ public class PerfilAuxController implements Initializable{
 		if(fDAO.delete()) {
 			unfollow.setVisible(false);
 			follow.setVisible(true);
-			unfollow.setDisable(false);
-			follow.setDisable(true);
+			unfollow.setDisable(true);
+			follow.setDisable(false);
 		}
 	}
 	

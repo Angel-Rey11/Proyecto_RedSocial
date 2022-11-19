@@ -116,7 +116,7 @@ public class PostDAO extends Post implements IPostDAO {
 		// TODO Auto-generated method stub
 		Connection con = Connect.getConnection();
 		PostDAO p = null;
-		
+		UserDAO u = null;
 		if(con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(FIND);
@@ -124,20 +124,18 @@ public class PostDAO extends Post implements IPostDAO {
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()) {
 					p = new PostDAO();
+					u = new UserDAO();
 					p.setId(rs.getInt("id"));
 					p.setCreationDate(rs.getDate("creation_date"));
 					p.setText(rs.getString("text"));
-					//User u = UserDAO.find(rs.getInt("id_user"));
-					//p.setUser(u);
-					int id_user = rs.getInt("id_user");
-					this.user = new UserDAO(id_user);
+					u.find(rs.getInt("id_user"));
+					p.setUser(u);
 				}
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return p;
 	}
 	public static List<PostDAO> findAllByFollower() {

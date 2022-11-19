@@ -170,20 +170,6 @@ public class UserDAO extends User{
 
 
 
-
-
-    public boolean like(User u, IPostDAO p) {
-
-        return false;
-    }
-
-
-    public boolean unlike(User u, IPostDAO p) {
-
-        return false;
-    }
-
-
     public UserDAO find(int id) {
         Connection con = Connect.getConnection();
         UserDAO u = null;
@@ -240,5 +226,8 @@ public class UserDAO extends User{
     		}
     	}
     	return modified;
+    }
+    public List<UserDAO> getRandomUsers(){
+        return null;
     }
 }

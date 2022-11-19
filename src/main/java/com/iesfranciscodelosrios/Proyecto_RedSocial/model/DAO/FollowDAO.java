@@ -17,7 +17,7 @@ public class FollowDAO extends Follow implements IFollowDAO {
 	//CONSULTAS DE MariaDB
 	private final static String INSERT = "INSERT INTO Follow (id_user_follower, id_user_following) VALUES (?, ?)";
 	private final static String UPDATE = "UPDATE Follow SET id_user_follower = ?, id_user_following = ? WHERE id = ?";
-	private final static String DELETE = "DELETE FROM Follow WHERE id_follower = ? AND id_following = ?";
+	private final static String DELETE = "DELETE FROM Follow WHERE id_user_follower = ? AND id_user_following = ?";
 	private final static String FIND = "SELECT id, id_user_follower, id_user_following FROM Follow WHERE id = ?";
 	//FIN DE LAS CONSULTAS
 	
@@ -40,10 +40,13 @@ public class FollowDAO extends Follow implements IFollowDAO {
 			PreparedStatement ps;
 			try {
 				ps = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-				ps.executeUpdate();  //devuelve 1 si todo ok
+				ps.setInt(1, this.getFollower().getId());
+				ps.setInt(2, this.getFollowing().getId());
+				ps.executeUpdate();
 				ResultSet rs = ps.getGeneratedKeys();
 				if(rs.next()) {
 					this.id = rs.getInt(1);
+					addFollow = true;
 				}
 				ps.close();
 				rs.close();
@@ -51,7 +54,6 @@ public class FollowDAO extends Follow implements IFollowDAO {
 				e.printStackTrace();
 			}
 		}
-		
 		return addFollow;
 	}
 
