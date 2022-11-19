@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="520.0" style="-fx-background-color: B1B2FF;" stylesheets="@../css/Post.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PostController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="520.0" style="-fx-background-color: B1B2FF;" stylesheets="@../css/Post.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PostController">
    <children>
       <ImageView fitHeight="45.0" fitWidth="47.0" layoutX="28.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -46,5 +46,6 @@
       <Button fx:id="mg" layoutX="85.0" layoutY="109.0" mnemonicParsing="false" onAction="#mg" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button fx:id="dmg" layoutX="85.0" layoutY="109.0" mnemonicParsing="false" onAction="#dmg" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToProfile" opacity="0.0" prefHeight="51.0" prefWidth="52.0" />
+      <Label layoutX="347.0" layoutY="28.0" style="-fx-font-size: 14px;" text="Fecha" />
    </children>
 </AnchorPane>
