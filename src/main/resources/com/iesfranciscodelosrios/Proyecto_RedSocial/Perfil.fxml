@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -65,9 +65,9 @@
                   <Label layoutX="122.0" layoutY="58.0" style="-fx-font-size: 14px;" styleClass="mod" text="Seguidores" />
                   <Label layoutX="272.0" layoutY="58.0" style="-fx-font-size: 14px;" styleClass="mod" text="Seguidos" />
                   <Label layoutX="402.0" layoutY="58.0" style="-fx-font-size: 14px;" styleClass="mod" text="Posts" />
-                  <Label layoutX="201.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="150" />
-                  <Label layoutX="339.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="20" />
-                  <Label layoutX="444.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="3" />
+                  <Label fx:id="nFollower" layoutX="201.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="150" />
+                  <Label fx:id="nFollowing" layoutX="339.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="20" />
+                  <Label fx:id="nPost" layoutX="444.0" layoutY="58.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" styleClass="mod" text="3" />
                   <TextArea fx:id="bio" layoutX="122.0" layoutY="-6.0" prefHeight="52.0" prefWidth="395.0" styleClass="mod" />
                   <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="35.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
