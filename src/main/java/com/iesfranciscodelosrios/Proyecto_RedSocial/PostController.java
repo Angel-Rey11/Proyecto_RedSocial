@@ -23,18 +23,16 @@ public class PostController implements Initializable {
 	@FXML
 	private Label id;
 	@FXML
-	private ImageView img1;
+	private ImageView img1; //Corazon vacio
 	@FXML
-	private ImageView img2;
+	private ImageView img2; //Corazon lleno
 	@FXML
-	private Button mg;
+	private Button mg; //Me gusta
 	@FXML
-	private Button dmg;
+	private Button dmg; //No me gusta
 	
 	@FXML
 	private void mg() {
-		img1.setVisible(false);
-		img2.setVisible(true);
 		mg.setDisable(true);
 		dmg.setDisable(false);
 	}
@@ -68,6 +66,5 @@ public class PostController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		dmg.setDisable(true);
-		
 	}
 }
