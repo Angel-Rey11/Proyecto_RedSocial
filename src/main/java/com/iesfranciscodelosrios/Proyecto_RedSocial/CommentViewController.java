@@ -3,7 +3,9 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,16 +82,14 @@ public class CommentViewController implements Initializable {
 	@FXML
 	private void AddComment() {
 		String message = text.getText();
-		Date date = Date.valueOf(LocalDate.now());
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		User user = DataService.userLogeado;
 		Post post = DataService.p;
-		if (text.getText() != "") {
-			CommentDAO c = new CommentDAO(-1, message, date, user, post);
-			c.create();
-			a1.setVisible(false);
-		}
+		CommentDAO c = new CommentDAO(-1, message, timestamp, user, post);
+		c.create();
+		a1.setVisible(false);
 	}
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comment = new ArrayList<>(comments());

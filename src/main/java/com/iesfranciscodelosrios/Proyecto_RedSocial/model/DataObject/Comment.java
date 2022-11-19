@@ -1,11 +1,13 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Comment {
 	private int id;
 	private String text;
-	private Date date;
+	private Timestamp date;
 	private User user;
 	private Post post;
 	
@@ -13,10 +15,13 @@ public class Comment {
 		
 	}
 	
-	public Comment(int id, String text, Date date) {
+	public Comment(int id, String text, Timestamp date, User user, Post post) {
+		super();
 		this.id = id;
 		this.text = text;
 		this.date = date;
+		this.user = user;
+		this.post = post;
 	}
 
 	public int getId() {
@@ -34,12 +39,12 @@ public class Comment {
 	public void setText(String text) {
 		this.text = text;
 	}
-
-	public Date getDate() {
+	
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 
