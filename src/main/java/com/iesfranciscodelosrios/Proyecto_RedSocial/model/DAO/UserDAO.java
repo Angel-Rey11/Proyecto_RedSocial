@@ -145,16 +145,16 @@ public class UserDAO extends User{
     }
 
 
-    public List<User> getAllFollowing() {
+    public List<UserDAO> getAllFollowing() {
         Connection con = Connect.getConnection();
-        List<User> following = new ArrayList<>();
+        List<UserDAO> following = new ArrayList<>();
         if(con != null){
             try{
                 PreparedStatement ps = con.prepareStatement(GETALLFOLLOWING);
                 ps.setInt(1, this.getId());
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()){
-                    User u = new User();
+                    UserDAO u = new UserDAO();
                     u.setId(rs.getInt("id"));
                     u.setName(rs.getString("name"));
                     u.setNickname(rs.getString("nickname"));
