@@ -16,7 +16,7 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 public class LikeDAO extends Like implements ILikeDAO{
 	private final static String INSERT = "INSERT INTO Likes (id_user, id_post) VALUES (?, ?)";
-	private final static String DELETE = "DELETE FROM Likes WHERE id = ?";
+	private final static String DELETE = "DELETE FROM Likes WHERE id_post = ? and id_user = ?";
 	private final static String GETALLLIKES = "SELECT * FROM Likes WHERE id_post = ?";
 	private final static String FIND = "SELECT * FROM Likes WHERE id = ?";
 	public LikeDAO() {
@@ -34,7 +34,7 @@ public class LikeDAO extends Like implements ILikeDAO{
 	}
 
 	@Override
-	public boolean create() {
+	public boolean create(int id_post) {
 		boolean added = false;
 		
 		Connection con = Connect.getConnection();
@@ -43,7 +43,7 @@ public class LikeDAO extends Like implements ILikeDAO{
 			try {
 				PreparedStatement ps = con.prepareStatement(INSERT);
 				ps.setInt(1, DataService.userLogeado.getId());
-				ps.setInt(2, DataService.p.getId());
+				ps.setInt(2, id_post);
 				ps.executeUpdate();
 				added = true;
 				ps.close();
@@ -55,7 +55,7 @@ public class LikeDAO extends Like implements ILikeDAO{
 	}
 
 	@Override
-	public boolean delete() {
+	public boolean delete(int id_post) {
 		boolean removed = false;
 		
 		Connection con = Connect.getConnection();
@@ -63,7 +63,8 @@ public class LikeDAO extends Like implements ILikeDAO{
 		if (con != null) {
 			try {
 				PreparedStatement ps = con.prepareStatement(DELETE);
-				ps.setInt(1, this.getId());
+				ps.setInt(1, id_post);
+				ps.setInt(2, DataService.userLogeado.getId());
 				ps.executeUpdate();
 				removed = true;
 				ps.close();
@@ -73,7 +74,7 @@ public class LikeDAO extends Like implements ILikeDAO{
 		}
 		return removed;
 	}
-	public List<LikeDAO> getAllLikesbyPost( int id_post) {
+	public List<LikeDAO> getAllLikesbyPost(int id_post) {
 		List<LikeDAO> likes = new ArrayList<LikeDAO>();
 		LikeDAO l = new LikeDAO();
 		UserDAO u = new UserDAO();

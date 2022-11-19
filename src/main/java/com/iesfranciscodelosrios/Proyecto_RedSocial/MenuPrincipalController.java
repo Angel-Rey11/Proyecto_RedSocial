@@ -51,6 +51,17 @@ public class MenuPrincipalController implements Initializable {
 		int columns = 0;
 		int row = 1;
 		
+		try {
+			for (int i = 0; i < posts.size(); i++) {
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("post.fxml"));
+				AnchorPane an = fxmlLoader.load();
+				PostController post = fxmlLoader.getController();
+				post.setData(posts.get(i));
+				post.initializePrivado();
+				if(columns == 1) {
+					columns = 0;
+					++row;
 		if(DataService.userLogeado.getAllFollowing().size()<=0) {
 			sug.setVisible(false);
 			img.setVisible(false);
