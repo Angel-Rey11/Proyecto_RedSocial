@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.CommentDAO;
 
 import javafx.fxml.FXML;
@@ -79,6 +81,8 @@ public class CommentController {
 	@FXML
 	private void deleteComment() {
 		cd.delete();
+		Dialog.showConfirm("OPERACIÓN EXITOSA", "COMENTARIO ELIMINADO", "El comentario se ha eliminado correctamente");
+		Loggers.LogsInfo("COMENTARIO ELIMINADO");
 	}
 	
 	/**
@@ -87,6 +91,8 @@ public class CommentController {
 	@FXML
 	private void showModifyComment() {
 		an.setVisible(true);
+		ta.setText(this.cd.getText());
+		Loggers.LogsInfo("MODIFICANDO COMENTARIO EXISTENTE");
 	}
 	
 	/**
@@ -94,9 +100,14 @@ public class CommentController {
 	 */
 	@FXML
 	private void modifyComment() {
-		Timestamp date = new Timestamp(System.currentTimeMillis());;
-		CommentDAO newComment = new CommentDAO(this.cd.getId(),ta.getText(),date,DataService.userLogeado,DataService.p);
-		newComment.update();
-		an.setVisible(false);
+		if (!ta.getText().equals("")) {
+			Timestamp date = new Timestamp(System.currentTimeMillis());;
+			CommentDAO newComment = new CommentDAO(this.cd.getId(),ta.getText(),date,DataService.userLogeado,DataService.p);
+			newComment.update();
+			an.setVisible(false);
+		} else {
+			Dialog.showError("ERROR", "MOFICIACIÓN ERRÓNEA", "El campo texto debe ser rellenado");
+			Loggers.LogsSevere("ERROR. NO SE HA PODIDO MOFICAR EL COMENTARIO.");
+		}
 	}
 }
