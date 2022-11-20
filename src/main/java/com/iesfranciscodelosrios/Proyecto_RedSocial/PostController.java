@@ -17,7 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class PostController implements Initializable {
+public class PostController {
 	private PostDAO post;
 	private LikeDAO like;
 	@FXML
@@ -83,11 +83,6 @@ public class PostController implements Initializable {
 		}else{
 			App.setRoot("PerfilAux");
 		}
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
 	}
 	public void initializePrivado(){
 		like = new LikeDAO();

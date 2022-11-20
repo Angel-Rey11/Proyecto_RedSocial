@@ -5,8 +5,12 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class UserController {
 	@FXML
@@ -45,6 +49,19 @@ public class UserController {
 			follow.setDisable(false);
 		}
 	}
-	
-	
+	public void initializePrivado(){
+		DataService.userLogeado.getAllFollowing().forEach((u)->{
+			if(u.getId() == this.u.getId()) {
+				unfollow.setVisible(true);
+				follow.setVisible(false);
+				unfollow.setDisable(false);
+				follow.setDisable(true);
+			}else{
+				unfollow.setVisible(false);
+				follow.setVisible(true);
+				unfollow.setDisable(true);
+				follow.setDisable(false);
+			}
+		});
+	}
 }
