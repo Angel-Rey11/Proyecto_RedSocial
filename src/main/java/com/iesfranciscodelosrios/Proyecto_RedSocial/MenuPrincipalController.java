@@ -105,6 +105,7 @@ public class MenuPrincipalController implements Initializable {
 					e.printStackTrace();
 			}
 		}
+		/*
 		Platform.runLater(()->{
 			Timer timer = new Timer(true);
 			timer.scheduleAtFixedRate(new TimerTask() {
@@ -115,7 +116,8 @@ public class MenuPrincipalController implements Initializable {
 					}
 				}
 			},2000,2000);
-		});	
+		});
+		*/	
 	}
 	
 	/**

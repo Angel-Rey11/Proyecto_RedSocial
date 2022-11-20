@@ -18,11 +18,11 @@ public class UserDAO extends User{
 
     private final static String INSERT = "INSERT INTO `user` (`id`, `nickname`, `name`, `password`, `biografia`) VALUES (NULL,?,?,?,'')";
     private final static String DELETE = "DELETE FROM User WHERE id = ?";
-    private final static String UPDATE = "UPDATE User SET name = ?,  nickname = ?, password = ?, biografia = ? WHERE id = ?";
+    private final static String UPDATE = "UPDATE User SET nickname = ?,  name = ?, password = ?, biografia = ? WHERE id = ?";
     private final static String GETALLFOLLOWER = "SELECT * FROM User WHERE id IN (SELECT id_user_follower FROM Follow WHERE id_user_following = ?)";
     private final static String GETALLFOLLOWING = "SELECT * FROM User WHERE id IN (SELECT id_user_following FROM Follow WHERE id_user_follower = ?)";
-    private final static String FIND = "SELECT id, name, nickname, password, biografia FROM user WHERE id = ?";
-    private final static String FINDBYNICKNAME = "SELECT id, name, nickname, password, biografia FROM user WHERE nickname = ?";
+    private final static String FIND = "SELECT id, nickname, name, password, biografia FROM user WHERE id = ?";
+    private final static String FINDBYNICKNAME = "SELECT id, nickname, name, password, biografia FROM user WHERE nickname = ?";
     private final static String LOGIN = "SELECT * FROM user WHERE nickname = ? AND password = ?";
     private final static String MODIFYBIO = "UPDATE `user` SET `biografia` = ? WHERE `user`.`id` = ?";
     private final static String RANDOMUSER = "SELECT * FROM `user` WHERE id NOT IN (?) ORDER BY RAND()*(25-10)+10 LIMIT 6";
@@ -83,8 +83,8 @@ public class UserDAO extends User{
         Connection con = Connect.getConnection();
         try{
             PreparedStatement ps = con.prepareStatement(UPDATE);
-            ps.setString(1, this.getName());
-            ps.setString(2, this.getNickname());
+            ps.setString(2, this.getName());
+            ps.setString(1, this.getNickname());
             ps.setString(3, this.getPassword());
             ps.setString(4, this.getBiografia());
             ps.setInt(5, this.getId());

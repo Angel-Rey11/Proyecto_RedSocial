@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.CommentDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
@@ -97,6 +99,7 @@ public class CommentViewController implements Initializable {
 	@FXML
 	private void showAddComment() {
 		a1.setVisible(true);
+		Loggers.LogsInfo("CREANDO NUEVO COMENTARIO");
 	}
 	
 	/**
@@ -104,13 +107,18 @@ public class CommentViewController implements Initializable {
 	 */
 	@FXML
 	private void AddComment() {
-		String message = text.getText();
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		User user = DataService.userLogeado;
-		Post post = DataService.p;
-		CommentDAO c = new CommentDAO(-1, message, timestamp, user, post);
-		c.create();
-		a1.setVisible(false);
+		if (!text.getText().equals("")) {
+			String message = text.getText();
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			User user = DataService.userLogeado;
+			Post post = DataService.p;
+			CommentDAO c = new CommentDAO(-1, message, timestamp, user, post);
+			c.create();
+			a1.setVisible(false);
+		}else {
+			Dialog.showError("ERROR", "CAMPO INCOMPLETO", "El campo texto debe ser rellenado");
+			Loggers.LogsSevere("ERROR. NO SE HA ENCONTRADO TEXTO.");
+		}
 	}
 	
 	/**
