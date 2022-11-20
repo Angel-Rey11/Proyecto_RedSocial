@@ -2,11 +2,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,6 +23,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Clase CommentViewController
+ * @author Francisco Berral, Antonio Jesús Luque, Francisco Prados, Ángel Rey  
+ *
+ */
 public class CommentViewController implements Initializable {
 	@FXML
 	private Label name;
@@ -54,31 +55,53 @@ public class CommentViewController implements Initializable {
 	CommentDAO cDAO = new CommentDAO();
 	PostDAO pDAO = new PostDAO();
 	
+	/**
+	 * Método para cambiar al FXML de 'Main'
+	 * @throws IOException Excepción en caso de que exista
+	 */
 	@FXML
 	private void switchToMain() throws IOException {
 		App.setRoot("MenuPrincipal");
 	}
 	
+	/**
+	 * Método para cambiar al FXML de 'Profile'
+	 * @throws IOException Excepción en caso de que exista
+	 */
 	@FXML
 	private void switchToProfile() throws IOException {
 		App.setRoot("Perfil");
 	}
 	
+	/**
+	 * Método para cambiar al FXML de 'Login'
+	 * @throws IOException Excepción en caso de que exista
+	 */
 	@FXML
 	private void switchToConf() throws IOException {
 		App.setRoot("Conf");
 	}
 	
+	/**
+	 * Método para cambiar al FXML de 'Login'
+	 * @throws IOException Excepción en caso de que exista
+	 */
 	@FXML
 	private void switchToLogin() throws IOException {
 		App.setRoot("Login");
 	}
 	
+	/**
+	 * Método para mostrar el AnchorPane para añadir un comentario
+	 */
 	@FXML
 	private void showAddComment() {
 		a1.setVisible(true);
 	}
 	
+	/**
+	 * Método para crear un nuevo comentario 
+	 */
 	@FXML
 	private void AddComment() {
 		String message = text.getText();
@@ -90,6 +113,9 @@ public class CommentViewController implements Initializable {
 		a1.setVisible(false);
 	}
 	
+	/**
+	 * Método que ejecuta todas las instrucciones contenidas al inicializar
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comment = new ArrayList<>(comments());
@@ -121,6 +147,10 @@ public class CommentViewController implements Initializable {
 		post.setText(DataService.p.getText());
 	}
 	
+	/**
+	 * Método para obtener una lista de comentarios de un post en concreto
+	 * @return Lista de comentarios
+	 */
 	private List<CommentDAO> comments() {
 		List<CommentDAO> list = cDAO.getAllCommentsByIdPost(DataService.p.getId());
 		

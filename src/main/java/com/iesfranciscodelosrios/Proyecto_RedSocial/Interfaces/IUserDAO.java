@@ -5,6 +5,11 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
 import java.util.List;
 
+/**
+ * Interfaz IUserDAO
+ * @author Francisco Berral, Antonio Jesús Luque, Francisco Prados, Ángel Rey
+ *
+ */
 public interface IUserDAO {
     boolean insert();
     boolean delete();
