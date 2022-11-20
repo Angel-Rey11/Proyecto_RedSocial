@@ -1,6 +1,7 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 
@@ -44,7 +45,7 @@ public class UserController {
 			unfollow.setDisable(false);
 			follow.setDisable(true);
 		}
-
+		Loggers.LogsInfo("HAS SEGUIDO A UN USUARIO");
 	}
 	
 	@FXML
@@ -60,6 +61,7 @@ public class UserController {
 			unfollow.setDisable(true);
 			follow.setDisable(false);
 		}
+		Loggers.LogsSevere("HAS DEJADO DE SEGUIR A UN USUARIO");
 	}
 
 	/**

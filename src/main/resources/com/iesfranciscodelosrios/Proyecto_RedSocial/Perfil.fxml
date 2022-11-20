@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -64,8 +64,8 @@
             <Separator layoutY="75.0" prefHeight="21.0" prefWidth="565.0" style="-fx-background-color: black;" />
             <AnchorPane layoutY="-3.0" prefHeight="87.0" prefWidth="565.0" style="-fx-background-color: D2DAFF;">
                <children>
-                  <Label layoutX="110.0" layoutY="65.0" style="-fx-font-size: 14px;" text="\@" />
-                  <Label fx:id="nickname" layoutX="125.0" layoutY="65.0" style="-fx-font-size: 14px;" text="Label" />
+                  <Label layoutX="110.0" layoutY="65.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" text="\@" />
+                  <Label fx:id="nickname" layoutX="125.0" layoutY="65.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" text="Label" />
                </children></AnchorPane>
             <Separator layoutY="191.0" prefHeight="7.0" prefWidth="565.0" style="-fx-background-color: B1B2FF;" />
             <AnchorPane layoutY="98.0" prefHeight="100.0" prefWidth="565.0" style="-fx-background-color: transparent;">

@@ -21,7 +21,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -36,13 +35,7 @@ public class CommentViewController implements Initializable {
 	
 	@FXML
 	private Label post;
-	
-	@FXML
-	private ImageView image1;
-	
-	@FXML
-	private ImageView image2;
-	
+
 	@FXML
 	private GridPane commentGrid;
 	
