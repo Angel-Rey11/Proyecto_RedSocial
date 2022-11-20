@@ -127,7 +127,7 @@ public class MenuPrincipalController implements Initializable {
 	
 	@FXML
 	private void addPostConfirm() {
-		Timestamp date = new Timestamp(System.currentTimeMillis());;
+		Timestamp date = new Timestamp(System.currentTimeMillis());
 		PostDAO pd = new PostDAO(-1,date,post.getText(),DataService.userLogeado);
 		pd.create();
 		vis.setVisible(false);

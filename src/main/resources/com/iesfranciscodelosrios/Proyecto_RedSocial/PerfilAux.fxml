@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilAuxController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.PerfilAuxController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -49,6 +51,12 @@
                </image>
             </ImageView>
             <Label layoutX="51.0" layoutY="379.0" style="-fx-font-size: 14px;" text="MÁS" />
+            <MenuButton layoutX="13.0" layoutY="344.0" mnemonicParsing="false" opacity="0.0" prefHeight="52.0" prefWidth="105.0">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#switchToConf" text="Ajustes" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToLogin" text="Cerrar Sesión" />
+               </items>
+            </MenuButton>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="136.0" prefHeight="500.0" prefWidth="565.0" style="-fx-background-color: black;">
