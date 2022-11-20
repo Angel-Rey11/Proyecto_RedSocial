@@ -69,17 +69,16 @@ public class UserController {
 	 * Y mostrara los botones correspondientes en cualquiera de los casos
 	 */
 	public void initializePrivado(){
-		DataService.userLogeado.getAllFollowing().forEach((u)->{
-			if(u.getId() == this.u.getId()) {
+		unfollow.setVisible(false);
+		follow.setVisible(true);
+		unfollow.setDisable(true);
+		follow.setDisable(false);
+		DataService.userLogeado.getAllFollowing().forEach((user)->{
+			if(user.getId() == this.u.getId()) {
 				unfollow.setVisible(true);
 				follow.setVisible(false);
 				unfollow.setDisable(false);
 				follow.setDisable(true);
-			}else{
-				unfollow.setVisible(false);
-				follow.setVisible(true);
-				unfollow.setDisable(true);
-				follow.setDisable(false);
 			}
 		});
 	}

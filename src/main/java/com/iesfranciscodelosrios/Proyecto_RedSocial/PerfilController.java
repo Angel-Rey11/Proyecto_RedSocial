@@ -34,30 +34,46 @@ public class PerfilController implements Initializable{
 	private List<PostDAO> posts;
 	
 	@FXML
+	/**
+	 * Metodo que carga la vista de la pagina principal
+	 */
 	private void switchToMain() throws IOException {
 		App.setRoot("MenuPrincipal");
 	}
 	
 	@FXML
+	/**
+	 * Metodo que carga la vista de la pagina de configuracion de usuario
+	 */
 	private void switchToConf() throws IOException {
 		App.setRoot("Conf");
 	}
 	
 	@FXML
+	/**
+	 * Metodo que carga la vista de la pagina de Login
+	 */
 	private void switchToLogin() throws IOException {
 		App.setRoot("Login");
 	}
 	
 	@FXML
+	/**
+	 * Metodo que permite añadir una biografia al perfil del usuario
+	 */
 	private void addBio() {
 		String text = bio.getText();
 		bio.setText(text);
 		bio.setEditable(false);
 		DataService.userLogeado.setBiografia(text);
-		DataService.userLogeado.changeBio();
+		DataService.userLogeado.update();
 	}
 
 	@Override
+	/**
+	 * Metodo que inicializa la vista de perfil con todos sus campos rellenos
+	 * y te trae una lista con todos los post del usuario
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		nickname.setText(DataService.userLogeado.getNickname());
 		bio.setText(DataService.userLogeado.getBiografia());
@@ -94,7 +110,6 @@ public class PerfilController implements Initializable{
 				e.printStackTrace();
 		}
 	}
-	
 	private List<PostDAO> posts() {
 		List<PostDAO> ls = PostDAO.getPostsByUser(DataService.userLogeado.getId());
 		return ls;

@@ -39,6 +39,10 @@ public class PerfilAuxController implements Initializable{
 	private Label nPost;
 
 	@Override
+	/**
+	 * Inicializa el controlador rellena todos los campos con los datos del usuario que hemos seleccionado
+	 * y comprueba si estamos siguiendo a ese usuario o no en funcion de si lo seguimos o no mostrara un boton u otro
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		nickname.setText(DataService.pAux.getUser().getNickname());
 		bio.setText(DataService.pAux.getUser().getBiografia());
@@ -64,6 +68,9 @@ public class PerfilAuxController implements Initializable{
 	}
 	
 	@FXML
+	/**
+	 * Metodo que permite seguir a un usuario.
+	 */
 	private void follow() {
 		fDAO = new FollowDAO(-1, DataService.userLogeado, DataService.pAux.getUser());
 		if(fDAO.create()) {
@@ -76,6 +83,9 @@ public class PerfilAuxController implements Initializable{
 	}
 	
 	@FXML
+	/**
+	 * Metodo que permite dejar de seguir a un usuario.
+	 */
 	private void unfollow() {
 		fDAO = new FollowDAO(-1, DataService.userLogeado, DataService.pAux.getUser());
 		if(fDAO.delete()) {
@@ -87,21 +97,33 @@ public class PerfilAuxController implements Initializable{
 	}
 	
 	@FXML
+	/**
+	 * Metodo que permite volver a la pagina principal.
+	 */
 	private void switchToMain() throws IOException {
 		App.setRoot("MenuPrincipal");
 	}
 	
 	@FXML
+	/**
+	 * Metodo que permite ir a la pagina de configuracion.
+	 */
 	private void switchToConf() throws IOException {
 		App.setRoot("Conf");
 	}
 	
 	@FXML
+	/**
+	 * Metodo que permite ir a la pagina de Login.
+	 */
 	private void switchToLogin() throws IOException {
 		App.setRoot("Login");
 	}
 	
 	@FXML
+	/**
+	 * Metodo que permite ir a la pagina de Perfil.
+	 */
 	private void switchToProfile() throws IOException {
 		App.setRoot("Perfil");
 	}
