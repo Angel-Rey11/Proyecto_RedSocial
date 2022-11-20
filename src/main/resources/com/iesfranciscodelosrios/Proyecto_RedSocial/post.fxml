@@ -50,8 +50,7 @@
       <Label fx:id="fecha" layoutX="377.0" layoutY="113.0" style="-fx-font-size: 14px;" text="Fecha" />
       <MenuButton layoutX="459.0" layoutY="25.0" mnemonicParsing="false" opacity="0.0" popupSide="LEFT" prefHeight="25.0" prefWidth="45.0" style="-fx-font-size: 14px;">
         <items>
-          <MenuItem mnemonicParsing="false" text="Modificar Post" />
-          <MenuItem mnemonicParsing="false" text="Eliminar Post" />
+          <MenuItem mnemonicParsing="false" onAction="#deletePost" text="Eliminar Post" />
         </items>
       </MenuButton>
    </children>

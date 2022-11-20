@@ -9,11 +9,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -99,8 +102,15 @@ public class MenuPrincipalController implements Initializable {
 					e.printStackTrace();
 			}
 		}
-		
-		
+		Platform.runLater(()->{
+			Timer timer = new Timer(true);
+			timer.scheduleAtFixedRate(new TimerTask() {
+				@Override
+				public void run() {
+					initialize(null,null);
+				}
+			},2000,2000);
+		});	
 	}
 	
 	private List<PostDAO> posts() {
