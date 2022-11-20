@@ -39,8 +39,10 @@ public class UserDAO extends User{
     }
 
 
-
-
+    /**
+     * Inserta un usuario en la base de datos
+     * @return true si se ha insertado correctamente
+     */
     public boolean insert() {
         Connection con = Connect.getConnection();
         boolean insertado = false;
@@ -64,7 +66,10 @@ public class UserDAO extends User{
         return insertado;
     }
 
-
+    /**
+     * Elimina un usuario de la base de datos
+     * @return true si se ha eliminado correctamente
+     */
     public boolean delete() {
         Connection con = Connect.getConnection();
         try{
@@ -78,7 +83,10 @@ public class UserDAO extends User{
         }
     }
 
-
+    /**
+     * Actualiza un usuario de la base de datos
+     * @return true si se ha actualizado correctamente
+     */
     public boolean update() {
         Connection con = Connect.getConnection();
         try{
@@ -95,6 +103,13 @@ public class UserDAO extends User{
             return false;
         }
     }
+
+    /**
+     * Si los parametros coinciden con algun usuario de la base de datos permite entrar al programa
+     * @param nickname nombre de usuario
+     * @param password contraseña
+     * @return true si se ha logueado correctamente
+     */
     public boolean login(String nickname, String password) {
         Connection con = Connect.getConnection();
         boolean logeado = false;
@@ -119,7 +134,10 @@ public class UserDAO extends User{
         return logeado;
     }
 
-
+    /**
+     * Se trae todos los seguidores de un usuario
+     * @return La lista con todos los seguidores
+     */
     public List<UserDAO> getAllFollower() {
         Connection con = Connect.getConnection();
         List<UserDAO> followers = new ArrayList<>();
@@ -144,7 +162,10 @@ public class UserDAO extends User{
         return followers;
     }
 
-
+    /**
+     * Se trae todos los usuarios que sigue un usuario
+     * @return La lista con todos los usuarios que sigue
+     */
     public List<UserDAO> getAllFollowing() {
         Connection con = Connect.getConnection();
         List<UserDAO> following = new ArrayList<>();
@@ -168,9 +189,11 @@ public class UserDAO extends User{
         }
         return following;
     }
-
-
-
+    /**
+     * Busca a un usuario en la base de datos por su id
+     * @param id id del usuario
+     * @return El usuario encontrado
+     */
     public UserDAO find(int id) {
         Connection con = Connect.getConnection();
         UserDAO u = null;
@@ -189,7 +212,12 @@ public class UserDAO extends User{
         }
         return u;
     }
-    
+
+    /**
+     * Busca a un usuario en la base de datos por su nickname
+     * @param nickname nickname del usuario
+     * @return El usuario encontrado
+     */
     public UserDAO find(String nickname) {
         Connection con = Connect.getConnection();
         UserDAO u = null;
@@ -209,9 +237,8 @@ public class UserDAO extends User{
         return u;
     }
     
-    public boolean changeBio() {
+    /*public boolean changeBio() {
     	boolean modified = false;
-    	
     	Connection con = Connect.getConnection();
     	
     	if (con != null) {
@@ -227,7 +254,12 @@ public class UserDAO extends User{
     		}
     	}
     	return modified;
-    }
+    }*/
+
+    /**
+     * Funcion que trae una lista con usuarios random para mostrar en la pagina de sugerencias
+     * @return La lista con los usuarios random
+     */
     public List<UserDAO> getRandomUsers(){
     	Connection con = Connect.getConnection();
         List<UserDAO> random = new ArrayList<>();
