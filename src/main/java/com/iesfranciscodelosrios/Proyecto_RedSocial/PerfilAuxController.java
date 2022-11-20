@@ -40,7 +40,6 @@ public class PerfilAuxController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		nickname.setText(DataService.pAux.getUser().getNickname());
 		bio.setText(DataService.pAux.getUser().getBiografia());
 		User pDAO = DataService.pAux.getUser();

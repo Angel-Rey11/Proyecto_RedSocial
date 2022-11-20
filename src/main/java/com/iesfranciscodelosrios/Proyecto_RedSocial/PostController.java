@@ -77,12 +77,12 @@ public class PostController implements Initializable {
 	@FXML
 	private void switchToProfile() throws IOException {
 		DataService.pAux = this.post;
-		if(DataService.userLogeado.getId()==this.post.getUser().getId()) {
+
+		if(DataService.userLogeado.getId() == this.post.getUser().getId()) {
 			App.setRoot("Perfil");
-		} else {
+		}else{
 			App.setRoot("PerfilAux");
 		}
-		
 	}
 
 	@Override
