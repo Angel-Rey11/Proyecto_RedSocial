@@ -62,6 +62,10 @@ public class ConfigUserController implements Initializable {
 	@FXML
 	private MenuItem sign_off;
 	
+	/**
+	 * Metodo para cuando cambiemos a esta pestaña, setee en los campos la información del usuario logeado
+	 * para luego poder cambiar
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -70,6 +74,12 @@ public class ConfigUserController implements Initializable {
 		nickname.setText(DataService.userLogeado.getNickname());
 	}
 	
+	/**
+	 * Metodo para modificar un usuario, aquí podremos modificar la biografia, nickname y nombre
+	 * La contraseña podremos cambiarla en otra vista
+	 * Loggers y alertas para la confirmación y errores
+	 * @throws IOException
+	 */
 	@FXML
 	private void modifyUser() throws IOException {
 		
@@ -94,12 +104,20 @@ public class ConfigUserController implements Initializable {
 		
 	}
 	
+	/**
+	 * Metodo para poner visible el anchorpane para cambiar la contraseña
+	 * @throws IOException
+	 */
 	@FXML
 	private void changePassword() throws IOException {
 		editPerfil.setVisible(false);
 		changePwd.setVisible(true);
 	}
 	
+	/**
+	 * Metodo para saber si la contraseña es la de ese usuario, para luego poder cambiarla
+	 * @throws IOException
+	 */
 	@FXML
 	private void insertPasswordByChange() throws IOException {
 		String pass = passwordUser.getText();
@@ -112,11 +130,20 @@ public class ConfigUserController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Metodo para poner visible el anchorpane para introducir la nueva contraseña
+	 * @throws IOException
+	 */
 	private void AnchorPanePasswordNewModify() throws IOException {
 		changePwd.setVisible(false);
 		passwordNewModify.setVisible(true);
 	}
 	
+	/**
+	 * Metodo para cambiar la contrasena, escribimos dos veces la nueva contraseña y si es correcta
+	 * lo actualiza en la base de datos con los nuevos cambios
+	 * @throws IOException
+	 */
 	@FXML
 	private void modifyPasswordUser() throws IOException {
 
@@ -137,21 +164,37 @@ public class ConfigUserController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Metodo para cambiar al menu principal
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToHome() throws IOException {
 		App.setRoot("MenuPrincipal");
 	}
 	
+	/**
+	 * Metodo para cambiar al perfil
+	 * @throws IOException
+	 */
 	@FXML
 	 private void switchToProfile() throws IOException {
 		App.setRoot("Perfil");
 	}
 	
+	/**
+	 * Metodo para cambiar a configuracion
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToConf() throws IOException {
 		App.setRoot("Conf");
 	}
 	
+	/**
+	 * Metodo para cambiar al login
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToLogin() throws IOException {
 		App.setRoot("Login");

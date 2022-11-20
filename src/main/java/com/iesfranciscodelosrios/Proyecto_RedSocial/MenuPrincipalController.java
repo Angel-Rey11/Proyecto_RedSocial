@@ -2,10 +2,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -45,7 +42,13 @@ public class MenuPrincipalController implements Initializable {
 	private ImageView img;
 	@FXML
 	private Button b;
-
+	
+	/**
+	 * Initialize para pintar los usuarios sugeridos en caso de que el usuario logeado no siga a nadie
+	 * Si sigue a alguien, pinta los post propios y de los usuarios que sigues
+	 * Además implementa un hilo para recargar el initialize para cuando agregamos un post o lo modifiquemos
+	 * se actualice automaticamente.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		posts = new ArrayList<>(posts());
@@ -107,34 +110,55 @@ public class MenuPrincipalController implements Initializable {
 			timer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
-					initialize(null,null);
+					for (int i = 0; i < posts.size(); i++) {
+						
+					}
 				}
 			},2000,2000);
 		});	
 	}
 	
+	/**
+	 * Metodo para obtener un array con todos los posts para luego pintarlos
+	 * @return el array con la consulta generada
+	 */
 	private List<PostDAO> posts() {
 		List<PostDAO> ls = PostDAO.findAllByFollower();
 		
 		return ls;
 	}
 	
+	/**
+	 * Metodo para obtener un array con todos los usuarios, hace una consulta random para
+	 * obtener usuarios aleatorios de la base de datos para las sugerencias
+	 * @return el array con la consulta generada
+	 */
 	private List<UserDAO> users() {
 		List<UserDAO> ud = u.getRandomUsers();
 		
 		return ud;
 	}
 	
+	/**
+	 * Metodo para cambiar a la vista de perfil
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToProfile() throws IOException {
 		App.setRoot("Perfil");
 	}
 	
+	/**
+	 * Metodo para poner visible un anchorpane para crear un post
+	 */
 	@FXML
 	private void addPost() {
 		vis.setVisible(true);
 	}
 	
+	/**
+	 * Metodo para crear un post y añadirlo en la base de datos
+	 */
 	@FXML
 	private void addPostConfirm() {
 		Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -144,16 +168,28 @@ public class MenuPrincipalController implements Initializable {
 		
 	}
 	
+	/**
+	 * Metodo para cambiar a la vista de configuración
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToConf() throws IOException {
 		App.setRoot("Conf");
 	}
 	
+	/**
+	 * Metodo para cambiar a la vista de login
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToLogin() throws IOException {
 		App.setRoot("Login");
 	}
 	
+	/**
+	 * Metodo para cambiar a la vista de sugerencias de usuario
+	 * @throws IOException
+	 */
 	@FXML
 	private void switchToSuggest() throws IOException {
 		App.setRoot("SuggestUsers");
