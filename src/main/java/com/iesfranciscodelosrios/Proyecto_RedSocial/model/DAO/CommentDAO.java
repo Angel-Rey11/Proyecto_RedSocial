@@ -24,7 +24,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	private final static String DELETE = "DELETE FROM Comments WHERE id = ?";
 	private final static String UPDATE = "UPDATE Comments SET text = ?, date = ?, id_user = ?, id_post = ? WHERE id = ?";
 	private final static String FIND = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id = ?";
-	private final static String GETALLBYPOST = "SELECT id, text, id_user FROM Comments WHERE id_post = ? ORDER BY date DESC";
+	private final static String GETALLBYPOST = "SELECT id, text, date, id_user FROM Comments WHERE id_post = ? ORDER BY date DESC";
 	
 	public CommentDAO() {
 		uDAO = new UserDAO();
@@ -154,6 +154,7 @@ public class CommentDAO extends Comment implements ICommentDAO {
 					cDAO = new CommentDAO();
 					cDAO.setId(rs.getInt(1));
 					cDAO.setText(rs.getString(2));
+					cDAO.setDate(rs.getTimestamp("date"));
 					cDAO.setUser(ud.find(rs.getInt("id_user")));
 					list.add(cDAO);
 				}
