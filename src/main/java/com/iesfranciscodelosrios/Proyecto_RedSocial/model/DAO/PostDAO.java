@@ -1,7 +1,6 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +26,7 @@ public class PostDAO extends Post implements IPostDAO {
 	private final static String FINDALLBYUSER="SELECT id,text,creation_date,id_user from Post where id_user=? GROUP BY creation_date DESC";
 	//FIN DE LAS CONSULTAS
 	
+	//Constructores
 	public PostDAO() {}
 	public PostDAO(int id, Timestamp creationDate, String text, User user) { super(id, creationDate,text, user); }
 	public PostDAO(Post p) {
@@ -36,6 +36,10 @@ public class PostDAO extends Post implements IPostDAO {
 		this.find(id);
 	}
 	
+	/**
+	 * Este método nos sirve para insertar todos los campos en la tabla Post.
+	 * @return true si se añade los post, false si no se han insertado correctamente.
+	 */
 	@Override
 	public boolean create() {
 		// TODO Auto-generated method stub
@@ -63,6 +67,11 @@ public class PostDAO extends Post implements IPostDAO {
 		return addPost;
 	}
 
+	/**
+	 * Este método nos sirve para eliminar de la tabla Post, todos los post por la id
+	 * principal.
+	 * @return true si se elimina correctamente todos los post, false si no se ha eliminado.
+	 */
 	@Override
 	public boolean delete() {
 		// TODO Auto-generated method stub
@@ -87,6 +96,11 @@ public class PostDAO extends Post implements IPostDAO {
 		return remove;
 	}
 
+	/**
+	 * Este método nos sirve para actualizar todos los campos de la tabla Post.
+	 * @return true si se han actualizado todos los campos de la tabla Post, false
+	 * si no se han actualizado.
+	 */
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
@@ -106,12 +120,17 @@ public class PostDAO extends Post implements IPostDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 		}
-		
 		return refresh;
 	}
 
+	/**
+	 * Este método se encarga de obtener de la tabla Post, todos los campos
+	 * de dicha tabla por la id principal de dicha tabla.
+	 * 
+	 * @param id el valor del campo por el que se obtiene. 
+	 * @return el post obtenido o null si no existe.
+	 */
 	@Override
 	public PostDAO find(int id) {
 		// TODO Auto-generated method stub
@@ -139,6 +158,12 @@ public class PostDAO extends Post implements IPostDAO {
 		}
 		return p;
 	}
+	
+	/**
+	 * Este método se encarga de obtener una lista de todos los campos de
+	 * la tabla Post.
+	 * @return el post de la lista obtenida por sus campos.
+	 */
 	public static List<PostDAO> findAllByFollower() {
 		UserDAO ud = new UserDAO();
 		Connection con = Connect.getConnection();
@@ -165,6 +190,12 @@ public class PostDAO extends Post implements IPostDAO {
 		}
 		return posts;
 	}
+	
+	/**
+	 * Este método se encarga de obtener una lista de post por la id del usuario dado.
+	 * @param id el valor del campo por el que se obtiene. 
+	 * @return el post de la lista obtenida por el usuario.
+	 */
 	public static List<PostDAO> getPostsByUser(int id){
 		UserDAO ud = new UserDAO();
 		Connection con = Connect.getConnection();
@@ -190,5 +221,4 @@ public class PostDAO extends Post implements IPostDAO {
 		}
 		return posts;
 	}
-
 }
