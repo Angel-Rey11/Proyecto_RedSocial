@@ -21,13 +21,21 @@ public class UserController {
 	private Button follow;
 	@FXML
 	private Button unfollow;
-	
+
+	/**
+	 * Metodo para setear el nombre del usuario en la vista
+	 * @param user
+	 */
 	public void setData(UserDAO user) {
 		name.setText(user.getNickname());
 		this.u = user;
 	}
 	
 	@FXML
+	/**
+	 * Metodo para seguir a un usuario se ejecuta al pulsar el boton
+	 * Una vez sigas al usuario se deshabilitara el boton de seguir y se habilitara el de dejar de seguir
+	 */
 	private void follow() {
 		fDAO = new FollowDAO(-1, DataService.userLogeado, this.u);
 		if(fDAO.create()) {
@@ -40,6 +48,10 @@ public class UserController {
 	}
 	
 	@FXML
+	/**
+	 * Metodo para dejar de seguir a un usuario se ejecuta al pulsar el boton
+	 * Una vez dejes de seguir al usuario se deshabilitara el boton de dejar de seguir y se habilitara el de seguir
+	 */
 	private void unfollow() {
 		fDAO = new FollowDAO(-1, DataService.userLogeado, this.u);
 		if(fDAO.delete()) {
@@ -49,6 +61,11 @@ public class UserController {
 			follow.setDisable(false);
 		}
 	}
+
+	/**
+	 * Metodo para comprobar si el usuario logeado sigue al usuario que se muestra en la vista
+	 * Y mostrara los botones correspondientes en cualquiera de los casos
+	 */
 	public void initializePrivado(){
 		DataService.userLogeado.getAllFollowing().forEach((u)->{
 			if(u.getId() == this.u.getId()) {

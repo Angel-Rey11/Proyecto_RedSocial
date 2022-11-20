@@ -22,29 +22,48 @@ public class SuggestUserController implements Initializable {
 	private UserDAO u = new UserDAO();
 	
 	@FXML
+	/**
+	 * Metodo para cambiar de escena a la de Perfil
+	 */
 	private void switchToProfile() throws IOException {
 		App.setRoot("Perfil");
 	}
 	@FXML
+	/**
+	 * Metodo para cambiar de escena a la de Configuracion
+	 */
 	private void switchToConf() throws IOException {
 		App.setRoot("Conf");
 	}
 	
 	@FXML
+	/**
+	 * Metodo para cambiar de escena a la de Login
+	 */
 	private void switchToLogin() throws IOException {
 		App.setRoot("Login");
 	}
 	@FXML
+	/**
+	 * Metodo para cambiar de escena a la de MenuPrincipal
+	 */
 	private void switchToHome() throws IOException {
 		App.setRoot("MenuPrincipal");
 	}
-	
+
+	/**
+	 * Metodo para traerte de la base de datos usuarios como sugerencia para seguir
+	 * @return Lista de usuarios
+	 */
 	private List<UserDAO> users() {
 		List<UserDAO> ud = u.getRandomUsers();
 		
 		return ud;
 	}
 	@Override
+	/**
+	 * Metodo para incrustar dentro del menu principal un fxml que es user.fxml con cada usuario de la lista
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		int columns = 0;
 		int row = 1;
