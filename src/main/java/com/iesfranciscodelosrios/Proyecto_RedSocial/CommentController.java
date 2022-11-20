@@ -13,6 +13,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Clase CommentController
+ * @author Francisco Berral, Antonio Jesús Luque, Francisco Prados, Ángel Rey  
+ *
+ */
 public class CommentController {
 	private CommentDAO cd;
 	@FXML
@@ -34,6 +39,10 @@ public class CommentController {
 	@FXML
 	private TextArea ta;
 	
+	/**
+	 * Método para setear los datos de un comentario
+	 * @param c Comentario del que se obtiene la información
+	 */
 	public void setData(CommentDAO c) {
 		name.setText(c.getUser().getNickname()); 
 		comment2.setText(c.getText());
@@ -42,6 +51,9 @@ public class CommentController {
 		fecha.setText(s);
 	}
 	
+	/**
+	 * Método que realiza la funcionalidad de 'Me Gusta'
+	 */
 	@FXML
 	private void mg() {
 		img1.setVisible(false);
@@ -50,6 +62,9 @@ public class CommentController {
 		dmg.setDisable(false);
 	}
 	
+	/**
+	 * Método que realiza la funcionalidad de 'No Me Gusta'
+	 */
 	@FXML
 	private void dmg() {
 		img1.setVisible(true);
@@ -58,16 +73,25 @@ public class CommentController {
 		mg.setDisable(false);
 	}
 	
+	/**
+	 * Método para eliminar un comentario
+	 */
 	@FXML
 	private void deleteComment() {
 		cd.delete();
 	}
 	
+	/**
+	 * Método para mostrar el AnchorPane del comentario modificado
+	 */
 	@FXML
 	private void showModifyComment() {
 		an.setVisible(true);
 	}
 	
+	/**
+	 * Método para modicar un comentario
+	 */
 	@FXML
 	private void modifyComment() {
 		Timestamp date = new Timestamp(System.currentTimeMillis());;
