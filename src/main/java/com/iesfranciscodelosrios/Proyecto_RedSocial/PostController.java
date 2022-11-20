@@ -40,6 +40,9 @@ public class PostController {
 	private Label fecha;
 
 	@FXML
+	/**
+	 * Metodo para dar me gusta a un post se ejecuta al pulsar el boton
+	 */
 	private void mg() {
 		like = new LikeDAO(-1,DataService.userLogeado,post.find(this.post.getId()));
 		System.out.println(this.post.getId());
@@ -52,6 +55,9 @@ public class PostController {
 	}
 
 	@FXML
+	/**
+	 * Metodo para quitar un like de un post se ejecuta al pulsar el boton
+	 */
 	private void dmg() {
 		like = new LikeDAO(-1,DataService.userLogeado,this.post);
 		if(like.delete(this.post.getId())){
@@ -62,6 +68,10 @@ public class PostController {
 		}
 	}
 
+	/**
+	 * Setea los datos del post que has seleccionado en el menu principal
+	 * @param post
+	 */
 	public void setData(PostDAO post) {
 		name.setText(post.getUser().getNickname());
 		post2.setText(post.getText());
@@ -71,12 +81,18 @@ public class PostController {
 	}
 
 	@FXML
+	/**
+	 * Metodo que permite volver a la ventana de comentarios
+	 */
 	private void switchToComments() throws IOException {
 		DataService.p = this.post;
 		App.setRoot("CommentView");
 	}
 
 	@FXML
+	/**
+	 * Metodo que permite volver a la vista de inicio
+	 */
 	private void switchToProfile() throws IOException {
 		DataService.pAux = this.post;
 
@@ -86,6 +102,10 @@ public class PostController {
 			App.setRoot("PerfilAux");
 		}
 	}
+
+	/**
+	 * Metodo que Muestra el boton de like o dislike dependiendo de si el usuario ha dado like o no
+	 */
 	public void initializePrivado(){
 		like = new LikeDAO();
 		boolean encontrado= false;
@@ -109,6 +129,9 @@ public class PostController {
 	}
 	
 	@FXML
+	/**
+	 * Metodo Para eliminar un post
+	 */
 	private void deletePost() {
 		if(DataService.userLogeado.getId()==this.post.getUser().getId()) {
 			post.delete();
