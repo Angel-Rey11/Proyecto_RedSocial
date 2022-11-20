@@ -100,14 +100,18 @@ public class CommentController {
 	 */
 	@FXML
 	private void modifyComment() {
-		if (!ta.getText().equals("")) {
-			Timestamp date = new Timestamp(System.currentTimeMillis());;
-			CommentDAO newComment = new CommentDAO(this.cd.getId(),ta.getText(),date,DataService.userLogeado,DataService.p);
-			newComment.update();
-			an.setVisible(false);
+		if (DataService.userLogeado.getId() == this.cd.getUser().getId()) {
+			if (!ta.getText().equals("")) {
+				Timestamp date = new Timestamp(System.currentTimeMillis());;
+				CommentDAO newComment = new CommentDAO(this.cd.getId(),ta.getText(),date,DataService.userLogeado,DataService.p);
+				newComment.update();
+				an.setVisible(false);
+			} else {
+				Dialog.showError("ERROR", "MOFICIACIÓN ERRÓNEA", "El campo texto debe ser rellenado");
+				Loggers.LogsSevere("ERROR. NO SE HA PODIDO MOFICAR EL COMENTARIO.");
+			}
 		} else {
-			Dialog.showError("ERROR", "MOFICIACIÓN ERRÓNEA", "El campo texto debe ser rellenado");
-			Loggers.LogsSevere("ERROR. NO SE HA PODIDO MOFICAR EL COMENTARIO.");
+			Dialog.showError("ERROR","MODIFICACIÓN ERRÓNEA", "Este comentario solo puede ser moficado por el autor");
 		}
 	}
 }

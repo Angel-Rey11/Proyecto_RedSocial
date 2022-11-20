@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.CommentViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.CommentViewController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -79,19 +79,9 @@
                         <Image url="@../images/gamer.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="name" layoutX="79.0" layoutY="23.0" style="-fx-font-size: 14px;" text="Nombre del Usuario" />
+                  <Label fx:id="name" layoutX="79.0" layoutY="23.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" text="Nombre del Usuario" />
                   <Label fx:id="post" layoutX="79.0" layoutY="42.0" style="-fx-font-size: 14px;" text="Post" />
-                  <ImageView fx:id="image1" fitHeight="38.0" fitWidth="28.0" layoutX="79.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                     <image>
-                        <Image url="@../images/like%20(1).png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="image2" fitHeight="38.0" fitWidth="28.0" layoutX="79.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/like.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="150.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="79.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/share2.png" />
                      </image>
