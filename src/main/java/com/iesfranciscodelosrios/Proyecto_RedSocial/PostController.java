@@ -2,6 +2,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -33,6 +34,8 @@ public class PostController implements Initializable {
 	private Button mg; //Me gusta
 	@FXML
 	private Button dmg; //No me gusta
+	@FXML
+	private Label fecha;
 
 	@FXML
 	private void mg() {
@@ -60,6 +63,8 @@ public class PostController implements Initializable {
 	public void setData(PostDAO post) {
 		name.setText(post.getUser().getNickname());
 		post2.setText(post.getText());
+		String s = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(post.getCreationDate());
+		fecha.setText(s);
 		this.post = post;
 	}
 
@@ -72,7 +77,12 @@ public class PostController implements Initializable {
 	@FXML
 	private void switchToProfile() throws IOException {
 		DataService.pAux = this.post;
-		App.setRoot("PerfilAux");
+		if(DataService.userLogeado.getId()==this.post.getUser().getId()) {
+			App.setRoot("Perfil");
+		} else {
+			App.setRoot("PerfilAux");
+		}
+		
 	}
 
 	@Override

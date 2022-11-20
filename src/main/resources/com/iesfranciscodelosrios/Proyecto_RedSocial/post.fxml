@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -42,10 +44,15 @@
       </ImageView>
       <Button layoutX="161.0" layoutY="109.0" mnemonicParsing="false" onAction="#switchToComments" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button layoutX="241.0" layoutY="109.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
-      <Button layoutX="461.0" layoutY="24.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button fx:id="mg" layoutX="85.0" layoutY="109.0" mnemonicParsing="false" onAction="#mg" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button fx:id="dmg" layoutX="85.0" layoutY="109.0" mnemonicParsing="false" onAction="#dmg" opacity="0.0" prefHeight="27.0" prefWidth="38.0" />
       <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToProfile" opacity="0.0" prefHeight="51.0" prefWidth="52.0" />
-      <Label layoutX="347.0" layoutY="28.0" style="-fx-font-size: 14px;" text="Fecha" />
+      <Label fx:id="fecha" layoutX="377.0" layoutY="113.0" style="-fx-font-size: 14px;" text="Fecha" />
+      <MenuButton layoutX="459.0" layoutY="25.0" mnemonicParsing="false" opacity="0.0" popupSide="LEFT" prefHeight="25.0" prefWidth="45.0" style="-fx-font-size: 14px;">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Modificar Post" />
+          <MenuItem mnemonicParsing="false" text="Eliminar Post" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>

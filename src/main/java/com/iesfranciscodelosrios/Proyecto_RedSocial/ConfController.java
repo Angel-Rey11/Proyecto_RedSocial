@@ -19,4 +19,14 @@ public class ConfController {
 	private void switchToProfile() throws IOException {
 		App.setRoot("Perfil");
 	}
+	
+	@FXML
+	private void switchToConf() throws IOException {
+		App.setRoot("Conf");
+	}
+	
+	@FXML
+	private void switchToLogin() throws IOException {
+		App.setRoot("Login");
+	}
 }
