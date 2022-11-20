@@ -56,6 +56,7 @@ public class SuggestUserController implements Initializable {
 				AnchorPane an = fxmlLoader.load();
 				UserController user = fxmlLoader.getController();
 				user.setData(users.get(i));
+				user.initializePrivado();
 				if(columns == 1) {
 					columns = 0;
 					++row;
