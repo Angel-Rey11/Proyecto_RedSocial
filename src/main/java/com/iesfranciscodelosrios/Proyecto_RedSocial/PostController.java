@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.LikeDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
@@ -108,6 +110,16 @@ public class PostController implements Initializable {
 			img2.setVisible(false);
 			mg.setDisable(false);
 			dmg.setDisable(true);
+		}
+	}
+	
+	@FXML
+	private void deletePost() {
+		if(DataService.userLogeado.getId()==this.post.getUser().getId()) {
+			post.delete();
+		} else {
+			Dialog.showError("ERROR", "ERROR AL ELIMINAR", "NO PUEDES ELIMINAR ESTE POST");
+			Loggers.LogsSevere("ERROR");
 		}
 	}
 }
