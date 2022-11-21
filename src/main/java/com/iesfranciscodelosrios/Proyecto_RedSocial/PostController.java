@@ -3,6 +3,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,6 +39,8 @@ public class PostController {
 	private Button dmg; //No me gusta
 	@FXML
 	private Label fecha;
+	@FXML
+	private Label nLikes;
 
 	@FXML
 	/**

@@ -24,6 +24,7 @@ public class LikeDAO extends Like implements ILikeDAO {
 	private final static String DELETE = "DELETE FROM Likes WHERE id_post = ? and id_user = ?";
 	private final static String GETALLLIKES = "SELECT * FROM Likes WHERE id_post = ?";
 	private final static String FIND = "SELECT * FROM Likes WHERE id = ?";
+	private final static String COUNTLIKES = "SELECT * FROM likes WHERE id_post=?";
 	
 	/**
 	 * Constructor
