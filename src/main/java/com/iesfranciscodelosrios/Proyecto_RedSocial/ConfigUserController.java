@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
@@ -120,10 +122,15 @@ public class ConfigUserController implements Initializable {
 	 */
 	@FXML
 	private void insertPasswordByChange() throws IOException {
-		String pass = passwordUser.getText();
+		String pass = DigestUtils.sha256Hex(passwordUser.getText());
 		
 		if (!pass.isEmpty()) {
-			this.AnchorPanePasswordNewModify();
+			if(pass.equals(DataService.userLogeado.getPassword())) {
+				this.AnchorPanePasswordNewModify();
+			} else {
+				Dialog.showError("ERROR", "FALLO AL INTRODUCIR LA CONTRASEÑA", "CONTRASEÑA ERRÓNEA");
+				Loggers.LogsSevere("LA CONTRASEÑA NO COINCIDE");
+			}
 		}else {
 			Dialog.showError("ERROR", "FALLO AL INTRODUCIR LA CONTRASEÑA", "EL CAMPO CONTRASEÑA DEBE SER COMPLETADO");
 			Loggers.LogsSevere("EL ÚNICO CAMPO QUE EXISTE DEBE SER COMPLETADO");
@@ -150,13 +157,25 @@ public class ConfigUserController implements Initializable {
 		String pass = newPassword.getText();
 		String passN = repeatNewPassword.getText();
 		
+		if (DigestUtils.sha256Hex(pass).equals(DataService.userLogeado.getPassword())) {
+			System.out.println("true");;
+		}
+		
+		
 		if (!pass.isEmpty() && !passN.isEmpty()) {
+			String newPass = pass;
+			newPass = DigestUtils.sha256Hex(newPass);
 			if (pass.contentEquals(passN)) {
-				UserDAO u = new UserDAO(DataService.userLogeado.getId(), DataService.userLogeado.getName(), DataService.userLogeado.getNickname(), pass, DataService.userLogeado.getBiografia());
+				System.out.println(newPass);
+				System.out.println(DataService.userLogeado.getPassword());
+				UserDAO u = new UserDAO(DataService.userLogeado.getId(), DataService.userLogeado.getName(), DataService.userLogeado.getNickname(), newPass, DataService.userLogeado.getBiografia());
 				u.update();
 				Dialog.showConfirm("OPERACIÓN EXITOSA", "CAMBIOS REALIZADOS CON ÉXITO", "LA CONTRASEÑA HA SIDO MODIFICADA CORRECTAMENTE");
 				App.setRoot("MenuPrincipal");
 				Loggers.LogsInfo("CONTRASEÑA MODIFICADA");
+			} else {
+				Dialog.showError("ERROR", "FALLO AL INTRODUCIR LA CONTRASEÑA", "LOS CAMPOS NO COINCIDEN");
+				Loggers.LogsSevere("LOS CAMPOS NO COINCIDEN");
 			}
 		} else {
 			Dialog.showError("ERROR", "FALLO AL INTRODUCIR LA CONTRASEÑA", "TODOS LOS CAMPOS DEBEN SER COMPLETADOS");

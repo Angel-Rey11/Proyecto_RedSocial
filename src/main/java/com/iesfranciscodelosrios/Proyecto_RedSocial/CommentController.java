@@ -80,9 +80,15 @@ public class CommentController {
 	 */
 	@FXML
 	private void deleteComment() {
-		cd.delete();
-		Dialog.showConfirm("OPERACIÓN EXITOSA", "COMENTARIO ELIMINADO", "El comentario se ha eliminado correctamente");
-		Loggers.LogsInfo("COMENTARIO ELIMINADO");
+		if(DataService.p.getUser().getId()==DataService.userLogeado.getId() || DataService.userLogeado.getId()==this.cd.getUser().getId()) {
+			cd.delete();
+			Dialog.showConfirm("OPERACIÓN EXITOSA", "COMENTARIO ELIMINADO", "El comentario se ha eliminado correctamente");
+			Loggers.LogsInfo("COMENTARIO ELIMINADO");
+		} else {
+			Dialog.showError("ERROR", null, null);
+			Loggers.LogsInfo("ERROR AL ELIMINAR");
+		}
+	
 	}
 	
 	/**

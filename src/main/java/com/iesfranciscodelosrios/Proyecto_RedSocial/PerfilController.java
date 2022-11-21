@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 
 import javafx.fxml.FXML;
@@ -62,11 +64,22 @@ public class PerfilController implements Initializable{
 	 * Metodo que permite añadir una biografia al perfil del usuario
 	 */
 	private void addBio() {
-		String text = bio.getText();
-		bio.setText(text);
-		bio.setEditable(false);
-		DataService.userLogeado.setBiografia(text);
-		DataService.userLogeado.update();
+		if (!bio.getText().equals("")) {
+			String text = bio.getText();
+			bio.setText(text);
+			bio.setEditable(false);
+			if (DataService.userLogeado.getBiografia().equals("")) {
+				DataService.userLogeado.setBiografia(text);
+				DataService.userLogeado.update();
+				Loggers.LogsInfo("BIOGRAFÍA CAMBIADA");
+			} else {
+				Dialog.showError("ERROR", "BIOGRAFÍA EXISTENTE", "Campo completado");
+				Loggers.LogsSevere("BIOGRAFÍA EXISTENTE");
+			}
+		} else {
+			Dialog.showError("ERROR", "BIOGRAFÍA ERRÓNEA", "No se puede insertar biografía vacía");
+			Loggers.LogsSevere("CAMPO BIOGRAFÍA VACÍO");
+		}
 	}
 
 	@Override

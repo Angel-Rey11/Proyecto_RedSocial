@@ -55,6 +55,7 @@ public class PostController {
 			img1.setVisible(false);
 			img2.setVisible(true);
 		}
+		Loggers.LogsInfo("HAS DADO LIKE A UNA PUBLICACIÓN");
 	}
 
 	@FXML
@@ -69,6 +70,7 @@ public class PostController {
 			img1.setVisible(true);
 			img2.setVisible(false);
 		}
+		Loggers.LogsInfo("HAS DADO DISLIKE A UNA PUBLICACIÓN");
 	}
 
 	/**
