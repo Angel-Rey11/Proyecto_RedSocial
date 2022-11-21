@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 public class UserDAO extends User{
 
     private final static String INSERT = "INSERT INTO `user` (`id`, `nickname`, `name`, `password`, `biografia`) VALUES (NULL,?,?,?,'')";
@@ -236,25 +238,6 @@ public class UserDAO extends User{
         }
         return u;
     }
-    
-    /*public boolean changeBio() {
-    	boolean modified = false;
-    	Connection con = Connect.getConnection();
-    	
-    	if (con != null) {
-    		try {
-    			PreparedStatement ps = con.prepareStatement(MODIFYBIO);
-    			ps.setString(1, this.getBiografia());
-    			ps.setInt(2, this.getId());
-    			ps.executeUpdate();
-    			modified = true;
-    			ps.close();
-    		} catch (SQLException e) {
-    			e.printStackTrace();
-    		}
-    	}
-    	return modified;
-    }*/
 
     /**
      * Funcion que trae una lista con usuarios random para mostrar en la pagina de sugerencias

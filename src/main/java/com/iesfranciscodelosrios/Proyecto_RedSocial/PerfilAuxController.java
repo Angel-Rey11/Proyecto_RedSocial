@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
-
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.FollowDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
@@ -46,6 +46,7 @@ public class PerfilAuxController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		nickname.setText(DataService.pAux.getUser().getNickname());
 		bio.setText(DataService.pAux.getUser().getBiografia());
+		bio.setEditable(false);
 		User pDAO = DataService.pAux.getUser();
 		DataService.uAux = (UserDAO) pDAO;
 		nFollower.setText(String.valueOf(DataService.uAux.getAllFollower().size()));
@@ -77,6 +78,7 @@ public class PerfilAuxController implements Initializable{
 			follow.setVisible(false);
 			unfollow.setDisable(false);
 			follow.setDisable(true);
+			Loggers.LogsInfo("HAS SEGUIDO A UN USUARIO");
 		}
 
 	}
@@ -92,6 +94,7 @@ public class PerfilAuxController implements Initializable{
 			follow.setVisible(true);
 			unfollow.setDisable(true);
 			follow.setDisable(false);
+			Loggers.LogsInfo("HAS DEJADO DE SEGUIR A UN USUARIO");
 		}
 	}
 	
