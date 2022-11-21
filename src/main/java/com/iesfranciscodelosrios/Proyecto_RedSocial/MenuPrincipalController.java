@@ -14,6 +14,8 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,6 +45,7 @@ public class MenuPrincipalController implements Initializable {
 	@FXML
 	private Button b;
 	
+	
 	/**
 	 * Initialize para pintar los usuarios sugeridos en caso de que el usuario logeado no siga a nadie
 	 * Si sigue a alguien, pinta los post propios y de los usuarios que sigues
@@ -56,6 +59,26 @@ public class MenuPrincipalController implements Initializable {
 		
 		int columns = 0;
 		int row = 1;
+		
+		/*
+		Platform.runLater(()->{
+			Timer timer = new Timer(true);
+			timer.scheduleAtFixedRate(new TimerTask() {
+				@Override
+				public void run() {
+					List<PostDAO> ls = PostDAO.findAllByFollower();
+					if(posts.size()!=ls.size()) {
+						try {
+							App.setRoot("MenuPrincipal");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}	
+				}
+			},5000,5000);
+		});
+		*/
 
 		if(DataService.userLogeado.getAllFollowing().size()<=0) {
 			sug.setVisible(false);
@@ -105,19 +128,7 @@ public class MenuPrincipalController implements Initializable {
 					e.printStackTrace();
 			}
 		}
-		/*
-		Platform.runLater(()->{
-			Timer timer = new Timer(true);
-			timer.scheduleAtFixedRate(new TimerTask() {
-				@Override
-				public void run() {
-					for (int i = 0; i < posts.size(); i++) {
-						
-					}
-				}
-			},2000,2000);
-		});
-		*/	
+		
 	}
 	
 	/**
