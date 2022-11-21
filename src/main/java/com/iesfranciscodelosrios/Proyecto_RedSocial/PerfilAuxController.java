@@ -52,17 +52,16 @@ public class PerfilAuxController implements Initializable{
 		nFollowing.setText(String.valueOf(DataService.uAux.getAllFollowing().size()));
 		List<PostDAO> listPost = PostDAO.getPostsByUser(DataService.uAux.getId());
 		nPost.setText(String.valueOf(listPost.size()));
+		unfollow.setVisible(false);
+		follow.setVisible(true);
+		unfollow.setDisable(true);
+		follow.setDisable(false);
 		DataService.userLogeado.getAllFollowing().forEach((u)->{
 			if(u.getId() == DataService.pAux.getUser().getId()) {
 				unfollow.setVisible(true);
 				follow.setVisible(false);
 				unfollow.setDisable(false);
 				follow.setDisable(true);
-			}else{
-				unfollow.setVisible(false);
-				follow.setVisible(true);
-				unfollow.setDisable(true);
-				follow.setDisable(false);
 			}
 		});
 	}
