@@ -10,19 +10,25 @@ import java.util.ResourceBundle;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.CommentDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.LikeDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
-public class PostController {
+public class PostController implements Initializable {
 	private PostDAO post;
 	private LikeDAO like;
+	private CommentDAO comment;
 	@FXML
 	private Label name;
 	@FXML
@@ -41,6 +47,8 @@ public class PostController {
 	private Label fecha;
 	@FXML
 	private Label nLikes;
+	@FXML
+	private Label nComments;
 
 	@FXML
 	/**
@@ -48,7 +56,6 @@ public class PostController {
 	 */
 	private void mg() {
 		like = new LikeDAO(-1,DataService.userLogeado,post.find(this.post.getId()));
-		System.out.println(this.post.getId());
 		if(like.create(this.post.getId())){
 			mg.setDisable(true);
 			dmg.setDisable(false);
@@ -113,8 +120,11 @@ public class PostController {
 	 */
 	public void initializePrivado(){
 		like = new LikeDAO();
+		comment= new CommentDAO();
 		boolean encontrado= false;
 		List<LikeDAO> likes = this.like.getAllLikesbyPost(this.post.getId());
+		nLikes.setText(like.countLikes(this.post.getId())+"");
+		nComments.setText(comment.getCommentsCount(this.post.getId())+"");
 		for (LikeDAO likeDAO : likes) {
 			if(likeDAO.getUser().getId()==DataService.userLogeado.getId()){
 				encontrado=true;
@@ -144,5 +154,14 @@ public class PostController {
 			Dialog.showError("ERROR", "ERROR AL ELIMINAR", "NO PUEDES ELIMINAR ESTE POST");
 			Loggers.LogsSevere("ERROR");
 		}
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), ev -> {
+			this.initializePrivado();
+		}));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
 	}
 }

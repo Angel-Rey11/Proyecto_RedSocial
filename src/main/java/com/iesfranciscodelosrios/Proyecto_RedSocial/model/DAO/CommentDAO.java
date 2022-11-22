@@ -28,7 +28,8 @@ public class CommentDAO extends Comment implements ICommentDAO {
 	private final static String UPDATE = "UPDATE Comments SET text = ?, date = ?, id_user = ?, id_post = ? WHERE id = ?";
 	private final static String FIND = "SELECT id, text, date, id_user, id_post FROM Comments WHERE id = ?";
 	private final static String GETALLBYPOST = "SELECT id, text, date, id_user FROM Comments WHERE id_post = ? ORDER BY date DESC";
-	
+	private final static String GETCOUNT = "SELECT COUNT(*) FROM Comments WHERE id_post = ?";
+
 	/**
 	 * Constructor
 	 */
@@ -208,5 +209,23 @@ public class CommentDAO extends Comment implements ICommentDAO {
 			}
 		}
 		return list;
+	}
+	public int getCommentsCount(int id_post) {
+		Connection con = Connect.getConnection();
+		int count = 0;
+
+		if (con != null) {
+			try {
+				PreparedStatement ps = con.prepareStatement(GETCOUNT);
+				ps.setInt(1, id_post);
+				ResultSet rs = ps.executeQuery();
+				rs.next();
+				count = rs.getInt(1);
+				rs.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
 	}
 }

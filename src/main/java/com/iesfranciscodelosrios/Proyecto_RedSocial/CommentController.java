@@ -1,19 +1,29 @@
 package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
+import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.CommentDAO;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 /**
  * Clase CommentController
@@ -108,7 +118,7 @@ public class CommentController {
 	private void modifyComment() {
 		if (DataService.userLogeado.getId() == this.cd.getUser().getId()) {
 			if (!ta.getText().equals("")) {
-				Timestamp date = new Timestamp(System.currentTimeMillis());;
+				Timestamp date = new Timestamp(System.currentTimeMillis());
 				CommentDAO newComment = new CommentDAO(this.cd.getId(),ta.getText(),date,DataService.userLogeado,DataService.p);
 				newComment.update();
 				an.setVisible(false);
