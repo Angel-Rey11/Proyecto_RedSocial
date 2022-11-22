@@ -13,6 +13,9 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +30,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 public class MenuPrincipalController implements Initializable {
 	@FXML
@@ -59,26 +63,18 @@ public class MenuPrincipalController implements Initializable {
 		
 		int columns = 0;
 		int row = 1;
-		
-		/*
-		Platform.runLater(()->{
-			Timer timer = new Timer(true);
-			timer.scheduleAtFixedRate(new TimerTask() {
-				@Override
-				public void run() {
-					List<PostDAO> ls = PostDAO.findAllByFollower();
-					if(posts.size()!=ls.size()) {
-						try {
-							App.setRoot("MenuPrincipal");
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}	
-				}
-			},5000,5000);
-		});
-		*/
+			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7), ev -> {
+				List<PostDAO> ls = PostDAO.findAllByFollower();
+				System.out.println(ls.size()+"vs"+posts.size());
+				if(posts.size()!=ls.size()) {
+					//actualizar list
+					posts = new ArrayList<>(ls);
+					//actualizar el 
+					paintPost(posts);
+				}	
+		    }));
+		    timeline.setCycleCount(Animation.INDEFINITE);
+		    timeline.play();
 
 		if(DataService.userLogeado.getAllFollowing().size()<=0) {
 			sug.setVisible(false);
@@ -130,7 +126,32 @@ public class MenuPrincipalController implements Initializable {
 		}
 		
 	}
-	
+	public void paintPost(List<PostDAO> posts){
+		int columns = 0;
+		int row = 1;
+		postGrid.getChildren().clear();
+		for (int i = 0; i < posts.size(); i++) {
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(getClass().getResource("post.fxml"));
+			AnchorPane an;
+			try {
+				an = fxmlLoader.load();
+				PostController post = fxmlLoader.getController();
+				post.setData(posts.get(i));
+				post.initializePrivado();
+				if(columns == 1) {
+					columns = 0;
+					++row;
+				}
+				
+				postGrid.add(an, columns++, row);
+				GridPane.setMargin(an, new Insets(10));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
+	}
 	/**
 	 * Metodo para obtener un array con todos los posts para luego pintarlos
 	 * @return el array con la consulta generada
@@ -177,6 +198,8 @@ public class MenuPrincipalController implements Initializable {
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		PostDAO pd = new PostDAO(-1,date,post.getText(),DataService.userLogeado);
 		pd.create();
+		posts.add(0,pd);
+		paintPost(posts);
 		vis.setVisible(false);
 		
 	}

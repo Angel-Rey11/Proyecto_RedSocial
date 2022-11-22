@@ -15,6 +15,9 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.Post;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 /**
  * Clase CommentViewController
@@ -95,6 +99,31 @@ public class CommentViewController implements Initializable {
 		Loggers.LogsInfo("CREANDO NUEVO COMENTARIO");
 	}
 	
+	public void paintComment(List<CommentDAO> comments) {
+		int columns = 0;
+		int row = 1;
+		commentGrid.getChildren().clear();
+		try {
+			for (int i = 0; i < comment.size(); i++) {
+				FXMLLoader f = new FXMLLoader();
+				f.setLocation(getClass().getResource("comment.fxml"));
+				AnchorPane a = f.load();
+				CommentController c = f.getController();
+				c.setData(comment.get(i));
+				
+				if (columns == 1) {
+					columns = 0;
+					++row;
+				}
+				
+				commentGrid.add(a, columns++, row);
+				GridPane.setMargin(a, new Insets(10));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Método para crear un nuevo comentario 
 	 */
@@ -107,6 +136,8 @@ public class CommentViewController implements Initializable {
 			Post post = DataService.p;
 			CommentDAO c = new CommentDAO(-1, message, timestamp, user, post);
 			c.create();
+			comment.add(0,c);
+			paintComment(comment);
 			a1.setVisible(false);
 		}else {
 			Dialog.showError("ERROR", "CAMPO INCOMPLETO", "El campo texto debe ser rellenado");
@@ -123,6 +154,17 @@ public class CommentViewController implements Initializable {
 		
 		int columns = 0;
 		int row = 1;
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), ev -> {
+			List<CommentDAO> ls = cDAO.getAllCommentsByIdPost(DataService.p.getId());
+			if(comment.size()!=ls.size()) {
+				//actualizar list
+				comment = new ArrayList<>(ls);
+				//actualizar el 
+				paintComment(comment);
+			}	
+	    }));
+	    timeline.setCycleCount(Animation.INDEFINITE);
+	    timeline.play();
 		
 		try {
 			for (int i = 0; i < comment.size(); i++) {
