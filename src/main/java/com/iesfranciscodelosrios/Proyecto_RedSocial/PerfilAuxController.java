@@ -2,6 +2,7 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -13,10 +14,13 @@ import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DataObject.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class PerfilAuxController implements Initializable{
@@ -37,6 +41,7 @@ public class PerfilAuxController implements Initializable{
 	private Label nFollowing;
 	@FXML 
 	private Label nPost;
+	private List<PostDAO> posts;
 
 	@Override
 	/**
@@ -65,6 +70,35 @@ public class PerfilAuxController implements Initializable{
 				follow.setDisable(true);
 			}
 		});
+		
+		posts = new ArrayList<>(posts());
+		
+		int columns = 0;
+		int row = 1;
+		try {
+			for (int i = 0; i < posts.size(); i++) {
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("post.fxml"));
+				AnchorPane an = fxmlLoader.load();
+				PostController post = fxmlLoader.getController();
+				post.setData(posts.get(i));
+				post.initializePrivado();
+				if(columns == 1) {
+					columns = 0;
+					++row;
+				}
+				
+				postGrid.add(an, columns++, row);
+				GridPane.setMargin(an, new Insets(10));
+			}
+		} catch (IOException e) {
+				e.printStackTrace();
+		}
+	}
+	
+	private List<PostDAO> posts() {
+		List<PostDAO> ls = PostDAO.getPostsByUser(DataService.pAux.getUser().getId());
+		return ls;
 	}
 	
 	@FXML
