@@ -10,6 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Dialog;
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.Loggers;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.PostDAO;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 
@@ -48,6 +50,8 @@ public class MenuPrincipalController implements Initializable {
 	private ImageView img;
 	@FXML
 	private Button b;
+	@FXML
+	private Label size;
 	
 	
 	/**
@@ -121,7 +125,6 @@ public class MenuPrincipalController implements Initializable {
 					e.printStackTrace();
 			}
 		}
-		
 	}
 	public void paintPost(List<PostDAO> posts){
 		int columns = 0;
@@ -185,6 +188,18 @@ public class MenuPrincipalController implements Initializable {
 	@FXML
 	private void addPost() {
 		vis.setVisible(true);
+		
+		Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+			if (post.getText().length() < 300) {
+				int count = 300 - post.getText().length();
+				size.setText(count +"");
+			}
+			if (post.getText().length() > 300) {
+				size.setText(0 +"");
+			}
+	    }));
+	    timeline2.setCycleCount(Animation.INDEFINITE);
+	    timeline2.play();
 	}
 	
 	/**
@@ -194,10 +209,16 @@ public class MenuPrincipalController implements Initializable {
 	private void addPostConfirm() {
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		PostDAO pd = new PostDAO(-1,date,post.getText(),DataService.userLogeado);
-		pd.create();
-		posts.add(0,pd);
-		paintPost(posts);
-		vis.setVisible(false);
+		if (post.getText().length() < 300) {
+			pd.create();
+			post.clear();
+			posts.add(0,pd);
+			paintPost(posts);
+			vis.setVisible(false);
+		} else {
+			Dialog.showError("ERROR", "ERROR AL PUBLICAR POST", "SE SOBREPASAN CARACTERES PERMITIDOS");
+			Loggers.LogsInfo("ERROR AL INSERTAR POST");
+		}
 		
 	}
 	

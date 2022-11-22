@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.MenuPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/cssFont.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesfranciscodelosrios.Proyecto_RedSocial.MenuPrincipalController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="136.0" style="-fx-background-color: B1B2FF;">
          <children>
@@ -115,9 +115,10 @@
                               <Image url="@../images/smile.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="342.0" layoutY="141.0" style="-fx-font-size: 14px;" text="300/300" />
+                        <Label fx:id="size" layoutX="342.0" layoutY="141.0" style="-fx-font-size: 14px; -fx-font-weight: bolder;" text="300" />
                         <Button layoutX="434.0" layoutY="142.0" mnemonicParsing="false" onAction="#addPostConfirm" opacity="0.0" prefHeight="34.0" prefWidth="46.0" />
                         <TextArea fx:id="post" layoutX="88.0" layoutY="25.0" prefHeight="106.0" prefWidth="378.0" styleClass="mod2" />
+                        <Label layoutX="365.0" layoutY="141.0" style="-fx-font-size: 14px;" text="/300" />
                      </children>
                   </AnchorPane>
                 </header>

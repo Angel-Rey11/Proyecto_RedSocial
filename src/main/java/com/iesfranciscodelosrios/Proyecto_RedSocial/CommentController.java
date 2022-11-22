@@ -95,7 +95,7 @@ public class CommentController {
 			Dialog.showConfirm("OPERACIÓN EXITOSA", "COMENTARIO ELIMINADO", "El comentario se ha eliminado correctamente");
 			Loggers.LogsInfo("COMENTARIO ELIMINADO");
 		} else {
-			Dialog.showError("ERROR", null, null);
+			Dialog.showError("ERROR", "ERROR AL ELIMINAR COMENTARIO", "El comentario no pertenece al usuario");
 			Loggers.LogsInfo("ERROR AL ELIMINAR");
 		}
 	
