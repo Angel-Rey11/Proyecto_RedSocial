@@ -153,6 +153,7 @@ public class PerfilAuxController implements Initializable{
 	 * Metodo que permite ir a la pagina de Login.
 	 */
 	private void switchToLogin() throws IOException {
+		DataService.userLogeado = null;
 		App.setRoot("Login");
 	}
 	

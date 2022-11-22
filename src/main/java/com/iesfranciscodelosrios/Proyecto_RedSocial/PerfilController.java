@@ -56,6 +56,7 @@ public class PerfilController implements Initializable{
 	 * Metodo que carga la vista de la pagina de Login
 	 */
 	private void switchToLogin() throws IOException {
+		DataService.userLogeado = null;
 		App.setRoot("Login");
 	}
 	
