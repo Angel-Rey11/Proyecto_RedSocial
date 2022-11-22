@@ -24,7 +24,7 @@ public class LikeDAO extends Like implements ILikeDAO {
 	private final static String DELETE = "DELETE FROM Likes WHERE id_post = ? and id_user = ?";
 	private final static String GETALLLIKES = "SELECT * FROM Likes WHERE id_post = ?";
 	private final static String FIND = "SELECT * FROM Likes WHERE id = ?";
-	private final static String COUNTLIKES = "SELECT * FROM likes WHERE id_post=?";
+	private final static String COUNTLIKES = "SELECT COUNT(*) FROM likes WHERE id_post=?";
 	
 	/**
 	 * Constructor
@@ -171,5 +171,23 @@ public class LikeDAO extends Like implements ILikeDAO {
 			}
 		}
 		return l;
+	}
+	public int countLikes(int id_post) {
+		int count = 0;
+		Connection con = Connect.getConnection();
+		if(con != null) {
+			try {
+				PreparedStatement ps = con.prepareStatement(COUNTLIKES);
+				ps.setInt(1,id_post);
+				ResultSet rs = ps.executeQuery();
+				rs.next();
+				count = rs.getInt(1);
+				ps.close();
+				rs.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
 	}
 }

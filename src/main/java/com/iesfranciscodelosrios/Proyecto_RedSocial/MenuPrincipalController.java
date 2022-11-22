@@ -65,11 +65,8 @@ public class MenuPrincipalController implements Initializable {
 		int row = 1;
 			Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7), ev -> {
 				List<PostDAO> ls = PostDAO.findAllByFollower();
-				System.out.println(ls.size()+"vs"+posts.size());
 				if(posts.size()!=ls.size()) {
-					//actualizar list
 					posts = new ArrayList<>(ls);
-					//actualizar el 
 					paintPost(posts);
 				}	
 		    }));
