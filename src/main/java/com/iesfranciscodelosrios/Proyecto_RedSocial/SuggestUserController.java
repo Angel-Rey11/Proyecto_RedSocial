@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
 import com.iesfranciscodelosrios.Proyecto_RedSocial.model.DAO.UserDAO;
 
 import javafx.fxml.FXML;
@@ -41,6 +42,7 @@ public class SuggestUserController implements Initializable {
 	 * Metodo para cambiar de escena a la de Login
 	 */
 	private void switchToLogin() throws IOException {
+		DataService.userLogeado = null;
 		App.setRoot("Login");
 	}
 	@FXML

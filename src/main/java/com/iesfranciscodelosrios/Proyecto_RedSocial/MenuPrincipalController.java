@@ -216,6 +216,7 @@ public class MenuPrincipalController implements Initializable {
 	 */
 	@FXML
 	private void switchToLogin() throws IOException {
+		DataService.userLogeado = null;
 		App.setRoot("Login");
 	}
 	

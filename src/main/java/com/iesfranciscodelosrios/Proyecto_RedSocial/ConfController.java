@@ -2,6 +2,8 @@ package com.iesfranciscodelosrios.Proyecto_RedSocial;
 
 import java.io.IOException;
 
+import com.iesfranciscodelosrios.Proyecto_RedSocial.Assets.DataService;
+
 import javafx.fxml.FXML;
 
 public class ConfController {
@@ -47,6 +49,7 @@ public class ConfController {
 	 */
 	@FXML
 	private void switchToLogin() throws IOException {
+		DataService.userLogeado = null;
 		App.setRoot("Login");
 	}
 }
